@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		917C8A1222D53E0C00A26154 /* PodcastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917C8A1122D53E0C00A26154 /* PodcastModel.swift */; };
-		917C8A1322D53E0C00A26154 /* PodcastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917C8A1122D53E0C00A26154 /* PodcastModel.swift */; };
+		915724AA22DA4D320003C6B7 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915724A922DA4D320003C6B7 /* Episode.swift */; };
+		915724AC22DA4D3A0003C6B7 /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915724AB22DA4D3A0003C6B7 /* Podcast.swift */; };
+		915724AE22DA4D4D0003C6B7 /* Discovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915724AD22DA4D4D0003C6B7 /* Discovery.swift */; };
+		915724B122DA5DF70003C6B7 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 915724B022DA5DF70003C6B7 /* data.json */; };
+		915724B322DA65BF0003C6B7 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915724B222DA65BF0003C6B7 /* Config.swift */; };
+		917C8A1222D53E0C00A26154 /* Responses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917C8A1122D53E0C00A26154 /* Responses.swift */; };
+		917C8A1322D53E0C00A26154 /* Responses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917C8A1122D53E0C00A26154 /* Responses.swift */; };
 		917C8A1522D53E1600A26154 /* Rest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917C8A1422D53E1600A26154 /* Rest.swift */; };
 		917C8A1622D53E1600A26154 /* Rest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917C8A1422D53E1600A26154 /* Rest.swift */; };
 		9186C75522D53534007307C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9186C75422D53534007307C1 /* AppDelegate.swift */; };
@@ -36,7 +41,12 @@
 		36604F8F64348AF8F5B002DE /* Pods_PodFast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PodFast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		59995660FD3C9444AC5F8649 /* Pods-PodFastTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodFastTests.release.xcconfig"; path = "Target Support Files/Pods-PodFastTests/Pods-PodFastTests.release.xcconfig"; sourceTree = "<group>"; };
 		732A0EA8D779424A7C4A22FD /* Pods-PodFast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodFast.debug.xcconfig"; path = "Target Support Files/Pods-PodFast/Pods-PodFast.debug.xcconfig"; sourceTree = "<group>"; };
-		917C8A1122D53E0C00A26154 /* PodcastModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PodcastModel.swift; sourceTree = "<group>"; };
+		915724A922DA4D320003C6B7 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
+		915724AB22DA4D3A0003C6B7 /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
+		915724AD22DA4D4D0003C6B7 /* Discovery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discovery.swift; sourceTree = "<group>"; };
+		915724B022DA5DF70003C6B7 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
+		915724B222DA65BF0003C6B7 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		917C8A1122D53E0C00A26154 /* Responses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Responses.swift; sourceTree = "<group>"; };
 		917C8A1422D53E1600A26154 /* Rest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rest.swift; sourceTree = "<group>"; };
 		9186C75122D53534007307C1 /* PodFast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodFast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9186C75422D53534007307C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +93,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		915724AF22DA525D0003C6B7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				915724A922DA4D320003C6B7 /* Episode.swift */,
+				915724AB22DA4D3A0003C6B7 /* Podcast.swift */,
+				915724B222DA65BF0003C6B7 /* Config.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		9186C74822D53534007307C1 = {
 			isa = PBXGroup;
 			children = (
@@ -109,7 +129,10 @@
 				9186C75422D53534007307C1 /* AppDelegate.swift */,
 				9186C75622D53534007307C1 /* ViewController.swift */,
 				917C8A1422D53E1600A26154 /* Rest.swift */,
-				917C8A1122D53E0C00A26154 /* PodcastModel.swift */,
+				915724B022DA5DF70003C6B7 /* data.json */,
+				917C8A1122D53E0C00A26154 /* Responses.swift */,
+				915724AF22DA525D0003C6B7 /* Models */,
+				915724AD22DA4D4D0003C6B7 /* Discovery.swift */,
 				91C5504222D5498D008FD9AB /* DBHelper.swift */,
 				9186C75822D53534007307C1 /* Main.storyboard */,
 				9186C75B22D53536007307C1 /* Assets.xcassets */,
@@ -226,6 +249,7 @@
 				9186C75F22D53536007307C1 /* LaunchScreen.storyboard in Resources */,
 				9186C75C22D53536007307C1 /* Assets.xcassets in Resources */,
 				9186C75A22D53534007307C1 /* Main.storyboard in Resources */,
+				915724B122DA5DF70003C6B7 /* data.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,7 +331,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				917C8A1222D53E0C00A26154 /* PodcastModel.swift in Sources */,
+				917C8A1222D53E0C00A26154 /* Responses.swift in Sources */,
+				915724AC22DA4D3A0003C6B7 /* Podcast.swift in Sources */,
+				915724B322DA65BF0003C6B7 /* Config.swift in Sources */,
+				915724AE22DA4D4D0003C6B7 /* Discovery.swift in Sources */,
+				915724AA22DA4D320003C6B7 /* Episode.swift in Sources */,
 				9186C75722D53534007307C1 /* ViewController.swift in Sources */,
 				91C5504322D5498D008FD9AB /* DBHelper.swift in Sources */,
 				9186C75522D53534007307C1 /* AppDelegate.swift in Sources */,
@@ -320,7 +348,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				917C8A1622D53E1600A26154 /* Rest.swift in Sources */,
-				917C8A1322D53E0C00A26154 /* PodcastModel.swift in Sources */,
+				917C8A1322D53E0C00A26154 /* Responses.swift in Sources */,
 				9186C76A22D53536007307C1 /* PodFastTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

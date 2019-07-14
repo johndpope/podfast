@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,7 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        Rest.requestTopPodcasts(count: 10)
+//        Rest.topPodCastsRequest(count: 10, completionBlock: {_ in })
+        print(Realm.Configuration.defaultConfiguration.fileURL)
+        Rest.checkConfiguration()
         return true
     }
 

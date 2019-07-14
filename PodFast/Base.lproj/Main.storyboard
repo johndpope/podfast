@@ -18,21 +18,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WGm-hA-DSJ">
-                                <rect key="frame" x="101" y="318" width="173" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="PLAY THIS MF PODCAST"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WGm-hA-DSJ">
+                                <rect key="frame" x="18" y="319" width="339" height="29"/>
+                                <state key="normal" title="this is some good text which can be displayed"/>
                                 <connections>
                                     <action selector="playPodcast:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dR9-z6-Ca1"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Podcast Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m2K-ii-5Lk">
+                                <rect key="frame" x="16" y="288" width="341" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="gkn-JY-tyy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="WGm-hA-DSJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="79t-Wr-JYa"/>
+                            <constraint firstItem="m2K-ii-5Lk" firstAttribute="trailing" secondItem="WGm-hA-DSJ" secondAttribute="trailing" id="7Fq-kM-6EX"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="WGm-hA-DSJ" secondAttribute="trailing" constant="18" id="BG8-jU-OPx"/>
+                            <constraint firstItem="m2K-ii-5Lk" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="ayT-B6-Js8"/>
+                            <constraint firstItem="WGm-hA-DSJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="18" id="eWE-nQ-Rba"/>
+                            <constraint firstItem="m2K-ii-5Lk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="268" id="jgw-w7-uCn"/>
+                            <constraint firstItem="WGm-hA-DSJ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="o0p-Iu-GY4"/>
+                            <constraint firstItem="WGm-hA-DSJ" firstAttribute="top" secondItem="m2K-ii-5Lk" secondAttribute="bottom" constant="10" id="tu9-Jw-v0q"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="episodeTitleLabel" destination="WGm-hA-DSJ" id="ptg-Zj-yIf"/>
+                        <outlet property="podcastTitleLabel" destination="m2K-ii-5Lk" id="PDZ-yx-e7s"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="53.600000000000001" y="26.53673163418291"/>
         </scene>
     </scenes>
 </document>
