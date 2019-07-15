@@ -11,6 +11,8 @@ import AlamofireObjectMapper
 import Alamofire
 import FeedKit
 import RealmSwift
+import ReactiveSwift
+import Result
 
 class Rest {
 
@@ -48,51 +50,107 @@ class Rest {
         }
     }
 
-    static func getEpisodes(forPodcast podcast: Podcast, count: Int, completionBlock: @escaping ([Episode]) -> Void) {
+    // for all podcasts
+    static func getEpisodes(){
+        let realm = DBHelper.shared.getRealm()
+        let podcasts = realm.objects(Podcast.self)
+        for podcast in podcasts {
+
+            // unmanaged copy
+            let _podcast = Podcast(value: podcast)
+            if _podcast._episodes.count == 0 {
+                guard let feedUrlString = podcast.feedUrl,
+                    let feedUrl = URL(string: feedUrlString) else {
+                        print("GetEpisodes -- Invalid Url")
+                        return
+                }
+
+                let parser = FeedParser(URL: feedUrl)
+                print("Trying to fetch \(feedUrl)")
+                parser.parseAsync(queue: DispatchQueue.global(qos: .userInitiated)) { (result) in
+                    switch result {
+                    case let .rss(feed):
+                        guard result.isSuccess else {
+                            print("GetEpisodes -- Could not parse feed URL from String")
+                            return
+                        }
+
+                        guard let feedItems = feed.items else {
+                            print("GetEpisodes -- Feed contains no items")
+                            return
+                        }
+
+                        var episodes = [Episode]()
+                        for feedItem in feedItems {
+                            let episode = Episode()
+                            episode.title = feedItem.title
+                            episode.episodeDescription = feedItem.description
+                            if let enclosure = feedItem.enclosure?.attributes {
+                                episode.url = enclosure.url
+                                episodes.append(episode)
+                            }
+                        }
+                        autoreleasepool {
+                            let realm = try! Realm(configuration: DBHelper.shared.defaultConfiguration)
+                            _podcast._episodes.append(objectsIn: episodes)
+                            // Write to Realm -- please work :)
+                            try! realm.write {
+                                realm.add(_podcast, update: .modified)
+                                try! realm.commitWrite()
+                            }
+                        }
+                    default:
+                        break
+                    }
+                }
+            }
+        }
+    }
+
+    static func getEpisodes(forPodcast podcast: Podcast, count: Int) throws ->
+    Signal<Episode, NoError> {
         guard let feedUrlString = podcast.feedUrl,
             let feedUrl = URL(string: feedUrlString) else {
             print("GetEpisodes -- Invalid Url")
-            return
+            throw RssFeedError.invalidURL
         }
 
-        let parser = FeedParser(URL: feedUrl)
-        print("Trying to fetch \(feedUrl)")
-        parser.parseAsync(queue: DispatchQueue.global(qos: .userInitiated)) { (result) in
-            switch result {
-            case let .rss(feed):
-                guard result.isSuccess else {
-                    print("GetEpisodes -- Could not parse feed URL from String")
-                    return
-                }
-
-                guard let feedItems = feed.items else {
-                    print("GetEpisodes -- Feed contains no items")
-                    return
-                }
-
-                guard count < feedItems.count else {
-                    print("GetEpisodes -- You asked for more than what exists")
-                    return
-                }
-
-                var episodes = [Episode]()
-                for feedItem in feedItems.prefix(count) {
-                    let episode = Episode()
-                    episode.title = feedItem.title
-                    episode.episodeDescription = feedItem.description
-                    if let enclosure = feedItem.enclosure?.attributes {
-                        episode.url = enclosure.url
-                        episodes.append(episode)
+        return Signal<Episode, NoError>.init({ (observer, _) in
+            let parser = FeedParser(URL: feedUrl)
+            print("Trying to fetch \(feedUrl)")
+            parser.parseAsync(queue: DispatchQueue.global(qos: .userInitiated)) { (result) in
+                switch result {
+                case let .rss(feed):
+                    guard result.isSuccess else {
+                        print("GetEpisodes -- Could not parse feed URL from String")
+                        return
                     }
-                }
-                DispatchQueue.main.async {
-                    completionBlock(episodes)
-                }
-            default:
-                break
 
+                    guard let feedItems = feed.items else {
+                        print("GetEpisodes -- Feed contains no items")
+                        return
+                    }
+
+                    guard count < feedItems.count else {
+                        print("GetEpisodes -- You asked for more than what exists")
+                        return
+                    }
+
+                    for feedItem in feedItems.prefix(count) {
+                        let episode = Episode()
+                        episode.title = feedItem.title
+                        episode.episodeDescription = feedItem.description
+                        if let enclosure = feedItem.enclosure?.attributes {
+                            episode.url = enclosure.url
+                            observer.send(value: episode)
+                        }
+                    }
+                default:
+                    break
+
+                }
             }
-        }
+        })
     }
 
 //    static func requestLatestPodcastEpisode(fromPodcastFeed podcastFeed: URL){
@@ -132,5 +190,9 @@ class Rest {
 ////                }
 //            }
 //    }
+}
+
+enum RssFeedError: Error {
+    case invalidURL
 }
 

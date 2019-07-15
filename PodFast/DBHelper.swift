@@ -57,8 +57,9 @@ class DBHelper{
             // delete all podcasts in db ? :)
             let oldPodcasts = realm.objects(Podcast.self)
             for oldPodcast in oldPodcasts {
+                // keep old episodes
                 if let podcast = podcasts.first(where: { $0.title == oldPodcast.title }) {
-                    podcast.episodes.append(objectsIn: oldPodcast.episodes)
+                    podcast._episodes.append(objectsIn: oldPodcast._episodes)
                 }
             }
             realm.delete(oldPodcasts)

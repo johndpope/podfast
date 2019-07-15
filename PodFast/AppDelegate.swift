@@ -17,9 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-//        Rest.topPodCastsRequest(count: 10, completionBlock: {_ in })
-        print(Realm.Configuration.defaultConfiguration.fileURL)
+        print("Realm URL: \(Realm.Configuration.defaultConfiguration.fileURL!)")
         Rest.checkConfiguration()
+        Rest.getEpisodes()
         return true
     }
 
