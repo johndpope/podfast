@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     var podcast: Podcast?
 
     var audioPlayer: AVPlayer?
-    var audioPlayerItem: AVPlayerItem?
+    var audioPlayerItem: CachingPlayerItem?
 
     @IBOutlet weak var podcastTitleLabel: UILabel!
     @IBOutlet weak var episodeTitleLabel: UIButton!
@@ -39,7 +39,8 @@ class ViewController: UIViewController {
                            .take(first: 1)
                            .observe(on: UIScheduler())
                            .on (value: { episode in
-                                self.audioPlayerItem = AVPlayerItem(url: URL(string: episode.url!)!)
+//                                self.audioPlayerItem = AVPlayerItem(url: URL(string: episode.url!)!)
+                                self.audioPlayerItem = CachingPlayerItem(url: URL(string: episode.url!)!)
                                 // Register as an observer of the player item's status property
                                 self.audioPlayerItem?.addObserver(self,
                                                        forKeyPath: #keyPath(AVPlayerItem.status),
