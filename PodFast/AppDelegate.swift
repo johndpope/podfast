@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         print("Realm URL: \(Realm.Configuration.defaultConfiguration.fileURL!)")
         Rest.checkConfiguration()
-        Rest.getEpisodes()
+        Rest.getEpisodeMetadata()
         return true
     }
 

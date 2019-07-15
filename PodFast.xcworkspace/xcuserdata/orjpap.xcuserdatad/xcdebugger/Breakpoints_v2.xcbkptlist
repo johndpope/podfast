@@ -6,16 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PodFast/Rest.swift"
-            timestampString = "584841917.241596"
+            timestampString = "584843445.544996"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
-            landmarkName = "getEpisodes()"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "getEpisodeMetadata()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

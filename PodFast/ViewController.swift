@@ -92,6 +92,8 @@ class ViewController: UIViewController {
             try! realm.commitWrite()
 
             audioPlayer.play()
+
+//            audioPlayer.seek(to: CMTime)
         }
 
     }

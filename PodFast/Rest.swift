@@ -51,11 +51,10 @@ class Rest {
     }
 
     // for all podcasts
-    static func getEpisodes(){
+    static func getEpisodeMetadata(){
         let realm = DBHelper.shared.getRealm()
         let podcasts = realm.objects(Podcast.self)
         for podcast in podcasts {
-
             // unmanaged copy
             let _podcast = Podcast(value: podcast)
             if _podcast._episodes.count == 0 {
@@ -64,7 +63,6 @@ class Rest {
                         print("GetEpisodes -- Invalid Url")
                         return
                 }
-
                 let parser = FeedParser(URL: feedUrl)
                 print("Trying to fetch \(feedUrl)")
                 parser.parseAsync(queue: DispatchQueue.global(qos: .userInitiated)) { (result) in
