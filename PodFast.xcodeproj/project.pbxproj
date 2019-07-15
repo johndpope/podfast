@@ -16,6 +16,9 @@
 		917C8A1322D53E0C00A26154 /* Responses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917C8A1122D53E0C00A26154 /* Responses.swift */; };
 		917C8A1522D53E1600A26154 /* Rest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917C8A1422D53E1600A26154 /* Rest.swift */; };
 		917C8A1622D53E1600A26154 /* Rest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917C8A1422D53E1600A26154 /* Rest.swift */; };
+		917FD7AD22DBFCA700945C2D /* LICENSE.md in Resources */ = {isa = PBXBuildFile; fileRef = 917FD7AA22DBFCA700945C2D /* LICENSE.md */; };
+		917FD7AE22DBFCA700945C2D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 917FD7AB22DBFCA700945C2D /* README.md */; };
+		917FD7AF22DBFCA700945C2D /* CachingPlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917FD7AC22DBFCA700945C2D /* CachingPlayerItem.swift */; };
 		9186C75522D53534007307C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9186C75422D53534007307C1 /* AppDelegate.swift */; };
 		9186C75722D53534007307C1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9186C75622D53534007307C1 /* ViewController.swift */; };
 		9186C75A22D53534007307C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9186C75822D53534007307C1 /* Main.storyboard */; };
@@ -48,6 +51,9 @@
 		915724B222DA65BF0003C6B7 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		917C8A1122D53E0C00A26154 /* Responses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Responses.swift; sourceTree = "<group>"; };
 		917C8A1422D53E1600A26154 /* Rest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rest.swift; sourceTree = "<group>"; };
+		917FD7AA22DBFCA700945C2D /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
+		917FD7AB22DBFCA700945C2D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		917FD7AC22DBFCA700945C2D /* CachingPlayerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachingPlayerItem.swift; sourceTree = "<group>"; };
 		9186C75122D53534007307C1 /* PodFast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodFast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9186C75422D53534007307C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9186C75622D53534007307C1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +109,23 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		917FD7A822DBFC6100945C2D /* lib */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		917FD7A922DBFCA700945C2D /* CachingPlayerItem */ = {
+			isa = PBXGroup;
+			children = (
+				917FD7AA22DBFCA700945C2D /* LICENSE.md */,
+				917FD7AB22DBFCA700945C2D /* README.md */,
+			);
+			name = CachingPlayerItem;
+			path = lib/CachingPlayerItem;
+			sourceTree = "<group>";
+		};
 		9186C74822D53534007307C1 = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +133,7 @@
 				9186C76822D53536007307C1 /* PodFastTests */,
 				9186C75222D53534007307C1 /* Products */,
 				B9952419773CC133ADE439E3 /* Pods */,
+				917FD7A922DBFCA700945C2D /* CachingPlayerItem */,
 				108C5CB6A63EC909C12134BB /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -126,10 +150,12 @@
 		9186C75322D53534007307C1 /* PodFast */ = {
 			isa = PBXGroup;
 			children = (
+				917FD7AC22DBFCA700945C2D /* CachingPlayerItem.swift */,
 				9186C75422D53534007307C1 /* AppDelegate.swift */,
 				9186C75622D53534007307C1 /* ViewController.swift */,
 				917C8A1422D53E1600A26154 /* Rest.swift */,
 				915724B022DA5DF70003C6B7 /* data.json */,
+				917FD7A822DBFC6100945C2D /* lib */,
 				917C8A1122D53E0C00A26154 /* Responses.swift */,
 				915724AF22DA525D0003C6B7 /* Models */,
 				915724AD22DA4D4D0003C6B7 /* Discovery.swift */,
@@ -246,6 +272,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				917FD7AE22DBFCA700945C2D /* README.md in Resources */,
+				917FD7AD22DBFCA700945C2D /* LICENSE.md in Resources */,
 				9186C75F22D53536007307C1 /* LaunchScreen.storyboard in Resources */,
 				9186C75C22D53536007307C1 /* Assets.xcassets in Resources */,
 				9186C75A22D53534007307C1 /* Main.storyboard in Resources */,
@@ -336,6 +364,7 @@
 				915724B322DA65BF0003C6B7 /* Config.swift in Sources */,
 				915724AE22DA4D4D0003C6B7 /* Discovery.swift in Sources */,
 				915724AA22DA4D320003C6B7 /* Episode.swift in Sources */,
+				917FD7AF22DBFCA700945C2D /* CachingPlayerItem.swift in Sources */,
 				9186C75722D53534007307C1 /* ViewController.swift in Sources */,
 				91C5504322D5498D008FD9AB /* DBHelper.swift in Sources */,
 				9186C75522D53534007307C1 /* AppDelegate.swift in Sources */,
