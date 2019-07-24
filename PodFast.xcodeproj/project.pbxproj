@@ -26,6 +26,8 @@
 		9186C75F22D53536007307C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9186C75D22D53536007307C1 /* LaunchScreen.storyboard */; };
 		9186C76A22D53536007307C1 /* PodFastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9186C76922D53536007307C1 /* PodFastTests.swift */; };
 		91C5504322D5498D008FD9AB /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C5504222D5498D008FD9AB /* DBHelper.swift */; };
+		91F9003822DE461B00FA99D2 /* Radio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F9003722DE461B00FA99D2 /* Radio.swift */; };
+		91F9003A22DF91B400FA99D2 /* UIAdjustableScrubSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F9003922DF91B400FA99D2 /* UIAdjustableScrubSlider.swift */; };
 		A403A1FE30AF819DD34ED360 /* Pods_PodFastTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8D86976DFC2BD1224FA60BF /* Pods_PodFastTests.framework */; };
 		AC367F35E679B9E8A74B4BB4 /* Pods_PodFast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36604F8F64348AF8F5B002DE /* Pods_PodFast.framework */; };
 /* End PBXBuildFile section */
@@ -65,6 +67,8 @@
 		9186C76922D53536007307C1 /* PodFastTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodFastTests.swift; sourceTree = "<group>"; };
 		9186C76B22D53536007307C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		91C5504222D5498D008FD9AB /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
+		91F9003722DE461B00FA99D2 /* Radio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Radio.swift; sourceTree = "<group>"; };
+		91F9003922DF91B400FA99D2 /* UIAdjustableScrubSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAdjustableScrubSlider.swift; sourceTree = "<group>"; };
 		A8D86976DFC2BD1224FA60BF /* Pods_PodFastTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PodFastTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6DA6EC92EFDACC5EFAFB171 /* Pods-PodFast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodFast.release.xcconfig"; path = "Target Support Files/Pods-PodFast/Pods-PodFast.release.xcconfig"; sourceTree = "<group>"; };
 		FA760B81FA684F9178BF5BFD /* Pods-PodFastTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodFastTests.debug.xcconfig"; path = "Target Support Files/Pods-PodFastTests/Pods-PodFastTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -109,13 +113,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		917FD7A822DBFC6100945C2D /* lib */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = lib;
-			sourceTree = "<group>";
-		};
 		917FD7A922DBFCA700945C2D /* CachingPlayerItem */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,16 +147,17 @@
 		9186C75322D53534007307C1 /* PodFast */ = {
 			isa = PBXGroup;
 			children = (
+				91F9003722DE461B00FA99D2 /* Radio.swift */,
 				917FD7AC22DBFCA700945C2D /* CachingPlayerItem.swift */,
 				9186C75422D53534007307C1 /* AppDelegate.swift */,
 				9186C75622D53534007307C1 /* ViewController.swift */,
 				917C8A1422D53E1600A26154 /* Rest.swift */,
 				915724B022DA5DF70003C6B7 /* data.json */,
-				917FD7A822DBFC6100945C2D /* lib */,
 				917C8A1122D53E0C00A26154 /* Responses.swift */,
 				915724AF22DA525D0003C6B7 /* Models */,
 				915724AD22DA4D4D0003C6B7 /* Discovery.swift */,
 				91C5504222D5498D008FD9AB /* DBHelper.swift */,
+				91F9003922DF91B400FA99D2 /* UIAdjustableScrubSlider.swift */,
 				9186C75822D53534007307C1 /* Main.storyboard */,
 				9186C75B22D53536007307C1 /* Assets.xcassets */,
 				9186C75D22D53536007307C1 /* LaunchScreen.storyboard */,
@@ -367,8 +365,10 @@
 				917C8A1222D53E0C00A26154 /* Responses.swift in Sources */,
 				915724AC22DA4D3A0003C6B7 /* Podcast.swift in Sources */,
 				915724B322DA65BF0003C6B7 /* Config.swift in Sources */,
+				91F9003A22DF91B400FA99D2 /* UIAdjustableScrubSlider.swift in Sources */,
 				915724AE22DA4D4D0003C6B7 /* Discovery.swift in Sources */,
 				915724AA22DA4D320003C6B7 /* Episode.swift in Sources */,
+				91F9003822DE461B00FA99D2 /* Radio.swift in Sources */,
 				917FD7AF22DBFCA700945C2D /* CachingPlayerItem.swift in Sources */,
 				9186C75722D53534007307C1 /* ViewController.swift in Sources */,
 				91C5504322D5498D008FD9AB /* DBHelper.swift in Sources */,
