@@ -11,7 +11,7 @@
 		915724AC22DA4D3A0003C6B7 /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915724AB22DA4D3A0003C6B7 /* Podcast.swift */; };
 		915724AE22DA4D4D0003C6B7 /* Discovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915724AD22DA4D4D0003C6B7 /* Discovery.swift */; };
 		915724B122DA5DF70003C6B7 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 915724B022DA5DF70003C6B7 /* data.json */; };
-		915724B322DA65BF0003C6B7 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915724B222DA65BF0003C6B7 /* Config.swift */; };
+		916DD7E222E8EA5400AE9E25 /* DataSetStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916DD7E122E8EA5400AE9E25 /* DataSetStats.swift */; };
 		917C8A1222D53E0C00A26154 /* Responses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917C8A1122D53E0C00A26154 /* Responses.swift */; };
 		917C8A1322D53E0C00A26154 /* Responses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917C8A1122D53E0C00A26154 /* Responses.swift */; };
 		917C8A1522D53E1600A26154 /* Rest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917C8A1422D53E1600A26154 /* Rest.swift */; };
@@ -50,7 +50,7 @@
 		915724AB22DA4D3A0003C6B7 /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
 		915724AD22DA4D4D0003C6B7 /* Discovery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discovery.swift; sourceTree = "<group>"; };
 		915724B022DA5DF70003C6B7 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
-		915724B222DA65BF0003C6B7 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		916DD7E122E8EA5400AE9E25 /* DataSetStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSetStats.swift; sourceTree = "<group>"; };
 		917C8A1122D53E0C00A26154 /* Responses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Responses.swift; sourceTree = "<group>"; };
 		917C8A1422D53E1600A26154 /* Rest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rest.swift; sourceTree = "<group>"; };
 		917FD7AA22DBFCA700945C2D /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
@@ -108,7 +108,7 @@
 			children = (
 				915724A922DA4D320003C6B7 /* Episode.swift */,
 				915724AB22DA4D3A0003C6B7 /* Podcast.swift */,
-				915724B222DA65BF0003C6B7 /* Config.swift */,
+				916DD7E122E8EA5400AE9E25 /* DataSetStats.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -364,9 +364,9 @@
 			files = (
 				917C8A1222D53E0C00A26154 /* Responses.swift in Sources */,
 				915724AC22DA4D3A0003C6B7 /* Podcast.swift in Sources */,
-				915724B322DA65BF0003C6B7 /* Config.swift in Sources */,
 				91F9003A22DF91B400FA99D2 /* UIAdjustableScrubSlider.swift in Sources */,
 				915724AE22DA4D4D0003C6B7 /* Discovery.swift in Sources */,
+				916DD7E222E8EA5400AE9E25 /* DataSetStats.swift in Sources */,
 				915724AA22DA4D320003C6B7 /* Episode.swift in Sources */,
 				91F9003822DE461B00FA99D2 /* Radio.swift in Sources */,
 				917FD7AF22DBFCA700945C2D /* CachingPlayerItem.swift in Sources */,

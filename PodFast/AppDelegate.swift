@@ -27,8 +27,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Setting category to AVAudioSessionCategoryPlayback failed.")
         }
 
-        Rest.checkConfiguration()
-        Rest.getEpisodeMetadata()
+        Rest.appleTopPodcastsRequest(completionBlock: {data in
+            if let response = data.result.value {
+                DBHelper.shared.updatePodcasts(fromAppleTopPodcasts: response)
+                Rest.getEpisodeMetadata()
+                // What if this was Podcast.update(fromAppleTopPodcasts: response) ?
+            }
+        })
+//        Rest.checkConfiguration()
+//        Rest.getEpisodeMetadata()
         return true
     }
 

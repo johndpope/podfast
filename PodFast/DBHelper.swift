@@ -14,7 +14,6 @@ class DBHelper{
     static let shared = DBHelper()
 
     private init(){
-
     }
 
     private lazy var realm = try! Realm(configuration: defaultConfiguration)
@@ -28,8 +27,18 @@ class DBHelper{
 
     func getCurrentConfigVersion() -> Int {
         let realm = getRealm()
-        let config = realm.objects(Config.self)
-        return config.first?.version ?? 0
+        let stats = realm.objects(DataSetStats.self)
+        return stats.first?.configVersion ?? 0
+    }
+
+    func getLastAppleTopPodcastsUpdateDate() -> Date {
+        let realm = getRealm()
+        if let stats = realm.objects(DataSetStats.self).first,
+            let lastUpdate = stats.appleTopPodcastsLastUpdate{
+            return lastUpdate
+        } else {
+            return Date(timeIntervalSince1970: 0)
+        }
     }
 
     func updatePodcasts(fromConfigData configData: ConfigFileData) {
@@ -46,7 +55,6 @@ class DBHelper{
                 dbPodcast.title = configPodcast.title
                 dbPodcast.podcastDescription = configPodcast.description
                 dbPodcast.hasBeenDiscovered = false //TODO: you don't know this :)
-                dbPodcast.id = UUID().hashValue
                 podcasts.append(dbPodcast)
             }
         }
@@ -54,7 +62,7 @@ class DBHelper{
         // start Write transaction // Handle exceptions here
         let realm = getRealm()
         try! realm.write {
-            // delete all podcasts in db ? :)
+            // delete all podcasts in db ? :) NOOO :)
             let oldPodcasts = realm.objects(Podcast.self)
             for oldPodcast in oldPodcasts {
                 // keep old episodes
@@ -66,14 +74,44 @@ class DBHelper{
 
             realm.add(podcasts)
 
-            let oldConfig = realm.objects(Config.self)
-            realm.delete(oldConfig)
-
-            let updatedConfig = Config()
-            updatedConfig.version = newVersion
-            realm.add(updatedConfig)
+//            let stats = realm.objects(DataSetStats.self)
+//            realm.delete(oldConfig)
+//
+//            let updatedConfig = Config()
+//            updatedConfig.configVersion = newVersion
+//            realm.add(updatedConfig)
 
             try! realm.commitWrite()
+        }
+    }
+
+    func updatePodcasts(fromAppleTopPodcasts response: AppleTopPodcastsResponse) {
+        if let pendingUpdateDate = response.updated {
+            let lastUpdateDate = getLastAppleTopPodcastsUpdateDate()
+            if pendingUpdateDate > lastUpdateDate {
+                // then go ahead and update boi
+                print("Updating Apple Top Podcasts List")
+
+                let stats = DataSetStats()
+                stats.appleTopPodcastsLastUpdate = pendingUpdateDate
+
+                var podcasts = [Podcast]()
+
+                if let appleTopPodcasts = response.podcasts {
+                    podcasts = appleTopPodcasts.map { $0.toPodcastObject() }
+                }
+                do {
+                    let realm = getRealm()
+                    realm.beginWrite()
+                    realm.add(podcasts, update: .all)
+                    realm.add(stats, update: .modified)
+                    try realm.commitWrite()
+                } catch {
+                    print("Error info: \(error)")
+                }
+            } else {
+                print("Apple Top Podcasts List Already Up to Date")
+            }
         }
     }
     

@@ -6,33 +6,65 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PodFast/Rest.swift"
-            timestampString = "584843445.544996"
+            filePath = "PodFast/AppDelegate.swift"
+            timestampString = "585694329.591561"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "getEpisodeMetadata()"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PodFast/Radio.swift"
-            timestampString = "585080449.261345"
+            filePath = "PodFast/Rest.swift"
+            timestampString = "585694399.514676"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "observeValue(forKeyPath:of:change:context:)"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "getEpisodeMetadata()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (FeedKit.Result) -&gt; () in static PodFast.Rest.getEpisodeMetadata() -&gt; ()"
+                  moduleName = "PodFast"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/orjpap/Documents/Development/iOS/PodFast/PodFast/PodFast/Rest.swift"
+                  timestampString = "585694399.5191129"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "206">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (FeedKit.Result) -&gt; () in static PodFast.Rest.getEpisodeMetadata() -&gt; ()"
+                  moduleName = "PodFast"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/orjpap/Documents/Development/iOS/PodFast/PodFast/PodFast/Rest.swift"
+                  timestampString = "585694399.5214961"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "253">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

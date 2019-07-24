@@ -11,19 +11,20 @@ import RealmSwift
 import AlamofireObjectMapper
 import ObjectMapper
 
-class TopPodcastsResponse: Mappable {
-    var url: URL?
-    var title: String?
-    var description: String?
+class AppleTopPodcastsResponse: Mappable {
+    var updated: Date?
+    var podcasts: [AppleTopPodcast]?
 
-    let stringToUrl = TransformOf<URL, String>(fromJSON: { (value: String?) -> URL? in
-        // transform value from String? to Int?
-        return try! value?.asURL()
-    }, toJSON: { (value: URL?) -> String? in
-        // transform value from Int? to String?
-        if let value = value {
-            return value.absoluteString
-        }
+    let stringToIso8601Date = TransformOf<Date, String>(fromJSON: { (value: String?) -> Date? in
+        guard let updated = value else { return nil }
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
+        let formattedDate = dateFormatter.date(from: updated)
+
+        return formattedDate
+    }, toJSON: { (value: Date?) -> String? in
+        // This is broken, not needed for now
         return nil
     })
 
@@ -32,9 +33,8 @@ class TopPodcastsResponse: Mappable {
     }
 
     func mapping(map: Map) {
-        url <- (map["url"], stringToUrl)
-        title <- map["title"]
-        description <- map["description"]
+        updated <- (map["feed.updated"], stringToIso8601Date)
+        podcasts <- map["feed.results"]
     }
 }
 
@@ -52,7 +52,7 @@ class ConfigFileData: Mappable {
     }
 }
 
-class ConfigPodcast: Mappable {
+class BasePodcastResponse: Mappable {
     var url: String?
     var title: String?
     var description: String?
@@ -62,8 +62,30 @@ class ConfigPodcast: Mappable {
     }
 
     func mapping(map: Map) {
+
+    }
+
+    func toPodcastObject() -> Podcast {
+        let dbPodcast = Podcast()
+        dbPodcast.feedUrl = url
+        dbPodcast.title = title
+        dbPodcast.podcastDescription = description
+        dbPodcast.hasBeenDiscovered = false //TODO: you don't know this :)
+        return dbPodcast
+    }
+}
+
+class ConfigPodcast: BasePodcastResponse {
+    override func mapping(map: Map) {
         url <- map["url"]
         title <- map["title"]
         description <- map["description"]
+    }
+}
+
+class AppleTopPodcast: BasePodcastResponse {
+    override func mapping(map: Map) {
+        url <- map["url"]
+        title <- map["name"]
     }
 }

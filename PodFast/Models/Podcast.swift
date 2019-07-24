@@ -15,7 +15,6 @@ import ReactiveCocoa
 import enum Result.NoError
 
 class Podcast: Object {
-    @objc dynamic var id = 0
     @objc dynamic var feedUrl: String?
     @objc dynamic var title: String?
     @objc dynamic var podcastDescription: String?
@@ -27,25 +26,7 @@ class Podcast: Object {
     }
 
     override static func primaryKey() -> String? {
-        return "id"
-    }
-
-    public lazy var episodeStream = SignalProducer<Episode, NoError> { (observer, lifetime) in
-            if self._episodes.count > 0 {
-                for episode in self._episodes {
-                    observer.send(value: episode)
-                }
-            } else {
-                let realm = DBHelper.shared.getRealm()
-                try! Rest.getEpisodes(forPodcast: self, count: 5)
-                    .observe(on: UIScheduler())
-                    .observeValues { episode in
-                        realm.beginWrite()
-                        self._episodes.append(episode)
-                        try! realm.commitWrite()
-                        observer.send(value: episode)
-                    }
-            }
+        return "title"
     }
 
     func deleteAllEpisodes() {
