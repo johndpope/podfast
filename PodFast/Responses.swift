@@ -13,7 +13,7 @@ import ObjectMapper
 
 class AppleTopPodcastsResponse: Mappable {
     var updated: Date?
-    var podcasts: [AppleTopPodcast]?
+    var podcasts: [AppleTopPodcastID]?
 
     let stringToIso8601Date = TransformOf<Date, String>(fromJSON: { (value: String?) -> Date? in
         guard let updated = value else { return nil }
@@ -35,6 +35,20 @@ class AppleTopPodcastsResponse: Mappable {
     func mapping(map: Map) {
         updated <- (map["feed.updated"], stringToIso8601Date)
         podcasts <- map["feed.results"]
+    }
+}
+
+class ItunesPodcastLookUpResponse: Mappable {
+    var resultCount: Int?
+    var podcasts: [AppleTopPodcast]?
+
+    required init?(map: Map){
+
+    }
+
+    func mapping(map: Map) {
+        resultCount <- map["resultCount"]
+        podcasts <- map["results"]
     }
 }
 
@@ -83,9 +97,18 @@ class ConfigPodcast: BasePodcastResponse {
     }
 }
 
+// We get only the podcast ID from the top 100 and do an itunes lookup to get the podcast
+class AppleTopPodcastID: BasePodcastResponse {
+    var id: String?
+    override func mapping(map: Map) {
+        id <- map["id"]
+    }
+}
+
 class AppleTopPodcast: BasePodcastResponse {
     override func mapping(map: Map) {
-        url <- map["url"]
-        title <- map["name"]
+        url <- map["feedUrl"]
+        title <- map["collectionName"]
+        description <- map["description"]
     }
 }

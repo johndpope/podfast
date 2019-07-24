@@ -37,13 +37,46 @@ class Rest {
         }
     }
 
-    static func appleTopPodcastsRequest(completionBlock: @escaping (DataResponse<AppleTopPodcastsResponse>) -> Void,
+    static func appleTopPodcastsRequest(completionBlock: @escaping (DataResponse<ItunesPodcastLookUpResponse>) -> Void,
                                         errorHandler: @escaping (Error) -> Void = DefaultErrorHandler)
     {
         let URL = "https://rss.itunes.apple.com/api/v1/us/podcasts/top-podcasts/all/100/explicit.json"
         Alamofire.request(URL).responseObject { (response: DataResponse<AppleTopPodcastsResponse>) in
             if response.result.isSuccess {
-                completionBlock(response)
+                if let pendingUpdateDate = response.result.value?.updated {
+                    let lastUpdateDate = DBHelper.shared.getLastAppleTopPodcastsUpdateDate()
+                    if  pendingUpdateDate > lastUpdateDate {
+
+                        print("Will Update Podcast Info")
+
+                        DBHelper.shared.updateLastAppleTopPodcastsUpdateDate(toDate: pendingUpdateDate)
+
+                        // Itunes Lookup by id
+                        var baseURL = "https://itunes.apple.com/lookup?id="
+                        if let podcasts = response.result.value?.podcasts {
+                            for podcast in podcasts {
+                                if let podcastId = podcast.id {
+                                    baseURL.append("\(podcastId),")
+                                }
+                            }
+                            baseURL.removeLast()
+                            print(baseURL)
+                        }
+
+                        // Request the podcast data from itunes
+                        Alamofire.request(baseURL).responseObject { (response: DataResponse<ItunesPodcastLookUpResponse>) in
+                            switch response.result {
+                            case .success:
+                                completionBlock(response)
+                            case .failure:
+                                print("Itunes lookup failed")
+                            }
+                        }
+                    } else {
+                         print("Podcast info already up to date!")
+                    }
+                }
+//                completionBlock(response)
             } else {
                 if let error = response.error {
                     errorHandler(error)

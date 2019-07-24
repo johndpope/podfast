@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         Rest.appleTopPodcastsRequest(completionBlock: {data in
             if let response = data.result.value {
-                DBHelper.shared.updatePodcasts(fromAppleTopPodcasts: response)
+                DBHelper.shared.updatePodcasts(fromItunesPodcastLookup: response)
                 Rest.getEpisodeMetadata()
                 // What if this was Podcast.update(fromAppleTopPodcasts: response) ?
             }

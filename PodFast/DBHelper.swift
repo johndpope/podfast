@@ -41,6 +41,19 @@ class DBHelper{
         }
     }
 
+    func updateLastAppleTopPodcastsUpdateDate(toDate pendingUpdateDate: Date) {
+        do {
+            let updatedStats = DataSetStats()
+            updatedStats.appleTopPodcastsLastUpdate = pendingUpdateDate
+            let realm = DBHelper.shared.getRealm()
+            realm.beginWrite()
+            realm.add(updatedStats, update: .modified)
+            try realm.commitWrite()
+        } catch {
+            print(error)
+        }
+    }
+
     func updatePodcasts(fromConfigData configData: ConfigFileData) {
         guard let newVersion = configData.version else {
             return
@@ -85,33 +98,20 @@ class DBHelper{
         }
     }
 
-    func updatePodcasts(fromAppleTopPodcasts response: AppleTopPodcastsResponse) {
-        if let pendingUpdateDate = response.updated {
-            let lastUpdateDate = getLastAppleTopPodcastsUpdateDate()
-            if pendingUpdateDate > lastUpdateDate {
-                // then go ahead and update boi
-                print("Updating Apple Top Podcasts List")
+    func updatePodcasts(fromItunesPodcastLookup response: ItunesPodcastLookUpResponse) {
+        print("Updating Apple Top Podcasts List")
+        var podcasts = [Podcast]()
 
-                let stats = DataSetStats()
-                stats.appleTopPodcastsLastUpdate = pendingUpdateDate
-
-                var podcasts = [Podcast]()
-
-                if let appleTopPodcasts = response.podcasts {
-                    podcasts = appleTopPodcasts.map { $0.toPodcastObject() }
-                }
-                do {
-                    let realm = getRealm()
-                    realm.beginWrite()
-                    realm.add(podcasts, update: .all)
-                    realm.add(stats, update: .modified)
-                    try realm.commitWrite()
-                } catch {
-                    print("Error info: \(error)")
-                }
-            } else {
-                print("Apple Top Podcasts List Already Up to Date")
-            }
+        if let appleTopPodcasts = response.podcasts {
+            podcasts = appleTopPodcasts.map { $0.toPodcastObject() }
+        }
+        do {
+            let realm = getRealm()
+            realm.beginWrite()
+            realm.add(podcasts, update: .all)
+            try realm.commitWrite()
+        } catch {
+            print("Error info: \(error)")
         }
     }
     
