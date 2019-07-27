@@ -34,17 +34,7 @@ public struct PodcastRemoteDataSource: PodcastDataSource {
                         reject(APIRequestError.noValueInResponse)
                         return
                     }
-
-                    // any is similar to all, but it fulfills even if some of the promises in the provided array are rejected.
-                    // If all promises in the input array are rejected, the returned promise rejects
-                    // the same error as the last one that was rejected.
-                    any(podcasts.map { PodcastFeedEpisodesRequest($0.toPodcastObject(), for: 1).execute() })
-                        .then { podcastsOrErrors in
-                            fulfill(podcastsOrErrors.compactMap{$0.value})
-                        }.catch { error in
-                            // all were rejected
-                            print(error)
-                    }
+                    fulfill(podcasts.map { $0.toPodcastObject() })
                 }
                 }.catch { error in
                     print(error)
