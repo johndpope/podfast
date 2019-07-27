@@ -18,30 +18,9 @@ public class Podcast: Object {
     @objc dynamic var podcastDescription: String?
     @objc dynamic var hasBeenDiscovered: Bool = false
     public let _episodes = List<Episode>()
-
-    public override static func ignoredProperties() -> [String] {
-        return ["episodeStream"]
-    }
+    public let categories = List<PodcastCategory>()
 
     public override static func primaryKey() -> String? {
         return "title"
-    }
-
-    func deleteAllEpisodes() {
-        let realm = DBHelper.shared.getRealm()
-        realm.beginWrite()
-        self._episodes.removeAll()
-        try! realm.commitWrite()
-    }
-
-    func getEpisodes(count: Int, completionBlock: @escaping ([Episode]) -> Void) {
-//        Rest.getEpisodes(forPodcast: self, count: 5 , completionBlock: { newEpisodes in
-//            let realm = DBHelper.shared.getRealm()
-//            realm.beginWrite()
-//            self._episodes.removeAll()
-//            self._episodes.append(objectsIn: newEpisodes)
-//            try! realm.commitWrite()
-//            completionBlock(newEpisodes)
-//        })
     }
 }

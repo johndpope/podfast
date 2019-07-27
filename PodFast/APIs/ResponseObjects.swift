@@ -83,6 +83,8 @@ class BasePodcastResponse: Mappable {
     var url: String?
     var title: String?
     var description: String?
+    var genres: [String]?
+    var genreIds: [String]?
 
     required init?(map: Map){
 
@@ -98,6 +100,13 @@ class BasePodcastResponse: Mappable {
         dbPodcast.title = title
         dbPodcast.podcastDescription = description
         dbPodcast.hasBeenDiscovered = false //TODO: you don't know this :)
+
+        if let genres = genres, let genreIds = genreIds {
+            for (genreId, genre) in zip(genreIds, genres) {
+                dbPodcast.categories.append(PodcastCategory(value: [Int(genreId) ?? 0, genre]))
+            }
+        }
+
         return dbPodcast
     }
 }
@@ -107,6 +116,9 @@ class ConfigPodcast: BasePodcastResponse {
         url <- map["url"]
         title <- map["title"]
         description <- map["description"]
+        genres <- map["genres"]
+        genreIds <- map["genreIds"]
+
     }
 }
 
@@ -123,5 +135,7 @@ class AppleTopPodcast: BasePodcastResponse {
         url <- map["feedUrl"]
         title <- map["collectionName"]
         description <- map["description"]
+        genres <- map["genres"]
+        genreIds <- map["genreIds"]
     }
 }

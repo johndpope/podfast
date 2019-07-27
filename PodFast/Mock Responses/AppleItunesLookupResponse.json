@@ -1,0 +1,47 @@
+{
+    "resultCount": 1,
+    "results": [
+        {
+            "wrapperType": "track",
+            "kind": "podcast",
+            "artistId": 1134742667,
+            "collectionId": 1465334342,
+            "trackId": 1465334342,
+            "artistName": "L.A. Times | Wondery",
+            "collectionName": "Man In The Window: The Golden State Killer",
+            "trackName": "Man In The Window: The Golden State Killer",
+            "collectionCensoredName": "Man In The Window: The Golden State Killer",
+            "trackCensoredName": "Man In The Window: The Golden State Killer",
+            "artistViewUrl": "https://podcasts.apple.com/us/artist/wondery/1134742667?uo=4",
+            "collectionViewUrl": "https://podcasts.apple.com/us/podcast/man-in-the-window-the-golden-state-killer/id1465334342?uo=4",
+            "feedUrl": "https://rss.art19.com/man-in-the-window",
+            "trackViewUrl": "https://podcasts.apple.com/us/podcast/man-in-the-window-the-golden-state-killer/id1465334342?uo=4",
+            "artworkUrl30": "https://is2-ssl.mzstatic.com/image/thumb/Music113/v4/07/c7/7c/07c77c47-641a-bb64-faca-f07ba49f8463/source/30x30bb.jpg",
+            "artworkUrl60": "https://is2-ssl.mzstatic.com/image/thumb/Music113/v4/07/c7/7c/07c77c47-641a-bb64-faca-f07ba49f8463/source/60x60bb.jpg",
+            "artworkUrl100": "https://is2-ssl.mzstatic.com/image/thumb/Music113/v4/07/c7/7c/07c77c47-641a-bb64-faca-f07ba49f8463/source/100x100bb.jpg",
+            "collectionPrice": 0.00,
+            "trackPrice": 0.00,
+            "trackRentalPrice": 0,
+            "collectionHdPrice": 0,
+            "trackHdPrice": 0,
+            "trackHdRentalPrice": 0,
+            "releaseDate": "2019-07-09T09:30:00Z",
+            "collectionExplicitness": "explicit",
+            "trackExplicitness": "explicit",
+            "trackCount": 9,
+            "country": "USA",
+            "currency": "USD",
+            "primaryGenreName": "True Crime",
+            "contentAdvisoryRating": "Explicit",
+            "artworkUrl600": "https://is2-ssl.mzstatic.com/image/thumb/Music113/v4/07/c7/7c/07c77c47-641a-bb64-faca-f07ba49f8463/source/600x600bb.jpg",
+            "genreIds": [
+                "1488",
+                "26"
+            ],
+            "genres": [
+                "True Crime",
+                "Podcasts"
+            ]
+        }
+    ]
+}

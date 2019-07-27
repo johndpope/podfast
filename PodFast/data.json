@@ -11,7 +11,9 @@
             "subscribers_last_week": 486,
             "title": "WTF with Marc Maron Podcast",
             "url": "http://wtfpod.libsyn.com/rss",
-            "website": "http://wtfpod.com"
+            "website": "http://wtfpod.com",
+            "genreIds": ["1303", "26", "1301", "1309", "1405"],
+            "genres": ["Comedy", "Podcasts", "Arts", "TV & Film", "Performing Arts"]
         },
         {
             "description": "The economy explained. Imagine you could call up a friend and say, \"Meet me at\nthe bar and tell me what's going on with the economy.\" Now imagine that's\nactually a fun evening.",
