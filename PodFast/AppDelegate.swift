@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import AVFoundation
+import Promises
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,15 +28,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Setting category to AVAudioSessionCategoryPlayback failed.")
         }
 
-        Rest.appleTopPodcastsRequest(completionBlock: {data in
-            if let response = data.result.value {
-                DBHelper.shared.updatePodcasts(fromItunesPodcastLookup: response)
-                Rest.getEpisodeMetadata()
-                // What if this was Podcast.update(fromAppleTopPodcasts: response) ?
+        let repository = PodcastDataRepository()
+        repository.update().then {
+            if $0 == true {
+                print("Repository was Updated")
             }
-        })
-//        Rest.checkConfiguration()
-//        Rest.getEpisodeMetadata()
+        }
         return true
     }
 

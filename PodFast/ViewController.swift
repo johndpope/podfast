@@ -10,8 +10,6 @@ import UIKit
 import AVFoundation
 import AVKit
 import RealmSwift
-import ReactiveSwift
-import ReactiveCocoa
 
 class ViewController: UIViewController {
     var podcastEpisode: Episode?

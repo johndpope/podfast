@@ -9,46 +9,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PodFast/Rest.swift"
-            timestampString = "585701453.395295"
+            filePath = "PodFast/AppDelegate.swift"
+            timestampString = "585945241.717243"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
-            landmarkName = "getEpisodeMetadata()"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "applicationWillResignActive(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (FeedKit.Result) -&gt; () in static PodFast.Rest.getEpisodeMetadata() -&gt; ()"
-                  moduleName = "PodFast"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/orjpap/Documents/Development/iOS/PodFast/PodFast/PodFast/Rest.swift"
-                  timestampString = "585700810.79533"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "102"
-                  endingLineNumber = "102"
-                  offsetFromSymbolStart = "206">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (FeedKit.Result) -&gt; () in static PodFast.Rest.getEpisodeMetadata() -&gt; ()"
-                  moduleName = "PodFast"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/orjpap/Documents/Development/iOS/PodFast/PodFast/PodFast/Rest.swift"
-                  timestampString = "585700810.797658"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "102"
-                  endingLineNumber = "102"
-                  offsetFromSymbolStart = "253">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -57,13 +25,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PodFast/AppDelegate.swift"
-            timestampString = "585701453.395982"
+            filePath = "PodFast/PodcastRepository.swift"
+            timestampString = "585943217.449815"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "update()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PodFast/PodcastRepository.swift"
+            timestampString = "585943217.450273"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "32"
             endingLineNumber = "32"
-            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
+            landmarkName = "update()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
