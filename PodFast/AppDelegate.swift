@@ -9,7 +9,6 @@
 import UIKit
 import RealmSwift
 import AVFoundation
-import Promises
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

@@ -101,7 +101,7 @@ struct PodcastFeedEpisodesRequest {
 
     private func parsePodcastEpisodes(fromRssFeed feedItems: [RSSFeedItem]) -> [Episode] {
         var episodes = [Episode]()
-        for feedItem in feedItems.prefix(self.numberOfEpisodesToRequest) {
+        for feedItem in feedItems.prefix(self.numberOfEpisodesToRequest - 1) {
             let episode = Episode()
             episode.title = feedItem.title
             episode.episodeDescription = feedItem.description
