@@ -11,12 +11,11 @@ import RealmSwift
 import AlamofireObjectMapper
 import ObjectMapper
 
-class DataSetStats: Object {
-    @objc dynamic var uniqueKey: Int = 0
-    @objc dynamic var configVersion: Int = 0
-    @objc dynamic var appleTopPodcastsLastUpdate: Date?
+class DataSetUpdated: Object {
+    @objc dynamic var dataSource: String?
+    @objc dynamic var date: Date?
 
     override static func primaryKey() -> String? {
-        return "uniqueKey"
+        return "dataSource"
     }
 }

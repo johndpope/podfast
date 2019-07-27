@@ -149,27 +149,14 @@ struct PodcastFeedEpisodesRequest {
     }
 }
 
-class Rest {
+struct ConfigurationDataRequest {
+    let path = Bundle.main.path(forResource: "data", ofType: "json")!
 
-    static let DefaultErrorHandler:(Error) -> Void = { error in
-        print(error)
-    }
-
-    static func checkConfiguration() {
-        if let path = Bundle.main.path(forResource: "data", ofType: "json") {
-            do {
-                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                if let jsonData = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String:Any] {
-                    if let configData = ConfigFileData(JSON: jsonData), let configVersion = configData.version {
-//                        if configVersion > DBHelper.shared.getCurrentConfigVersion() {
-//                            DBHelper.shared.updatePodcasts(fromConfigData: configData)
-//                        }
-                    }
-                }
-            } catch {
-                // handle error
-            }
+    func execute() throws -> ConfigFileData? {
+        let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+        if let jsonData = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String:Any] {
+            return ConfigFileData(JSON: jsonData) ?? nil
         }
+        return nil
     }
-
 }

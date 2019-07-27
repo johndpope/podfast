@@ -9,14 +9,9 @@ import Promises
 
 public struct PodcastRemoteDataSource: PodcastDataSource {
 
-    public init() {}
+    public var description = "apple_top_podcasts"
 
-    public func update(fromPodcasts podcasts: [Podcast]) -> Promise<Bool> {
-        return Promise<Bool> { fulfill, reject in
-            // Called asynchronously on the default queue.
-            fulfill(true)
-        }
-    }
+    public init() {}
 
     public func fetchPodcasts() -> Promise<[Podcast]> {
         return Promise<[Podcast]> { fulfill, reject in

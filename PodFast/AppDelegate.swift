@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import AVFoundation
+import Promises
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,11 +29,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         let repository = PodcastDataRepository()
-        repository.update().then {
-            if $0 == true {
-                print("Repository was Updated")
+        repository.update(withPolicy: .config).then { updated in
+            if updated {
+                print("YES")
+            } else {
+                print("NOPE")
             }
         }
+
         return true
     }
 

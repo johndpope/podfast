@@ -53,15 +53,28 @@ class ApplePodcastLookUpResponse: Mappable {
 }
 
 class ConfigFileData: Mappable {
-    var version: Int?
-    var podcasts: [[String: Any]] = [[:]]
+    var updated: Date?
+    var podcasts: [ConfigPodcast]?
+
+    let stringToConfigDateFormat = TransformOf<Date, String>(fromJSON: { (value: String?) -> Date? in
+        guard let updated = value else { return nil }
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "ddMMyyyy"
+        let formattedDate = dateFormatter.date(from: updated)
+
+        return formattedDate
+    }, toJSON: { (value: Date?) -> String? in
+        // This is broken, not needed for now
+        return nil
+    })
     
     required init?(map: Map){
 
     }
 
     func mapping(map: Map) {
-        version <- map["version"]
+        updated <- (map["updated"], stringToConfigDateFormat)
         podcasts <- map["podcasts"]
     }
 }

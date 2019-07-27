@@ -13,48 +13,55 @@ public struct PodcastLocalDataSource: PodcastDataSource {
 
     private let realm: Realm
 
+    public var description = "realm_db_podcast"
+
     public init() {
         self.realm = DBHelper.shared.getRealm()
     }
 
-    public func update(fromPodcasts podcasts: [Podcast]) -> Promise<Bool> {
+    public func update(fromSource dataSource: PodcastDataSource) -> Promise<Bool> {
         return Promise<Bool> { fulfill, reject in
-            // Called asynchronously on the default queue.
-            do {
-                self.realm.beginWrite()
-                self.realm.add(podcasts, update: .modified)
-                try self.realm.commitWrite()
-                try self.updateStats()
-                fulfill(true)
-            } catch let error as NSError {
-                reject(error)
-            }
-        }
-    }
-
-    public func fetchPodcasts() -> Promise<[Podcast]>{
-        return Promise<[Podcast]> { fulfill, reject in
-            // Called asynchronously on the default queue.
-            fulfill([])
-        }
-    }
-
-    public var lastUpdated: Promise<Date> {
-        get{
-            return Promise { () -> Date in
-                if let stats = self.realm.objects(DataSetStats.self).first,
-                    let lastUpdate = stats.appleTopPodcastsLastUpdate{
-                    return lastUpdate
-                } else {
-                    return Date(timeIntervalSince1970: 0)
+            dataSource.fetchPodcasts().then { podcasts in
+                do {
+                    self.realm.beginWrite()
+                    self.realm.add(podcasts, update: .modified)
+                    try self.realm.commitWrite()
+                    try self.update(lastUpdatedDatasource: dataSource, to: Date())
+                    fulfill(true)
+                } catch let error as NSError {
+                    reject(error)
                 }
             }
         }
     }
 
-    private func updateStats() throws {
-        let updatedStats = DataSetStats()
-        updatedStats.appleTopPodcastsLastUpdate = Date()
+    public func fetchPodcasts() -> Promise<[Podcast]>{
+        // potential realm fuck here
+        return Promise<[Podcast]> { fulfill, reject in
+                fulfill ( [] ) // SHIT SHIT SHIT
+        }
+    }
+
+    // that's for self!
+    public var lastUpdated: Promise<Date> {
+        get{
+            return Promise<Date> (self.get(lastUpdatedDatasourceDate: self))
+        }
+    }
+
+    public func get(lastUpdatedDatasourceDate dataSource: PodcastDataSource) -> Date {
+        if let stats = self.realm.objects(DataSetUpdated.self).filter("dataSource == %@ ", dataSource.description).first,
+           let lastUpdate = stats.date {
+            return lastUpdate
+        } else {
+            return Date(timeIntervalSince1970: 0)
+        }
+    }
+
+    private func update(lastUpdatedDatasource dataSource: PodcastDataSource, to date: Date) throws {
+        let updatedStats = DataSetUpdated()
+        updatedStats.dataSource = dataSource.description
+        updatedStats.date = date
         realm.beginWrite()
         realm.add(updatedStats, update: .modified)
         try realm.commitWrite()

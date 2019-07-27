@@ -7,6 +7,11 @@
 //
 import Promises
 
+enum UpdatePolicy {
+    case config
+    case remote
+}
+
 protocol PodcastRepository {
-    func update() -> Promise<Bool>
+    func update(withPolicy policy: UpdatePolicy) -> Promise<Bool>
 }
