@@ -37,6 +37,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
+        repository.update(withPolicy: .remote).then { updated in
+            if updated {
+                print("YES")
+            } else {
+                print("NOPE")
+            }
+        }
+
         return true
     }
 
