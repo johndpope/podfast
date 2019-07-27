@@ -5,8 +5,9 @@ PODS:
     - ObjectMapper (~> 3.4)
   - FeedKit (8.1.1)
   - ObjectMapper (3.5.1)
-  - ReactiveCocoa (9.0.0):
-    - ReactiveSwift (~> 5.0)
+  - PromisesObjC (1.2.8)
+  - PromisesSwift (1.2.8):
+    - PromisesObjC (= 1.2.8)
   - ReactiveSwift (5.0.1):
     - Result (~> 4.1)
   - Realm (3.17.0):
@@ -19,7 +20,7 @@ PODS:
 DEPENDENCIES:
   - AlamofireObjectMapper (~> 5.2)
   - FeedKit (~> 8.0)
-  - ReactiveCocoa
+  - PromisesSwift
   - ReactiveSwift (~> 5.0)
   - RealmSwift
 
@@ -29,7 +30,8 @@ SPEC REPOS:
     - AlamofireObjectMapper
     - FeedKit
     - ObjectMapper
-    - ReactiveCocoa
+    - PromisesObjC
+    - PromisesSwift
     - ReactiveSwift
     - Realm
     - RealmSwift
@@ -40,12 +42,13 @@ SPEC CHECKSUMS:
   AlamofireObjectMapper: 92b6ce2423a9d159e686f6a1d514a009bf903ddc
   FeedKit: 3418eed25f0b493b205b4de1b8511ac21d413fa9
   ObjectMapper: 70187b8941977c62ccfb423caf6b50be405cabf0
-  ReactiveCocoa: 29709cf0cc7502ddd04a51220e10ee0336d8bec8
+  PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
+  PromisesSwift: 37bad6f4daddb02f7c9c531efe91e8b21c13ee2f
   ReactiveSwift: cac20a5bbe560c5806bd29c0fccf90d03b996ac1
   Realm: b30db41ff34fc858ffc25ba8d44a82c164e7ccd0
   RealmSwift: fe733e459d60dc7b6971d4cbee2eb4854097d12c
   Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
 
-PODFILE CHECKSUM: 2e7a107d9804caf36cd9ba2c4a4beb58b7dd66ea
+PODFILE CHECKSUM: ac02c4bc2cd49730c57eb623c0a82a4b4909f169
 
 COCOAPODS: 1.7.4

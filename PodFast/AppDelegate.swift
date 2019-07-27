@@ -27,8 +27,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Setting category to AVAudioSessionCategoryPlayback failed.")
         }
 
-        Rest.checkConfiguration()
-        Rest.getEpisodeMetadata()
+        let repository = PodcastDataRepository()
+        repository.update().then {
+            if $0 == true {
+                print("Repository was Updated")
+            }
+        }
         return true
     }
 
