@@ -7,13 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9156081222EDD3F300BEEF19 /* PodcastRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9156081122EDD3F300BEEF19 /* PodcastRepositoryTests.swift */; };
+		9156081622EDEE0200BEEF19 /* PodFastRadioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9156081522EDEE0200BEEF19 /* PodFastRadioTests.swift */; };
+		9156081822EDF9B400BEEF19 /* PodcastCategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9156081722EDF9B400BEEF19 /* PodcastCategoryRepository.swift */; };
+		9156081A22EDFA5100BEEF19 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9156081922EDFA5100BEEF19 /* DataSource.swift */; };
+		9156081E22EE21FD00BEEF19 /* PodcastRealmDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9156081D22EE21FD00BEEF19 /* PodcastRealmDataSourceTests.swift */; };
 		915724AA22DA4D320003C6B7 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915724A922DA4D320003C6B7 /* Episode.swift */; };
 		915724AC22DA4D3A0003C6B7 /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915724AB22DA4D3A0003C6B7 /* Podcast.swift */; };
 		915724AE22DA4D4D0003C6B7 /* Discovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915724AD22DA4D4D0003C6B7 /* Discovery.swift */; };
 		915724B122DA5DF70003C6B7 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 915724B022DA5DF70003C6B7 /* data.json */; };
 		916DD7E222E8EA5400AE9E25 /* DataSetUpdated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916DD7E122E8EA5400AE9E25 /* DataSetUpdated.swift */; };
 		916DD7E422EA0FC100AE9E25 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916DD7E322EA0FC100AE9E25 /* Repository.swift */; };
-		916DD7E622EA10B400AE9E25 /* PodcastDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916DD7E522EA10B400AE9E25 /* PodcastDataRepository.swift */; };
+		916DD7E622EA10B400AE9E25 /* PodcastRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916DD7E522EA10B400AE9E25 /* PodcastRepository.swift */; };
 		917C8A1222D53E0C00A26154 /* ResponseObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917C8A1122D53E0C00A26154 /* ResponseObjects.swift */; };
 		917C8A1522D53E1600A26154 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917C8A1422D53E1600A26154 /* Requests.swift */; };
 		917FD7AD22DBFCA700945C2D /* LICENSE.md in Resources */ = {isa = PBXBuildFile; fileRef = 917FD7AA22DBFCA700945C2D /* LICENSE.md */; };
@@ -28,8 +33,6 @@
 		918752EE22ED02CD000A1B94 /* PodcastCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918752ED22ED02CD000A1B94 /* PodcastCategory.swift */; };
 		918752F122ED10FC000A1B94 /* AppleItunesLookupResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 918752EF22ED10FB000A1B94 /* AppleItunesLookupResponse.json */; };
 		918752F222ED10FC000A1B94 /* AppleTopPodcastsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 918752F022ED10FC000A1B94 /* AppleTopPodcastsResponse.json */; };
-		91B7F14622ECCE11004CB98F /* PodcastRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B7F14522ECCE11004CB98F /* PodcastRepository.swift */; };
-		91B7F14922ECCE6F004CB98F /* PodcastDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B7F14822ECCE6F004CB98F /* PodcastDataSource.swift */; };
 		91B7F14B22ECCEC2004CB98F /* PodcastRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B7F14A22ECCEC2004CB98F /* PodcastRemoteDataSource.swift */; };
 		91B7F14D22ECCF28004CB98F /* PodcastLocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B7F14C22ECCF28004CB98F /* PodcastLocalDataSource.swift */; };
 		91B7F15222ECD0F0004CB98F /* PodcastConfigurationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B7F15122ECD0F0004CB98F /* PodcastConfigurationDataSource.swift */; };
@@ -54,13 +57,18 @@
 		36604F8F64348AF8F5B002DE /* Pods_PodFast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PodFast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		59995660FD3C9444AC5F8649 /* Pods-PodFastTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodFastTests.release.xcconfig"; path = "Target Support Files/Pods-PodFastTests/Pods-PodFastTests.release.xcconfig"; sourceTree = "<group>"; };
 		732A0EA8D779424A7C4A22FD /* Pods-PodFast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodFast.debug.xcconfig"; path = "Target Support Files/Pods-PodFast/Pods-PodFast.debug.xcconfig"; sourceTree = "<group>"; };
+		9156081122EDD3F300BEEF19 /* PodcastRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastRepositoryTests.swift; sourceTree = "<group>"; };
+		9156081522EDEE0200BEEF19 /* PodFastRadioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodFastRadioTests.swift; sourceTree = "<group>"; };
+		9156081722EDF9B400BEEF19 /* PodcastCategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastCategoryRepository.swift; sourceTree = "<group>"; };
+		9156081922EDFA5100BEEF19 /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
+		9156081D22EE21FD00BEEF19 /* PodcastRealmDataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastRealmDataSourceTests.swift; sourceTree = "<group>"; };
 		915724A922DA4D320003C6B7 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 		915724AB22DA4D3A0003C6B7 /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
 		915724AD22DA4D4D0003C6B7 /* Discovery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discovery.swift; sourceTree = "<group>"; };
 		915724B022DA5DF70003C6B7 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
 		916DD7E122E8EA5400AE9E25 /* DataSetUpdated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSetUpdated.swift; sourceTree = "<group>"; };
 		916DD7E322EA0FC100AE9E25 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
-		916DD7E522EA10B400AE9E25 /* PodcastDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastDataRepository.swift; sourceTree = "<group>"; };
+		916DD7E522EA10B400AE9E25 /* PodcastRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastRepository.swift; sourceTree = "<group>"; };
 		917C8A1122D53E0C00A26154 /* ResponseObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseObjects.swift; sourceTree = "<group>"; };
 		917C8A1422D53E1600A26154 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
 		917FD7AA22DBFCA700945C2D /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
@@ -79,8 +87,6 @@
 		918752ED22ED02CD000A1B94 /* PodcastCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastCategory.swift; sourceTree = "<group>"; };
 		918752EF22ED10FB000A1B94 /* AppleItunesLookupResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AppleItunesLookupResponse.json; sourceTree = "<group>"; };
 		918752F022ED10FC000A1B94 /* AppleTopPodcastsResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AppleTopPodcastsResponse.json; sourceTree = "<group>"; };
-		91B7F14522ECCE11004CB98F /* PodcastRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastRepository.swift; sourceTree = "<group>"; };
-		91B7F14822ECCE6F004CB98F /* PodcastDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PodcastDataSource.swift; sourceTree = "<group>"; };
 		91B7F14A22ECCEC2004CB98F /* PodcastRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastRemoteDataSource.swift; sourceTree = "<group>"; };
 		91B7F14C22ECCF28004CB98F /* PodcastLocalDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastLocalDataSource.swift; sourceTree = "<group>"; };
 		91B7F15122ECD0F0004CB98F /* PodcastConfigurationDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastConfigurationDataSource.swift; sourceTree = "<group>"; };
@@ -189,6 +195,9 @@
 			children = (
 				9186C76922D53536007307C1 /* PodFastTests.swift */,
 				9186C76B22D53536007307C1 /* Info.plist */,
+				9156081122EDD3F300BEEF19 /* PodcastRepositoryTests.swift */,
+				9156081D22EE21FD00BEEF19 /* PodcastRealmDataSourceTests.swift */,
+				9156081522EDEE0200BEEF19 /* PodFastRadioTests.swift */,
 			);
 			path = PodFastTests;
 			sourceTree = "<group>";
@@ -206,8 +215,8 @@
 			isa = PBXGroup;
 			children = (
 				916DD7E322EA0FC100AE9E25 /* Repository.swift */,
-				916DD7E522EA10B400AE9E25 /* PodcastDataRepository.swift */,
-				91B7F14522ECCE11004CB98F /* PodcastRepository.swift */,
+				916DD7E522EA10B400AE9E25 /* PodcastRepository.swift */,
+				9156081722EDF9B400BEEF19 /* PodcastCategoryRepository.swift */,
 			);
 			name = Repositories;
 			path = ../Repositories;
@@ -216,8 +225,8 @@
 		91B7F14E22ECCF57004CB98F /* Data Sources */ = {
 			isa = PBXGroup;
 			children = (
-				91B7F14822ECCE6F004CB98F /* PodcastDataSource.swift */,
-				91B7F14C22ECCF28004CB98F /* PodcastLocalDataSource.swift */,
+				9156081922EDFA5100BEEF19 /* DataSource.swift */,
+				91B7F14C22ECCF28004CB98F /* PodcastRealmDataSource.swift */,
 				91B7F15122ECD0F0004CB98F /* PodcastConfigurationDataSource.swift */,
 				91B7F14A22ECCEC2004CB98F /* PodcastRemoteDataSource.swift */,
 			);
@@ -433,6 +442,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9156081A22EDFA5100BEEF19 /* DataSource.swift in Sources */,
 				917C8A1222D53E0C00A26154 /* ResponseObjects.swift in Sources */,
 				915724AC22DA4D3A0003C6B7 /* Podcast.swift in Sources */,
 				91B7F14B22ECCEC2004CB98F /* PodcastRemoteDataSource.swift in Sources */,
@@ -446,13 +456,12 @@
 				917FD7AF22DBFCA700945C2D /* CachingPlayerItem.swift in Sources */,
 				9186C75722D53534007307C1 /* ViewController.swift in Sources */,
 				91C5504322D5498D008FD9AB /* DBHelper.swift in Sources */,
-				91B7F14922ECCE6F004CB98F /* PodcastDataSource.swift in Sources */,
 				9186C75522D53534007307C1 /* AppDelegate.swift in Sources */,
-				916DD7E622EA10B400AE9E25 /* PodcastDataRepository.swift in Sources */,
+				916DD7E622EA10B400AE9E25 /* PodcastRepository.swift in Sources */,
 				917C8A1522D53E1600A26154 /* Requests.swift in Sources */,
 				91B7F15222ECD0F0004CB98F /* PodcastConfigurationDataSource.swift in Sources */,
-				91B7F14622ECCE11004CB98F /* PodcastRepository.swift in Sources */,
-				91B7F14D22ECCF28004CB98F /* PodcastLocalDataSource.swift in Sources */,
+				9156081822EDF9B400BEEF19 /* PodcastCategoryRepository.swift in Sources */,
+				91B7F14D22ECCF28004CB98F /* PodcastRealmDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,7 +469,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9156081222EDD3F300BEEF19 /* PodcastRepositoryTests.swift in Sources */,
+				9156081622EDEE0200BEEF19 /* PodFastRadioTests.swift in Sources */,
 				9186C76A22D53536007307C1 /* PodFastTests.swift in Sources */,
+				9156081E22EE21FD00BEEF19 /* PodcastRealmDataSourceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

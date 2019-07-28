@@ -71,37 +71,38 @@ extension Station: CachingPlayerItemDelegate {
 }
 
 class Radio {
-
+    var podcastRepository: PodcastRepository?
     var stations = [Station]()
     var frequencies = [Int:Station] ()
     let frequencyRange = 1...100
     let frequencySpacing = 25
 
     init() {
-        loadStations()
+//        self.podcastRepository = podcastRepository
+//        loadStations()
     }
 
     func loadStations() {
-        let podcasts = DBHelper.shared.getRealm().objects(Podcast.self).filter(" hasBeenDiscovered == false ").shuffled()
-        let startFrequency = Int.random(in: frequencyRange)
-        var stationFrequency = startFrequency
-        for podcast in podcasts.prefix(4) {
-            if let episode = podcast._episodes.shuffled().first(where: { !$0.hasBeenPlayed }) {
-                self.stations.append(Station(podcast, episode, stationFrequency))
-                print("RADIO: Added station \(podcast.title!) to frequency \(stationFrequency)")
-            }
-            stationFrequency = (stationFrequency + frequencySpacing) % frequencyRange.upperBound
-        }
+//        let podcasts = DBHelper.shared.getRealm().objects(Podcast.self).filter(" hasBeenDiscovered == false ").shuffled()
+//        let startFrequency = Int.random(in: frequencyRange)
+//        var stationFrequency = startFrequency
+//        for podcast in podcasts.prefix(4) {
+//            if let episode = podcast._episodes.shuffled().first(where: { !$0.hasBeenPlayed }) {
+//                self.stations.append(Station(podcast, episode, stationFrequency))
+//                print("RADIO: Added station \(podcast.title!) to frequency \(stationFrequency)")
+//            }
+//            stationFrequency = (stationFrequency + frequencySpacing) % frequencyRange.upperBound
+//        }
     }
 
     func tune(toFrequency f: Int){
-        for station in stations {
-            let distance: Float = Float(abs(f - station.frequency))
-            if distance > 10 {
-                station.audioPlayer.volume = 0
-            } else {
-                station.audioPlayer.volume = 1.0 - distance * 10.0/Float(frequencyRange.upperBound)
-            }
-        }
+//        for station in stations {
+//            let distance: Float = Float(abs(f - station.frequency))
+//            if distance > 10 {
+//                station.audioPlayer.volume = 0
+//            } else {
+//                station.audioPlayer.volume = 1.0 - distance * 10.0/Float(frequencyRange.upperBound)
+//            }
+//        }
     }
 }

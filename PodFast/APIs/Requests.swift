@@ -30,11 +30,6 @@ struct AppleTopPodcastsRequest {
     func execute() -> Promise<AppleTopPodcastsResponse> {
         return Promise<AppleTopPodcastsResponse> { fulfill, reject in
             Alamofire.request(self.URL).responseObject { (response: DataResponse<AppleTopPodcastsResponse>) in
-                #if DEBUG
-                print("Request: \(String(describing: response.request))")
-                print("Response: \(String(describing: response.response))")
-                print("Error: \(String(describing: response.error))")
-                #endif
                 switch response.result {
                 case .success:
                     guard let topPodcasts = response.value else {

@@ -2,16 +2,46 @@
 //  PodcastRepository.swift
 //  PodFast
 //
-//  Created by Orestis on 27/07/2019.
+//  Created by Orestis on 25/07/2019.
 //  Copyright © 2019 Orestis Papadopoulos. All rights reserved.
 //
+
 import Promises
 
-enum UpdatePolicy {
-    case config
-    case remote
-}
+class PodcastRepository: Repository {
 
-protocol PodcastRepository {
-    func update(withPolicy policy: UpdatePolicy) -> Promise<Bool>
+    private let localDataSource:  AnyLocalDataSource<Podcast>
+    private let remoteDataSource: AnyDataSource<Podcast>
+    private let configDataSource: AnyDataSource<Podcast>
+
+    public init(localDataSource: AnyLocalDataSource<Podcast> = AnyLocalDataSource<Podcast>(base: PodcastRealmDataSource()),
+               remoteDataSource: AnyDataSource<Podcast> = AnyDataSource<Podcast>(base: PodcastRemoteDataSource()),
+               configDataSource: AnyDataSource<Podcast> = AnyDataSource<Podcast>(base: PodcastConfigurationDataSource())) {
+        self.remoteDataSource = remoteDataSource
+        self.localDataSource = localDataSource
+        self.configDataSource = configDataSource
+    }
+
+    public func getAll() -> Promise<[Podcast]> {
+        return localDataSource.fetchAll()
+    }
+
+    public func update(withPolicy policy: RepositoryUpdatePolicy) -> Promise<Bool> {
+        var dataSource: AnyDataSource<Podcast>
+        // TODO: Good candidate for factory
+        switch policy {
+        case .remote:
+            dataSource = self.remoteDataSource
+        case .config:
+            dataSource = self.configDataSource
+        }
+
+        return Promise<Bool> { fulfill, reject in
+            self.localDataSource.update(fromSource: dataSource).then { updateStatus in
+                fulfill(updateStatus)
+            }
+        }
+    }
+
+    
 }

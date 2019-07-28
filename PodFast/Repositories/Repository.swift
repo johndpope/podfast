@@ -7,15 +7,21 @@
 //
 
 // Leave this here for now
+import Promises
+
+enum RepositoryUpdatePolicy {
+    case config
+    case remote
+}
 
 protocol Repository {
-
+    
     associatedtype T
-
-    func getAll() -> [T]
-    func get( identifier:Int ) -> T?
-    func create( a:T ) -> Bool
-    func update( a:T ) -> Bool
-    func delete( a:T ) -> Bool
-
+    
+    func getAll() -> Promise<[T]>
+    func update(withPolicy policy: RepositoryUpdatePolicy) -> Promise<Bool>
+//    func get( identifier:Int ) -> T?
+//    func create( a:T ) -> Bool
+//    func delete( a:T ) -> Bool
+    
 }

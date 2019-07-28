@@ -9,11 +9,13 @@
 import Foundation
 import Promises
 
-public struct PodcastConfigurationDataSource: PodcastDataSource {
+public struct PodcastConfigurationDataSource: DataSource {
+
+    public typealias DataType = Podcast
 
     public var description = "config"
 
-    public func fetchPodcasts() -> Promise<[Podcast]> {
+    public func fetchAll() -> Promise<[Podcast]> {
         if let configData = try! ConfigurationDataRequest().execute(),
            let podcasts = configData.podcasts {
             return Promise<[Podcast]>(podcasts.map{$0.toPodcastObject()})
@@ -23,13 +25,11 @@ public struct PodcastConfigurationDataSource: PodcastDataSource {
         }
     }
 
-    public var lastUpdated: Promise<Date> {
-        get {
-            if let configData = try! ConfigurationDataRequest().execute() {
-                return Promise<Date>(configData.updated ?? Date(timeIntervalSince1970: 0))
-            } else {
-                return Promise<Date>(APIRequestError.noValueInResponse)
-            }
+    public func lastUpdated() -> Promise<Date> {
+        if let configData = try! ConfigurationDataRequest().execute() {
+            return Promise<Date>(configData.updated ?? Date(timeIntervalSince1970: 0))
+        } else {
+            return Promise<Date>(APIRequestError.noValueInResponse)
         }
     }
 }
