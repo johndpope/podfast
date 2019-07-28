@@ -14,4 +14,5 @@ enum UpdatePolicy {
 
 protocol PodcastRepository {
     func update(withPolicy policy: UpdatePolicy) -> Promise<Bool>
+    func get() -> Promise<[Podcast]>
 }

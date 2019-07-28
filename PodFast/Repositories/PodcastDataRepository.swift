@@ -5,6 +5,7 @@
 //  Created by Orestis on 25/07/2019.
 //  Copyright © 2019 Orestis Papadopoulos. All rights reserved.
 //
+
 import Promises
 
 class PodcastDataRepository: PodcastRepository {
@@ -13,12 +14,16 @@ class PodcastDataRepository: PodcastRepository {
     private let remoteDataSource: PodcastDataSource
     private let configDataSource: PodcastDataSource
 
-    public init(localDataSource: PodcastLocalDataSource =  PodcastLocalDataSource(),
+    public init(localDataSource: PodcastLocalDataSource = PodcastRealmDataSource(),
                remoteDataSource: PodcastDataSource = PodcastRemoteDataSource(),
                configDataSource: PodcastDataSource = PodcastConfigurationDataSource()) {
         self.remoteDataSource = remoteDataSource
         self.localDataSource = localDataSource
         self.configDataSource = configDataSource
+    }
+
+    public func get() -> Promise<[Podcast]> {
+        return localDataSource.fetchPodcasts()
     }
 
     public func update(withPolicy policy: UpdatePolicy) -> Promise<Bool> {
