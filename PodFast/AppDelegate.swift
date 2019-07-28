@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Setting category to AVAudioSessionCategoryPlayback failed.")
         }
 
-        let repository = PodcastDataRepository()
+        let repository = PodcastRepository()
         repository.update(withPolicy: .config).then { updated in
             if updated {
                 print("YES")

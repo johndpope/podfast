@@ -7,13 +7,15 @@
 //
 import Promises
 
-public struct PodcastRemoteDataSource: PodcastDataSource {
+public struct PodcastRemoteDataSource: DataSource {
 
     public var description = "apple_top_podcasts"
 
     public init() {}
 
-    public func fetchPodcasts() -> Promise<[Podcast]> {
+    public typealias DataType = Podcast
+    
+    public func fetchAll() -> Promise<[Podcast]> {
         return Promise<[Podcast]> { fulfill, reject in
             // Get Podcast Top 100
             AppleTopPodcastsRequest().execute().then { topPodcastsResponse in
@@ -37,16 +39,14 @@ public struct PodcastRemoteDataSource: PodcastDataSource {
         }
     }
 
-    public var lastUpdated: Promise<Date> {
-        get{
-            return Promise<Date> { fulfill, reject in
-                AppleTopPodcastsRequest().execute().then { (topPodcastsResponse: AppleTopPodcastsResponse) in
-                    guard let updated = topPodcastsResponse.updated else {
-                        reject(APIRequestError.noValueInResponse)
-                        return
-                    }
-                    fulfill(updated)
+    public func lastUpdated() -> Promise<Date> {
+        return Promise<Date> { fulfill, reject in
+            AppleTopPodcastsRequest().execute().then { (topPodcastsResponse: AppleTopPodcastsResponse) in
+                guard let updated = topPodcastsResponse.updated else {
+                    reject(APIRequestError.noValueInResponse)
+                    return
                 }
+                fulfill(updated)
             }
         }
     }
