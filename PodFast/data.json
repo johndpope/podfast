@@ -73,7 +73,9 @@
             "subscribers_last_week": 1289,
             "title": "In Our Time",
             "url": "http://downloads.bbc.co.uk/podcasts/radio4/iot/rss.xml",
-            "website": "http://www.bbc.co.uk/programmes/b006qykl"
+            "website": "http://www.bbc.co.uk/programmes/b006qykl",
+            "genreIds":["1324", "26", "1487"],
+            "genres":["Society & Culture", "Podcasts", "History"]
         }
     ]
 }
