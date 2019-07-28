@@ -10,6 +10,8 @@ target 'PodFast' do
   pod 'AlamofireObjectMapper', '~> 5.2'
   pod 'RealmSwift'
   pod 'FeedKit', '~> 8.0'
+  pod 'ReactiveSwift', '~> 5.0'
+  pod 'PromisesSwift'
 
   target 'PodFastTests' do
     inherit! :search_paths

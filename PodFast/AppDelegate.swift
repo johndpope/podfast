@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import RealmSwift
+import AVFoundation
+import Promises
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,7 +19,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        Rest.requestTopPodcasts(count: 10)
+        print("Realm URL: \(Realm.Configuration.defaultConfiguration.fileURL!)")
+
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(AVAudioSessionCategoryPlayback)
+        } catch {
+            print("Setting category to AVAudioSessionCategoryPlayback failed.")
+        }
+
+        let repository = PodcastDataRepository()
+        repository.update(withPolicy: .config).then { updated in
+            if updated {
+                print("YES")
+            } else {
+                print("NOPE")
+            }
+        }
+
+        repository.update(withPolicy: .remote).then { updated in
+            if updated {
+                print("YES")
+            } else {
+                print("NOPE")
+            }
+        }
+
         return true
     }
 

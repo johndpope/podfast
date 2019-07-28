@@ -12,46 +12,45 @@ import AVKit
 import RealmSwift
 
 class ViewController: UIViewController {
-    var podcastURL: String?
-    var notificationToken: NotificationToken? = nil
+    var podcastEpisode: Episode?
+    var podcast: Podcast?
+    var radio = Radio()
+
+    @IBOutlet weak var podcastTitleLabel: UILabel!
+    @IBOutlet weak var episodeTitleLabel: UIButton!
+    @IBOutlet weak var slider: UIAdjustableScrubSlider!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        podcastURL =
-        let realm = try! Realm()
-        let results = realm.objects(Podcast.self)
-        // Observe Results Notifications
-        notificationToken = results.observe { [weak self] (changes: RealmCollectionChange) in
-            switch changes {
-            case .initial:
-                print("initial")
-            case .update(_, _, _, _):
-                print("update")
-                self?.podcastURL = results.first?.url
-            case .error(let error):
-                // An error occurred while opening the Realm file on the background worker thread
-                fatalError("\(error)")
-            }
-        }
-        // Do any additional setup after loading the view, typically from a nib.
-    }
 
-    deinit {
-        notificationToken?.invalidate()
+        self.episodeTitleLabel.isHidden = true
+        podcastTitleLabel.isHidden = true
+
+        slider.minimumValue = Float(radio.frequencyRange.first!)
+        slider.maximumValue = Float(radio.frequencyRange.last!)
+
+        slider.setSnapPoints(radio.stations.compactMap({ station in
+            if(station.audioPlayerItem.status != .failed) {
+                 return Float(station.frequency)
+            }
+            return nil
+        }))
+
+        slider.setSmoothing(type: .simple)
+
+        radio.tune(toFrequency: radio.frequencyRange.lowerBound)
     }
 
     @IBAction func playPodcast(_ sender: UIButton) {
-        var player: AVPlayer!
-
-        let playerItem: AVPlayerItem = AVPlayerItem(url: URL(string: podcastURL!)!)
-        player = AVPlayer(playerItem: playerItem)
-
-        let playerLayer = AVPlayerLayer(player: player!)
-
-        playerLayer.frame = CGRect(x: 0, y: 0, width: 10, height: 50)
-        self.view.layer.addSublayer(playerLayer)
-        player.play()
     }
 
+    @IBAction func newRadio(_ sender: UIButton) {
+        radio = Radio()
+        radio.tune(toFrequency: radio.frequencyRange.lowerBound)
+    }
+
+    @IBAction func sliderValueChanged(_ sender: UISlider) {
+        radio.tune(toFrequency: Int(sender.value))
+    }
 }
 
