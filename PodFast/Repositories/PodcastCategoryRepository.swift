@@ -8,14 +8,22 @@
 
 import Promises
 
-//class PodcastCategoryRepository: Repository {
-//
-////    func getAll() -> Promise<[PodcastCategory]> {
-////        <#code#>
-////    }
-////
-////    func update(withPolicy policy: RepositoryUpdatePolicy) -> Promise<Bool> {
-////        <#code#>
-////    }
-//
-//}
+
+class PodcastCategoryRepository: Repository {
+
+    private let dataSource: AnyDataSource<PodcastCategory>
+
+    public init(dataSource: AnyDataSource<PodcastCategory> = AnyDataSource<PodcastCategory>(base: PodcastCategoryRealmDataSource())) {
+        self.dataSource = dataSource
+    }
+
+    public func getAll() -> Promise<[PodcastCategory]> {
+        return dataSource.fetchAll()
+    }
+
+    public func update(withPolicy policy: RepositoryUpdatePolicy) -> Promise<Bool> {
+        return Promise { true } // Does not do anything at the moment
+    }
+
+}
+

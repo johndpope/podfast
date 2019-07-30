@@ -25,3 +25,25 @@ protocol Repository {
 //    func delete( a:T ) -> Bool
     
 }
+
+// Type Erased Struct to Represent Any Data Source
+struct AnyRepository<U>: Repository {
+
+    typealias T = U
+
+    private var _getAll: () -> Promise<[U]>
+    private var _update: (RepositoryUpdatePolicy) -> Promise<Bool>
+
+    init<Base: Repository>(base : Base) where Base.T == U {
+        _getAll = base.getAll
+        _update = base.update
+    }
+
+    func getAll() -> Promise<[U]> {
+        return _getAll()
+    }
+
+    func update(withPolicy policy: RepositoryUpdatePolicy) -> Promise<Bool> {
+        return _update(policy)
+    }
+}

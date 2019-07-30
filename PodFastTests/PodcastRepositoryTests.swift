@@ -13,12 +13,13 @@ import Promises
 class PodcastRepositoryTests: XCTestCase {
 
     var podcastRepository = PodcastRepository()
+    var podcastCategoryRepository = PodcastCategoryRepository()
 
     override func setUp() {
         podcastRepository = PodcastRepository( localDataSource: AnyLocalDataSource<Podcast>(base: MockPodcastLocalDataSource()),
                                             remoteDataSource: AnyDataSource<Podcast>(base: MockPodcastRemoteDataSource()),
-                                            configDataSource: AnyDataSource<Podcast>(base: MockPodcastConfigDataSource()) )
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+                                            configDataSource: AnyDataSource<Podcast>(base: MockPodcastConfigDataSource()))
+        podcastCategoryRepository = PodcastCategoryRepository(dataSource: AnyDataSource<PodcastCategory>(base: MockPodcastCategoryDataSource()))
     }
 
     override func tearDown() {
@@ -45,8 +46,9 @@ class PodcastRepositoryTests: XCTestCase {
         waitForExpectations(timeout: 10)
     }
 
-    func testGet() {
-        let expectation = self.expectation(description: #function)
+    func testGetAll() {
+        let podcastExpectation = self.expectation(description: "podcastExpecation")
+        let podcastCategoriesExpectation = self.expectation(description: "podcastCategoriesExpecation")
 
         self.podcastRepository.update(withPolicy: .remote).then { _ in
             self.podcastRepository.getAll().then { podcasts in
@@ -54,93 +56,20 @@ class PodcastRepositoryTests: XCTestCase {
                 self.podcastRepository.update(withPolicy: .config).then { _ in
                     self.podcastRepository.getAll().then { podcasts in
                         XCTAssertEqual(podcasts.count, 2)
-                        expectation.fulfill()
+                        podcastExpectation.fulfill()
                     }
                 }
             }
+        }
+
+        self.podcastCategoryRepository.getAll().then { podcastCategories in
+            XCTAssertEqual(podcastCategories.count, 2)
+            XCTAssertEqual(podcastCategories.filter { $0.name == "Spiritual Ballsacks" }.count, 1)
+            XCTAssertEqual(podcastCategories.filter { $0.name == "Mum Talk" }.count, 1)
+            podcastCategoriesExpectation.fulfill()
         }
 
         waitForExpectations(timeout: 10)
     }
-
-}
-
-class MockPodcastRemoteDataSource: DataSource {
-    func fetchAll() -> Promise<[Podcast]> {
-        return Promise([Podcast(value: ["title" : "remotePodcast"])])
-    }
-
-    func lastUpdated() -> Promise<Date> {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy"
-        return Promise<Date> (dateFormatter.date(from: "2018")!)
-    }
-
-    var description: String = "remoteDataSource"
-}
-
-class MockPodcastConfigDataSource: DataSource {
-    func fetchAll() -> Promise<[Podcast]> {
-        return Promise([Podcast(value: ["title" : "configPodcast"])])
-    }
-
-    func lastUpdated() -> Promise<Date> {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy"
-        return Promise<Date> (dateFormatter.date(from: "2017")!)
-    }
-
-    var description: String = "configDataSource"
-}
-
-class MockPodcastLocalDataSource: LocalDataSource {
-
-    typealias DataType = Podcast
-
-    func update<D>(fromSource dataSource: D) -> Promise<Bool> where D : DataSource, DataType == D.DataType {
-        return Promise { fulfill, reject in
-            self.isUpToDate(with: AnyDataSource<Podcast>(base: dataSource)).then { localIsUpToDateWithSource in
-                if !localIsUpToDateWithSource {
-                    dataSource.fetchAll().then { newPodcasts in
-                        newPodcasts.forEach { self.podcasts.insert($0) }
-                        dataSource.lastUpdated().then { datasourceLastUpdated in
-                            self.updateTimestamps[dataSource.description] = datasourceLastUpdated
-                        }
-                        fulfill(true)
-                    }
-                } else {
-                    fulfill(false)
-                }
-            }
-        }
-    }
-
-    func get<D>(lastUpdatedDatasourceDate dataSource: D) -> Date where D : DataSource, D.DataType == DataType {
-        return updateTimestamps[dataSource.description] ?? Date(timeIntervalSince1970: 0)
-    }
-
-    func lastUpdated() -> Promise<Date> {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy"
-        return Promise<Date> (dateFormatter.date(from: "2017")!)
-    }
-
-    private var updateTimestamps = [String: Date]()
-    private var podcasts = Set<Podcast>()
-
-    func fetchAll() -> Promise<[Podcast]> {
-        return Promise(Array(podcasts))
-    }
-
-    private func isUpToDate(with dataSource: AnyDataSource<Podcast>) -> Promise<Bool> {
-        return Promise<Bool> { fulfill, reject in
-            let savedDataSourceUpdatedDate = self.get(lastUpdatedDatasourceDate: dataSource)
-            dataSource.lastUpdated().then { dataSourceUpdatedDate in
-                fulfill(savedDataSourceUpdatedDate >= dataSourceUpdatedDate)
-            }
-        }
-    }
-
-    var description: String = "localDataSource"
 }
 
