@@ -14,4 +14,6 @@ public class PodcastCategory: Object {
     public override static func primaryKey() -> String? {
         return "id"
     }
+
+    let podcasts = LinkingObjects(fromType: Podcast.self, property: "categories")
 }

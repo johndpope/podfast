@@ -8,20 +8,35 @@
 
 import Foundation
 import Promises
+import RealmSwift
 
 protocol DiscoveryInteractor {
     func getPodcasts() -> Promise<[Podcast]>
 }
 class Discovery: DiscoveryInteractor {
-    let podcastRepository: AnyRepository<Podcast>
-    var podcastsByCategory = [PodcastCategory: [Podcast]]()
+    let podcastCategoryRepository: AnyRepository<PodcastCategory>
 
-    init(withRepository repository: AnyRepository<Podcast>
-        = AnyRepository<Podcast>(base: PodcastRepository())) {
-        podcastRepository = repository
+    init(withRepository repository: AnyRepository<PodcastCategory>
+        = AnyRepository<PodcastCategory>(base: PodcastCategoryRepository())) {
+        podcastCategoryRepository = repository
     }
 
     func getPodcasts() -> Promise<[Podcast]> {
-        return podcastRepository.getAll()
+        return Promise<[Podcast]> { fulfill, reject in
+            self.podcastCategoryRepository.getAll().then { podcastCategories in
+
+                var podcasts = [Podcast]()
+                for podcastCategory in podcastCategories {
+
+                    var categoryList = List<PodcastCategory>()
+                    categoryList.append(podcastCategory)
+                    if let podcast = podcastCategory.podcasts.randomElement(){
+                        podcasts.append(Podcast(value: ["title" : podcast.title, "categories" : categoryList]))
+                    }
+                }
+
+                fulfill(podcasts.shuffled())
+            }
+        }
     }
 }
