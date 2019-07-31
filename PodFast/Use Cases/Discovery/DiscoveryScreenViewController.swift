@@ -22,10 +22,6 @@ class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
         super.viewDidLoad()
         podcastCollection.dataSource = self
 
-//        let flowLayout = UICollectionViewFlowLayout()
-//        flowLayout.scrollDirection = .horizontal
-//        podcastCollection.collectionViewLayout = flowLayout
-
         podcastCollection.delegate = self
         presenter.setViewDelegate(discoveryViewDelegate: self)
         presenter.viewDidLoad()
@@ -35,16 +31,6 @@ class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
     func reloadData() {
         podcastCollection.reloadData()
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 

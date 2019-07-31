@@ -152,11 +152,7 @@
 		910454BE22F0A95D00477E09 /* Use Cases */ = {
 			isa = PBXGroup;
 			children = (
-				915724AD22DA4D4D0003C6B7 /* Discovery.swift */,
-				910454D822F1108700477E09 /* AudioPlayer.swift */,
-				910454D622F1106100477E09 /* AudioPlayerInterface.swift */,
-				910454C822F0C12800477E09 /* DiscoveryScreenPresenter.swift */,
-				910454CA22F0C14600477E09 /* DiscoveryScreenViewController.swift */,
+				910454DA22F115CF00477E09 /* Discovery */,
 				910454C722F0BB5600477E09 /* Launch */,
 			);
 			path = "Use Cases";
@@ -170,6 +166,18 @@
 				910454BF22F0AB1100477E09 /* LaunchScreenViewController.swift */,
 			);
 			path = Launch;
+			sourceTree = "<group>";
+		};
+		910454DA22F115CF00477E09 /* Discovery */ = {
+			isa = PBXGroup;
+			children = (
+				915724AD22DA4D4D0003C6B7 /* Discovery.swift */,
+				910454D822F1108700477E09 /* AudioPlayer.swift */,
+				910454D622F1106100477E09 /* AudioPlayerInterface.swift */,
+				910454C822F0C12800477E09 /* DiscoveryScreenPresenter.swift */,
+				910454CA22F0C14600477E09 /* DiscoveryScreenViewController.swift */,
+			);
+			path = Discovery;
 			sourceTree = "<group>";
 		};
 		915724AF22DA525D0003C6B7 /* Data Layer */ = {

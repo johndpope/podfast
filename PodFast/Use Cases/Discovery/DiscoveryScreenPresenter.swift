@@ -42,7 +42,6 @@ class DiscoveryScreenPresenter {
 
     func selectedPodcast(atRow row: Int) {
         print("\(String(describing: podcasts[row].title)) was selected!")
-        print("I'll try to fetch the episodes!")
         // TODO: This must become, get episode and the selection logic should go to the discover ;)
         discoveryInteractor.getEpisodes(forPodcast: podcasts[row]).then { episodes in
             if let episode = episodes.first, let episodeURL = URL(string: episode.url ?? "") {
