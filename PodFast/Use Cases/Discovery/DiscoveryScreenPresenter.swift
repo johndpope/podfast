@@ -10,7 +10,7 @@ import Foundation
 
 class DiscoveryScreenPresenter {
     private let discoveryInteractor: DiscoveryInteractor
-    private let audioPlayer: AudioPlayerInterface
+    private var audioPlayer: AudioPlayerInterface
     weak private var discoveryViewDelegate : DiscoveryViewDelegate?
 
     private var podcasts = [Podcast]()
@@ -19,6 +19,7 @@ class DiscoveryScreenPresenter {
         withAudioPlayerInterface audioPlayer: AudioPlayerInterface = AudioPlayer()){
         discoveryInteractor = interactor
         self.audioPlayer = audioPlayer
+        self.audioPlayer.delegate = self
     }
 
     func viewDidLoad() {
@@ -48,5 +49,11 @@ class DiscoveryScreenPresenter {
                 self.audioPlayer.play(fromURL: episodeURL)
             }
         }
+    }
+}
+
+extension DiscoveryScreenPresenter: AudioPlayerDelegate {
+    func playBackStarted() {
+        discoveryViewDelegate?.playBackStarted()
     }
 }

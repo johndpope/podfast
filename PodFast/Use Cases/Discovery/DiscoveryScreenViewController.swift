@@ -10,11 +10,14 @@ import UIKit
 
 protocol DiscoveryViewDelegate: NSObjectProtocol {
     func reloadData()
+    func playBackStarted()
 }
 
 class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
 
     @IBOutlet weak var podcastCollection: UICollectionView!
+
+    private weak var collidedCell: PodcastCollectionViewCell?
 
     private let presenter = DiscoveryScreenPresenter()
 
@@ -37,6 +40,12 @@ class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
 
     func reloadData() {
         podcastCollection.reloadData()
+    }
+
+    // TODO Not working at the moment
+    func playBackStarted() {
+        collidedCell?.isHighlighted = false
+        collidedCell?.titleLabel.textColor = .green
     }
 
 }
@@ -67,35 +76,48 @@ extension DiscoveryScreenViewController: UICollectionViewDataSource, UICollectio
             // detect collision
             let cellFrame = podcastCollection.convert(cell.frame, to: self.view)
             cell.titleLabel.textColor = .black
-            cell.titleLabel.isHighlighted = cellFrame.contains(center) ? true : false
+            if cellFrame.contains(center) {
+                cell.titleLabel.isHighlighted = true
+                if(collidedCell != cell){
+                    collidedCell = cell
+                    collisionDetected(forCell: cell)
+                    presenter.selectedPodcast(atRow: podcastCollection.indexPath(for: cell)!.row)
+                }
+            } else {
+                cell.titleLabel.isHighlighted = false
+            }
         }
+    }
+
+    func collisionDetected(forCell cell: PodcastCollectionViewCell){
+        print("Collision of cell \(cell.titleLabel.text)")
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let center = self.view.center
-        for cell in podcastCollection.visibleCells.map({$0 as! PodcastCollectionViewCell}) {
-            // detect collision
-            let cellFrame = podcastCollection.convert(cell.frame, to: self.view)
-            if cellFrame.contains(center) {
-                cell.titleLabel.isHighlighted = false
-                cell.titleLabel.textColor = .green
-            } else {
-                cell.titleLabel.isHighlighted = false
-            }
-        }
+//        let center = self.view.center
+//        for cell in podcastCollection.visibleCells.map({$0 as! PodcastCollectionViewCell}) {
+//            // detect collision
+//            let cellFrame = podcastCollection.convert(cell.frame, to: self.view)
+//            if cellFrame.contains(center) {
+//                cell.titleLabel.isHighlighted = false
+//                cell.titleLabel.textColor = .green
+//            } else {
+//                cell.titleLabel.isHighlighted = false
+//            }
+//        }
     }
 
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let center = self.view.center
-        for cell in podcastCollection.visibleCells.map({$0 as! PodcastCollectionViewCell}) {
-            // detect collision
-            let cellFrame = podcastCollection.convert(cell.frame, to: self.view)
-            if cellFrame.contains(center) {
-                cell.titleLabel.isHighlighted = false
-                cell.titleLabel.textColor = .green
-            } else {
-                cell.titleLabel.isHighlighted = false
-            }
-        }
+//        let center = self.view.center
+//        for cell in podcastCollection.visibleCells.map({$0 as! PodcastCollectionViewCell}) {
+//            // detect collision
+//            let cellFrame = podcastCollection.convert(cell.frame, to: self.view)
+//            if cellFrame.contains(center) {
+//                cell.titleLabel.isHighlighted = false
+//                cell.titleLabel.textColor = .green
+//            } else {
+//                cell.titleLabel.isHighlighted = false
+//            }
+//        }
     }
 }

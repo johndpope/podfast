@@ -11,4 +11,5 @@ import Foundation
 protocol AudioPlayerInterface {
     func play(fromURL url: URL)
     func stop()
+    var delegate: AudioPlayerDelegate? {get set}
 }

@@ -8,9 +8,14 @@
 
 import AVFoundation
 
+protocol AudioPlayerDelegate {
+    func playBackStarted()
+}
+
 class AudioPlayer: NSObject, AudioPlayerInterface  {
     var audioPlayer: AVPlayer?
     var audioPlayerItem: AVPlayerItem?
+    var delegate: AudioPlayerDelegate?
 
     override init() {
 
@@ -31,6 +36,7 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
             switch status {
             case .readyToPlay:
                 audioPlayer?.play()
+                delegate?.playBackStarted()
             case .failed:
                 print("FAILED!")
             case .unknown:
