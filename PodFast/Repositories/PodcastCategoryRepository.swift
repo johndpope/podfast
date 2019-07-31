@@ -24,6 +24,6 @@ class PodcastCategoryRepository: Repository {
     public func update(withPolicy policy: RepositoryUpdatePolicy) -> Promise<Bool> {
         return Promise { true } // Does not do anything at the moment
     }
-
+    
 }
 

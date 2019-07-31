@@ -17,4 +17,6 @@ public class Episode: Object {
     @objc dynamic var title: String?
     @objc dynamic var hasBeenPlayed: Bool = false
     @objc dynamic var cachedData: Data?
+
+    let podcast = LinkingObjects(fromType: Podcast.self, property: "_episodes")
 }

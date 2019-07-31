@@ -10,12 +10,15 @@ import Foundation
 
 class DiscoveryScreenPresenter {
     private let discoveryInteractor: DiscoveryInteractor
+    private let audioPlayer: AudioPlayerInterface
     weak private var discoveryViewDelegate : DiscoveryViewDelegate?
 
     private var podcasts = [Podcast]()
 
-    init(withInteractor interactor: DiscoveryInteractor = Discovery()){
+    init(withInteractor interactor: DiscoveryInteractor = Discovery(),
+        withAudioPlayerInterface audioPlayer: AudioPlayerInterface = AudioPlayer()){
         discoveryInteractor = interactor
+        self.audioPlayer = audioPlayer
     }
 
     func viewDidLoad() {
@@ -39,5 +42,12 @@ class DiscoveryScreenPresenter {
 
     func selectedPodcast(atRow row: Int) {
         print("\(String(describing: podcasts[row].title)) was selected!")
+        print("I'll try to fetch the episodes!")
+        // TODO: This must become, get episode and the selection logic should go to the discover ;)
+        discoveryInteractor.getEpisodes(forPodcast: podcasts[row]).then { episodes in
+            if let episode = episodes.first, let episodeURL = URL(string: episode.url ?? "") {
+                self.audioPlayer.play(fromURL: episodeURL)
+            }
+        }
     }
 }
