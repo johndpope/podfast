@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PodFast/Use Cases/Launch/LaunchScreenViewController.swift"
-            timestampString = "586224405.092981"
+            timestampString = "586299190.659699"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "18"
@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PodFast/Use Cases/Launch/LaunchScreenViewController.swift"
-            timestampString = "586224405.0930459"
+            timestampString = "586299190.6597641"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "19"
@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PodFast/APIs/Requests.swift"
-            timestampString = "586224405.093158"
+            timestampString = "586299190.659844"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "113"
@@ -122,7 +122,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PodFast/APIs/Requests.swift"
-            timestampString = "586224405.093205"
+            timestampString = "586299190.659903"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "121"
@@ -138,12 +138,12 @@
                   moduleName = "PodFast"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/orjpap/Documents/Development/iOS/PodFast/PodFast/PodFast/APIs/Requests.swift"
-                  timestampString = "586223375.744666"
+                  timestampString = "586298988.144498"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "121"
                   endingLineNumber = "121"
-                  offsetFromSymbolStart = "126">
+                  offsetFromSymbolStart = "100">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -153,12 +153,12 @@
                   moduleName = "PodFast"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/orjpap/Documents/Development/iOS/PodFast/PodFast/PodFast/APIs/Requests.swift"
-                  timestampString = "586223375.7460181"
+                  timestampString = "586298988.146082"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "121"
                   endingLineNumber = "121"
-                  offsetFromSymbolStart = "249">
+                  offsetFromSymbolStart = "196">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -170,7 +170,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PodFast/Data Layer/Data Sources/EpisodeRealmDataSource.swift"
-            timestampString = "586224405.093254"
+            timestampString = "586299190.659952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "29"
@@ -218,7 +218,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PodFast/Data Layer/Data Sources/EpisodeRealmDataSource.swift"
-            timestampString = "586224405.0933141"
+            timestampString = "586299190.660014"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "39"
