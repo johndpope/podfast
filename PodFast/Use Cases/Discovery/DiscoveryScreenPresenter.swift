@@ -9,6 +9,7 @@
 import Foundation
 
 class DiscoveryScreenPresenter {
+
     private let discoveryInteractor: DiscoveryInteractor
     private var audioPlayer: AudioPlayerInterface
     weak private var discoveryViewDelegate : DiscoveryViewDelegate?
@@ -24,10 +25,6 @@ class DiscoveryScreenPresenter {
     }
 
     func viewDidLoad() {
-        discoveryInteractor.getPodcasts().then { podcasts in
-            self.podcasts = podcasts
-        }
-
         discoveryInteractor.getPodcastCategories().then {categories in
             self.categories = categories
             self.discoveryViewDelegate?.reloadData()
@@ -48,12 +45,17 @@ class DiscoveryScreenPresenter {
 
     func didSelectCategory(atRow row: Int) {
         print("\(String(describing: categories[row].name)) was selected!")
+        discoveryInteractor.getEpisodeOfPodcast(inCategory: categories[row]).then { episode in
+            self.audioPlayer.play(fromURL: URL(string: episode.url!)!)
+            print("Playing \(String(describing: episode.title)) of Podcast: \(episode.podcast.first!.title!)")
+        }
 //        // TODO: This must become, get episode and the selection logic should go to the discover ;)
 //        discoveryInteractor.getEpisodes(forPodcast: podcasts[row]).then { episodes in
 //            if let episode = episodes.first, let episodeURL = URL(string: episode.url ?? "") {
 //                self.audioPlayer.play(fromURL: episodeURL)
 //            }
 //        }
+
     }
 }
 
