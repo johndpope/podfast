@@ -11,44 +11,35 @@ import Promises
 import RealmSwift
 
 protocol DiscoveryInteractor {
+    func getPodcastCategories() -> Promise<[PodcastCategory]>
     func getPodcasts() -> Promise<[Podcast]>
-    func getEpisodes(forPodcast podcast: Podcast) -> Promise<[Episode]>
 }
+
 class Discovery: DiscoveryInteractor {
     let podcastCategoryRepository: AnyRepository<PodcastCategory>
+    let podcastRepository: AnyRepository<Podcast>
     let episodeRepository: EpisodeRepositoryInterface
 
     init(withPodcastCategoryRepository repository: AnyRepository<PodcastCategory>
         = AnyRepository<PodcastCategory>(base: PodcastCategoryRepository()),
-         andEpisodeRepository episodeRepository: EpisodeRepositoryInterface = EpisodeRepository()) {
+         withPodcastRepository podcastRepository: AnyRepository<Podcast>
+        = AnyRepository<Podcast>(base: PodcastRepository()),
+         withEpisodeRepository episodeRepository: EpisodeRepositoryInterface = EpisodeRepository()) {
         podcastCategoryRepository = repository
+        self.podcastRepository = podcastRepository
         self.episodeRepository = episodeRepository
     }
 
-    func getPodcasts() -> Promise<[Podcast]> {
-        return Promise<[Podcast]> { fulfill, reject in
-            self.podcastCategoryRepository.getAll().then { podcastCategories in
-
-                var podcasts = [Podcast]()
-                for podcastCategory in podcastCategories {
-
-                    let categoryList = List<PodcastCategory>()
-                    categoryList.append(podcastCategory)
-                    if let podcast = podcastCategory.podcasts.randomElement(){
-                        podcasts.append(Podcast(value: ["title" : podcast.title ?? ""
-                                                      , "podcastDescription" : podcast.podcastDescription ?? ""
-                                                      , "feedUrl" : podcast.feedUrl ?? ""
-                                                      , "_episodes" : podcast._episodes
-                                                      , "categories" : categoryList]))
-                    }
-                }
-
-                fulfill(podcasts.shuffled())
-            }
-        }
+    func getPodcastCategories() -> Promise<[PodcastCategory]> {
+        return self.podcastCategoryRepository.getAll()
     }
 
-    func getEpisodes(forPodcast podcast: Podcast) -> Promise<[Episode]> {
-        return episodeRepository.getEpisodes(forPodcast: podcast, numberOfEpisodes: 10)
+    func getPodcasts() -> Promise<[Podcast]> {
+        return self.podcastRepository.getAll().then { podcasts in
+            podcasts.map { podcast in
+                podcast.episodes = self.episodeRepository.getEpisodes(forPodcast: podcast, numberOfEpisodes: 10)
+                return podcast
+            }
+        }
     }
 }

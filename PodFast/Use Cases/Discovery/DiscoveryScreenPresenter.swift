@@ -14,6 +14,7 @@ class DiscoveryScreenPresenter {
     weak private var discoveryViewDelegate : DiscoveryViewDelegate?
 
     private var podcasts = [Podcast]()
+    private var categories = [PodcastCategory]()
 
     init(withInteractor interactor: DiscoveryInteractor = Discovery(),
         withAudioPlayerInterface audioPlayer: AudioPlayerInterface = AudioPlayer()){
@@ -23,32 +24,36 @@ class DiscoveryScreenPresenter {
     }
 
     func viewDidLoad() {
-        discoveryInteractor.getPodcasts().then {podcasts in
+        discoveryInteractor.getPodcasts().then { podcasts in
             self.podcasts = podcasts
+        }
+
+        discoveryInteractor.getPodcastCategories().then {categories in
+            self.categories = categories
             self.discoveryViewDelegate?.reloadData()
         }
     }
 
-    func getPodcastCount() -> Int {
-        return podcasts.count
+    func getCategoriesCount() -> Int {
+        return categories.count
     }
 
-    func getPodcast(forRow row: Int) -> Podcast{
-        return podcasts[row]
+    func getCategoryName(forRow row: Int) -> String? {
+        return categories[row].name
     }
 
     func setViewDelegate(discoveryViewDelegate: DiscoveryViewDelegate?){
         self.discoveryViewDelegate = discoveryViewDelegate
     }
 
-    func selectedPodcast(atRow row: Int) {
-        print("\(String(describing: podcasts[row].title)) was selected!")
-        // TODO: This must become, get episode and the selection logic should go to the discover ;)
-        discoveryInteractor.getEpisodes(forPodcast: podcasts[row]).then { episodes in
-            if let episode = episodes.first, let episodeURL = URL(string: episode.url ?? "") {
-                self.audioPlayer.play(fromURL: episodeURL)
-            }
-        }
+    func didSelectCategory(atRow row: Int) {
+        print("\(String(describing: categories[row].name)) was selected!")
+//        // TODO: This must become, get episode and the selection logic should go to the discover ;)
+//        discoveryInteractor.getEpisodes(forPodcast: podcasts[row]).then { episodes in
+//            if let episode = episodes.first, let episodeURL = URL(string: episode.url ?? "") {
+//                self.audioPlayer.play(fromURL: episodeURL)
+//            }
+//        }
     }
 }
 

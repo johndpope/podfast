@@ -52,22 +52,21 @@ class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
 
 extension DiscoveryScreenViewController: UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return presenter.getPodcastCount()
+        return presenter.getCategoriesCount()
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let podcast = presenter.getPodcast(forRow: indexPath.row)
         let cell = podcastCollection.dequeueReusableCell(
             withReuseIdentifier: "podcast",
             for: indexPath
         ) as! PodcastCollectionViewCell
 
-        cell.titleLabel.text = podcast.categories.first?.name
+        cell.titleLabel.text = presenter.getCategoryName(forRow: indexPath.row) ?? " "
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        presenter.selectedPodcast(atRow: indexPath.row)
+        presenter.didSelectCategory(atRow: indexPath.row)
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -81,7 +80,7 @@ extension DiscoveryScreenViewController: UICollectionViewDataSource, UICollectio
                 if(collidedCell != cell){
                     collidedCell = cell
                     collisionDetected(forCell: cell)
-                    presenter.selectedPodcast(atRow: podcastCollection.indexPath(for: cell)!.row)
+                    presenter.didSelectCategory(atRow: podcastCollection.indexPath(for: cell)!.row)
                 }
             } else {
                 cell.titleLabel.isHighlighted = false

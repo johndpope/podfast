@@ -58,6 +58,16 @@ public struct PodcastRealmDataSource: LocalDataSource {
         }
     }
 
+    public func update(entry: Podcast) {
+        do {
+            self.realm.beginWrite()
+            self.realm.add(entry, update: Realm.UpdatePolicy.modified)
+            try self.realm.commitWrite()
+        } catch {
+            fatalError("Realm failed.")
+        }
+    }
+
     // MARK: Private Methods
     private func update<D>(lastUpdatedDatasource dataSource: D, to date: Date) throws where D: DataSource {
         let updatedStats = DataSetUpdated()
