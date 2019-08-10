@@ -13,16 +13,14 @@ protocol AudioPlayerDelegate {
 }
 
 class AudioPlayer: NSObject, AudioPlayerInterface  {
-    var audioPlayer: AVPlayer?
-    var audioPlayerItem: AVPlayerItem?
+
     var delegate: AudioPlayerDelegate?
-
-    override init() {
-
-    }
+    var audioPlayers = [URL: AVPlayer]()
+    var currentlyPlayingAudioPlayer: AVPlayer?
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == #keyPath(AVPlayerItem.status) {
+        if keyPath == #keyPath(AVPlayerItem.status),
+        let item = object as? AVPlayerItem {
             let status: AVPlayerItemStatus
 
             // Get the status change from the change dictionary
@@ -35,9 +33,21 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
             // Switch over the status
             switch status {
             case .readyToPlay:
-                audioPlayer?.play()
-                delegate?.playBackStarted()
+                // find the audio player
+                if let urlItem = item.asset as? AVURLAsset,
+                let audioPlayer = audioPlayers[urlItem.url] {
+                    if audioPlayer == currentlyPlayingAudioPlayer {
+                        audioPlayer.volume = 1.0
+                        audioPlayer.play()
+                        print("An Episode will play url: \(urlItem.url)")
+                    } else {
+                        audioPlayer.preroll(atRate: 1.0) { _ in
+                            print("Preroll completed?")
+                        }
+                    }
+                }
             case .failed:
+                // TODO: signal failed in order to enqueue another episode
                 print("FAILED!")
             case .unknown:
                 print("unknown :(!")
@@ -46,16 +56,39 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
     }
 
     func play(fromURL url: URL) {
-        audioPlayerItem = AVPlayerItem(url: url)
-        audioPlayer = AVPlayer(playerItem: audioPlayerItem)
-        audioPlayerItem?.addObserver(self,
-                                    forKeyPath: #keyPath(AVPlayerItem.status),
-                                    options: [.old, .new],
-                                    context: nil)
+        for (_, audioPlayer) in audioPlayers {
+            audioPlayer.volume = 0.0
+        }
 
-        audioPlayer?.automaticallyWaitsToMinimizeStalling = false
+        if let audioPlayer = audioPlayers[url] {
+            currentlyPlayingAudioPlayer = audioPlayer
+            if audioPlayer.status == .readyToPlay {
+                audioPlayer.volume = 1.0
+                audioPlayer.playImmediately(atRate: 1.0)
+            }
+        }
     }
+
     func stop() {
 
+    }
+
+    func enqueueItem(url: URL){
+        let audioPlayerItem = AVPlayerItem(url: url)
+        audioPlayerItem.addObserver(self,
+                                     forKeyPath: #keyPath(AVPlayerItem.status),
+                                     options: [.old, .new],
+                                     context: nil)
+        let audioPlayer = AVPlayer(playerItem: audioPlayerItem)
+        audioPlayer.automaticallyWaitsToMinimizeStalling = false
+        audioPlayer.volume = 0.0
+        audioPlayers[url] = audioPlayer
+    }
+
+    func dequeueItem(url: URL){
+        if let audioPlayer = audioPlayers.removeValue(forKey: url){
+            audioPlayer.pause()
+            // does it deinit?
+        }
     }
 }

@@ -14,7 +14,7 @@ class DiscoveryScreenPresenter {
     private var audioPlayer: AudioPlayerInterface
     weak private var discoveryViewDelegate : DiscoveryViewDelegate?
 
-    private var podcasts = [Podcast]()
+    private var enqueuedEpisodes = [PodcastCategory: URL]()
     private var categories = [PodcastCategory]()
 
     init(withInteractor interactor: DiscoveryInteractor = Discovery(),
@@ -43,19 +43,28 @@ class DiscoveryScreenPresenter {
         self.discoveryViewDelegate = discoveryViewDelegate
     }
 
-    func didSelectCategory(atRow row: Int) {
-        print("\(String(describing: categories[row].name)) was selected!")
-        discoveryInteractor.getEpisodeOfPodcast(inCategory: categories[row]).then { episode in
-            self.audioPlayer.play(fromURL: URL(string: episode.url!)!)
-            print("Playing \(String(describing: episode.title)) of Podcast: \(episode.podcast.first!.title!)")
-        }
-//        // TODO: This must become, get episode and the selection logic should go to the discover ;)
-//        discoveryInteractor.getEpisodes(forPodcast: podcasts[row]).then { episodes in
-//            if let episode = episodes.first, let episodeURL = URL(string: episode.url ?? "") {
-//                self.audioPlayer.play(fromURL: episodeURL)
-//            }
-//        }
+    func categoriesVisibilityChanged(added: Set<Int>, removed: Set<Int>) {
+        let visibleCategoriesAdded = added.map { categories[$0] }
+        let visibleCategoriesRemoved = removed.map { categories[$0] }
 
+        for category in visibleCategoriesAdded {
+            discoveryInteractor.getEpisodeOfPodcast(inCategory: category).then { episode in
+                self.enqueuedEpisodes[category] = URL(string: episode.url!)!
+                self.audioPlayer.enqueueItem(url: URL(string: episode.url!)!)
+            }
+        }
+
+        for category in visibleCategoriesRemoved {
+            self.audioPlayer.dequeueItem(url: self.enqueuedEpisodes.removeValue(forKey: category)!)
+        }
+    }
+
+    func didSelectCategory(atRow row: Int) {
+        let category = categories[row]
+
+        if let enqueuedEpisode = self.enqueuedEpisodes[category]{
+            self.audioPlayer.play(fromURL: enqueuedEpisode)
+        }
     }
 }
 

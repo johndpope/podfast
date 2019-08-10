@@ -18,6 +18,7 @@ class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
     @IBOutlet weak var podcastCollection: UICollectionView!
 
     private weak var collidedCell: PodcastCollectionViewCell?
+    private var visibleCells = [Int]()
 
     private let presenter = DiscoveryScreenPresenter()
 
@@ -36,6 +37,13 @@ class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
                                             y: frame.minY, width: 2.0, height: frame.height))
         lineView.backgroundColor = .red
         self.view.addSubview(lineView)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        let visibleCellRows = podcastCollection.visibleCells.compactMap { cell in
+            return podcastCollection.indexPath(for: cell)?.row
+        }
+        presenter.categoriesVisibilityChanged(added: Set(visibleCellRows), removed: Set<Int> ())
     }
 
     func reloadData() {
@@ -71,7 +79,17 @@ extension DiscoveryScreenViewController: UICollectionViewDataSource, UICollectio
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let center = self.view.center
-        for cell in podcastCollection.visibleCells.map({$0 as! PodcastCollectionViewCell}) {
+        let cellsInView = podcastCollection.visibleCells.map({$0 as! PodcastCollectionViewCell})
+        let rowsOfCellsInView = cellsInView.compactMap { podcastCollection.indexPath(for: $0)?.row }
+
+        // detect change in visible cells
+        if !visibleCells.elementsEqual(rowsOfCellsInView) {
+            presenter.categoriesVisibilityChanged(added: Set(rowsOfCellsInView).subtracting(visibleCells),
+                                               removed: Set(visibleCells).subtracting(rowsOfCellsInView))
+            visibleCells = rowsOfCellsInView
+        }
+
+        for cell in cellsInView {
             // detect collision
             let cellFrame = podcastCollection.convert(cell.frame, to: self.view)
             cell.titleLabel.textColor = .black
@@ -93,30 +111,8 @@ extension DiscoveryScreenViewController: UICollectionViewDataSource, UICollectio
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-//        let center = self.view.center
-//        for cell in podcastCollection.visibleCells.map({$0 as! PodcastCollectionViewCell}) {
-//            // detect collision
-//            let cellFrame = podcastCollection.convert(cell.frame, to: self.view)
-//            if cellFrame.contains(center) {
-//                cell.titleLabel.isHighlighted = false
-//                cell.titleLabel.textColor = .green
-//            } else {
-//                cell.titleLabel.isHighlighted = false
-//            }
-//        }
     }
 
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-//        let center = self.view.center
-//        for cell in podcastCollection.visibleCells.map({$0 as! PodcastCollectionViewCell}) {
-//            // detect collision
-//            let cellFrame = podcastCollection.convert(cell.frame, to: self.view)
-//            if cellFrame.contains(center) {
-//                cell.titleLabel.isHighlighted = false
-//                cell.titleLabel.textColor = .green
-//            } else {
-//                cell.titleLabel.isHighlighted = false
-//            }
-//        }
     }
 }
