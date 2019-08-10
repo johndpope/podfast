@@ -28,23 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Setting category to AVAudioSessionCategoryPlayback failed.")
         }
 
-        let repository = PodcastRepository()
-        repository.update(withPolicy: .config).then { updated in
-            if updated {
-                print("YES")
-            } else {
-                print("NOPE")
-            }
-        }
-
-        repository.update(withPolicy: .remote).then { updated in
-            if updated {
-                print("YES")
-            } else {
-                print("NOPE")
-            }
-        }
-
         return true
     }
 

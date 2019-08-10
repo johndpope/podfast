@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pgm-0A-SIa">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,73 +10,97 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Launch Screen View Controller-->
+        <scene sceneID="GDw-FL-Ce0">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="PodFast" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <viewController id="pgm-0A-SIa" customClass="LaunchScreenViewController" customModule="PodFast" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xSm-qD-JNj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WGm-hA-DSJ">
-                                <rect key="frame" x="18" y="319" width="339" height="29"/>
-                                <state key="normal" title="this is some good text which can be displayed"/>
-                                <connections>
-                                    <action selector="playPodcast:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dR9-z6-Ca1"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Podcast Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m2K-ii-5Lk">
-                                <rect key="frame" x="16" y="288" width="341" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="gkn-JY-tyy"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PODFAST" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sk8-U9-fi5">
+                                <rect key="frame" x="81.5" y="304" width="212" height="59"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="49"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="GBd-9Y-dsc" customClass="UIAdjustableScrubSlider" customModule="PodFast" customModuleProvider="target">
-                                <rect key="frame" x="28" y="393" width="319" height="31"/>
-                                <connections>
-                                    <action selector="sliderValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="UJE-yp-HXE"/>
-                                </connections>
-                            </slider>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oOb-sm-weS">
-                                <rect key="frame" x="150" y="482" width="74" height="30"/>
-                                <state key="normal" title="New Radio"/>
-                                <connections>
-                                    <action selector="newRadio:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0N3-dH-XbJ"/>
-                                </connections>
-                            </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="WGm-hA-DSJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="79t-Wr-JYa"/>
-                            <constraint firstItem="m2K-ii-5Lk" firstAttribute="trailing" secondItem="WGm-hA-DSJ" secondAttribute="trailing" id="7Fq-kM-6EX"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="WGm-hA-DSJ" secondAttribute="trailing" constant="18" id="BG8-jU-OPx"/>
-                            <constraint firstItem="oOb-sm-weS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="150" id="LK8-YR-zbF"/>
-                            <constraint firstItem="oOb-sm-weS" firstAttribute="top" secondItem="GBd-9Y-dsc" secondAttribute="bottom" constant="59" id="X7p-gt-Oai"/>
-                            <constraint firstItem="m2K-ii-5Lk" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="ayT-B6-Js8"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="oOb-sm-weS" secondAttribute="bottom" constant="155" id="cHc-bG-5RP"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="GBd-9Y-dsc" secondAttribute="bottom" constant="244" id="cWE-cK-f0W"/>
-                            <constraint firstItem="WGm-hA-DSJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="18" id="eWE-nQ-Rba"/>
-                            <constraint firstItem="m2K-ii-5Lk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="268" id="jgw-w7-uCn"/>
-                            <constraint firstItem="WGm-hA-DSJ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="o0p-Iu-GY4"/>
-                            <constraint firstItem="WGm-hA-DSJ" firstAttribute="top" secondItem="m2K-ii-5Lk" secondAttribute="bottom" constant="10" id="tu9-Jw-v0q"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="oOb-sm-weS" secondAttribute="trailing" constant="151" id="tx1-NB-fjs"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="GBd-9Y-dsc" secondAttribute="trailing" constant="30" id="wGe-E3-Ssl"/>
-                            <constraint firstItem="GBd-9Y-dsc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="wUr-MG-2Ch"/>
+                            <constraint firstItem="sk8-U9-fi5" firstAttribute="centerX" secondItem="xSm-qD-JNj" secondAttribute="centerX" id="7Ma-ay-EDx"/>
+                            <constraint firstItem="sk8-U9-fi5" firstAttribute="centerY" secondItem="xSm-qD-JNj" secondAttribute="centerY" id="iI0-PT-aZg"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <viewLayoutGuide key="safeArea" id="ap9-mj-sQr"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rs2-Q5-1AB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-505" y="-70"/>
+        </scene>
+        <!--Discovery Screen View Controller-->
+        <scene sceneID="96C-ik-Kfw">
+            <objects>
+                <viewController storyboardIdentifier="discovery" id="QdZ-6h-5Dd" customClass="DiscoveryScreenViewController" customModule="PodFast" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KEt-VD-v15">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hRZ-Dh-SSk">
+                                <rect key="frame" x="8" y="282" width="359" height="187"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="NTS-b2-sYU">
+                                    <size key="itemSize" width="177" height="96"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="center" reuseIdentifier="podcast" id="Ip6-NT-MmH" customClass="PodcastCollectionViewCell" customModule="PodFast" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="45.5" width="174" height="96"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="174" height="96"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="2Yh-aw-Adh">
+                                                    <rect key="frame" x="8" y="29" width="158" height="38.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                                    <nil key="textColor"/>
+                                                    <color key="highlightedColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="2Yh-aw-Adh" firstAttribute="centerY" secondItem="Ip6-NT-MmH" secondAttribute="centerY" id="anw-CQ-CLX"/>
+                                            <constraint firstItem="2Yh-aw-Adh" firstAttribute="leading" secondItem="Ip6-NT-MmH" secondAttribute="leadingMargin" id="qRp-kW-O7M"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="2Yh-aw-Adh" secondAttribute="trailing" id="xDa-te-tcW"/>
+                                        </constraints>
+                                        <size key="customSize" width="174" height="96"/>
+                                        <connections>
+                                            <outlet property="titleLabel" destination="2Yh-aw-Adh" id="QbK-nU-2wg"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="hRZ-Dh-SSk" firstAttribute="centerX" secondItem="KEt-VD-v15" secondAttribute="centerX" id="Knu-Q4-ewn"/>
+                            <constraint firstItem="hRZ-Dh-SSk" firstAttribute="centerY" secondItem="KEt-VD-v15" secondAttribute="centerY" constant="42" id="NKt-a9-a4C"/>
+                            <constraint firstItem="Lyw-8I-qcy" firstAttribute="trailing" secondItem="hRZ-Dh-SSk" secondAttribute="trailing" constant="8" id="Nt5-qw-NVx"/>
+                            <constraint firstItem="hRZ-Dh-SSk" firstAttribute="leading" secondItem="Lyw-8I-qcy" secondAttribute="leading" constant="8" id="OWm-W2-7C1"/>
+                            <constraint firstItem="hRZ-Dh-SSk" firstAttribute="centerY" secondItem="KEt-VD-v15" secondAttribute="centerY" constant="42" id="Qlu-mA-k5a"/>
+                            <constraint firstItem="hRZ-Dh-SSk" firstAttribute="top" secondItem="Lyw-8I-qcy" secondAttribute="top" constant="262" id="pS0-Bg-jMp"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Lyw-8I-qcy"/>
                     </view>
                     <connections>
-                        <outlet property="episodeTitleLabel" destination="WGm-hA-DSJ" id="ptg-Zj-yIf"/>
-                        <outlet property="podcastTitleLabel" destination="m2K-ii-5Lk" id="PDZ-yx-e7s"/>
-                        <outlet property="slider" destination="GBd-9Y-dsc" id="Osf-0H-lVY"/>
+                        <outlet property="podcastCollection" destination="hRZ-Dh-SSk" id="jXQ-1h-1hF"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MwH-8w-C2F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53.600000000000001" y="26.53673163418291"/>
+            <point key="canvasLocation" x="176.80000000000001" y="-71.514242878560722"/>
         </scene>
     </scenes>
 </document>

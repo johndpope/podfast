@@ -10,6 +10,7 @@ import Foundation
 import RealmSwift
 import AlamofireObjectMapper
 import ObjectMapper
+import Promises
 import enum Result.NoError
 
 public class Podcast: Object {
@@ -19,7 +20,7 @@ public class Podcast: Object {
     @objc dynamic var hasBeenDiscovered: Bool = false
     public let _episodes = List<Episode>()
     public let categories = List<PodcastCategory>()
-
+    public var episodes = Promise<[Episode]>([Episode]())
     public override static func primaryKey() -> String? {
         return "title"
     }

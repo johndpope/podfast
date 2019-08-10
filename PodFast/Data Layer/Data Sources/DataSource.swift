@@ -19,6 +19,8 @@ public protocol DataSource {
 // A Local Data Source is a quick access local store which can get updated from a Data Source whenever is needed
 public protocol LocalDataSource: DataSource {
     func update<D: DataSource>(fromSource dataSource: D) -> Promise<Bool> where D.DataType == DataType
+
+    func update(entry: DataType)
 }
 
 // Type Erased Struct to Represent Any Data Source
@@ -54,6 +56,7 @@ struct AnyLocalDataSource<U>: LocalDataSource {
     private let _lastUpdated: () -> Promise<Date>
     private let _fetchPodcasts: () -> Promise<[U]>
     private let _updateFromSource: (AnyDataSource<U>) -> Promise<Bool>
+    private let _updateEntry: (U) -> Void
 
     var description: String
 
@@ -61,12 +64,17 @@ struct AnyLocalDataSource<U>: LocalDataSource {
         _fetchPodcasts = base.fetchAll
         _lastUpdated = base.lastUpdated
         _updateFromSource = base.update
+        _updateEntry = base.update
         description = base.description
     }
 
     func update<D>(fromSource dataSource: D) -> Promise<Bool> where D : DataSource, DataType == D.DataType {
         let actualDataSource = AnyDataSource<U>(base: dataSource)
         return _updateFromSource(actualDataSource)
+    }
+
+    func update(entry: U) {
+        _updateEntry(entry)
     }
 
     func fetchAll() -> Promise<[U]> {

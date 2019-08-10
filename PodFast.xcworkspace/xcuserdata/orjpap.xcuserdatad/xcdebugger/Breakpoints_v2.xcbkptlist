@@ -35,5 +35,229 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PodFast/Use Cases/LaunchScreenViewController.swift"
+            timestampString = "586201830.438427"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "nextScreen()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PodFast/Use Cases/Launch/LaunchScreenViewController.swift"
+            timestampString = "586390252.118763"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "nextScreen()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PodFast/Use Cases/Launch/LaunchScreenViewController.swift"
+            timestampString = "586390252.118831"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "nextScreen()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PodFast/Use Cases/DiscoveryScreenViewController.swift"
+            timestampString = "586224405.093098"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "collectionView(_:didSelectItemAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PodFast/APIs/Requests.swift"
+            timestampString = "586390252.118917"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
+            landmarkName = "execute()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PodFast/APIs/Requests.swift"
+            timestampString = "586390252.1189719"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
+            landmarkName = "execute()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (FeedKit.Result) -&gt; () in closure #1 ((Swift.Array&lt;PodFast.Episode&gt;) -&gt; (), (Swift.Error) -&gt; ()) -&gt; () in PodFast.PodcastFeedEpisodesRequest.execute() -&gt; Promises.Promise&lt;Swift.Array&lt;PodFast.Episode&gt;&gt;"
+                  moduleName = "PodFast"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/orjpap/Documents/Development/iOS/PodFast/PodFast/PodFast/APIs/Requests.swift"
+                  timestampString = "586302002.062101"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "121"
+                  endingLineNumber = "121"
+                  offsetFromSymbolStart = "100">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (FeedKit.Result) -&gt; () in closure #1 ((Swift.Array&lt;PodFast.Episode&gt;) -&gt; (), (Swift.Error) -&gt; ()) -&gt; () in PodFast.PodcastFeedEpisodesRequest.execute() -&gt; Promises.Promise&lt;Swift.Array&lt;PodFast.Episode&gt;&gt;"
+                  moduleName = "PodFast"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/orjpap/Documents/Development/iOS/PodFast/PodFast/PodFast/APIs/Requests.swift"
+                  timestampString = "586302002.063404"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "121"
+                  endingLineNumber = "121"
+                  offsetFromSymbolStart = "196">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PodFast/Data Layer/Data Sources/EpisodeRealmDataSource.swift"
+            timestampString = "586390252.119027"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "getEpisodes(forPodcast:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 ((Swift.Array&lt;PodFast.Episode&gt;) -&gt; (), (Swift.Error) -&gt; ()) -&gt; () in PodFast.EpisodeRealmDataSource.getEpisodes(forPodcast: PodFast.Podcast) -&gt; Promises.Promise&lt;Swift.Array&lt;PodFast.Episode&gt;&gt;"
+                  moduleName = "PodFast"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/orjpap/Documents/Development/iOS/PodFast/PodFast/PodFast/Data%20Layer/Data%20Sources/EpisodeRealmDataSource.swift"
+                  timestampString = "586223375.7493761"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "80">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (PodFast.Podcast) -&gt; Swift.Bool in closure #1 ((Swift.Array&lt;PodFast.Episode&gt;) -&gt; (), (Swift.Error) -&gt; ()) -&gt; () in PodFast.EpisodeRealmDataSource.getEpisodes(forPodcast: PodFast.Podcast) -&gt; Promises.Promise&lt;Swift.Array&lt;PodFast.Episode&gt;&gt;"
+                  moduleName = "PodFast"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/orjpap/Documents/Development/iOS/PodFast/PodFast/PodFast/Data%20Layer/Data%20Sources/EpisodeRealmDataSource.swift"
+                  timestampString = "586223375.750658"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "84">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PodFast/Data Layer/Data Sources/EpisodeRealmDataSource.swift"
+            timestampString = "586390252.119083"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "updatePodcastEpisodes(forPodcast:episodes:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PodFast/Use Cases/Discovery/DiscoveryScreenViewController.swift"
+            timestampString = "587170566.792972"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "scrollViewDidScroll(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PodFast/Use Cases/Discovery/AudioPlayer.swift"
+            timestampString = "587170566.7932431"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "play(fromURL:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

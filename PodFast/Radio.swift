@@ -61,14 +61,14 @@ class Station: NSObject {
         }
     }
 }
-
-extension Station: CachingPlayerItemDelegate {
-//    /// Is called after initial prebuffering is finished, means
-//    /// we are ready to play.
-//    @objc func playerItemReadyToPlay(_ playerItem: CachingPlayerItem) {
-//        audioPlayer.play()
-//    }
-}
+//
+//extension Station: CachingPlayerItemDelegate {
+////    /// Is called after initial prebuffering is finished, means
+////    /// we are ready to play.
+////    @objc func playerItemReadyToPlay(_ playerItem: CachingPlayerItem) {
+////        audioPlayer.play()
+////    }
+//}
 
 class Radio {
     var podcastRepository: PodcastRepository?

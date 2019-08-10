@@ -89,9 +89,9 @@ struct PodcastFeedEpisodesRequest {
     let podcast: Podcast
     let numberOfEpisodesToRequest: Int
 
-    init(_ podcast: Podcast, for numberOfEpisodesToRequest: Int) {
+    init(_ podcast: Podcast, for numberOfEpisodesToParse: Int) {
         self.podcast = podcast
-        self.numberOfEpisodesToRequest = numberOfEpisodesToRequest
+        self.numberOfEpisodesToRequest = numberOfEpisodesToParse
     }
 
     private func parsePodcastEpisodes(fromRssFeed feedItems: [RSSFeedItem]) -> [Episode] {
@@ -108,8 +108,8 @@ struct PodcastFeedEpisodesRequest {
         return episodes
     }
 
-    func execute() -> Promise<Podcast> {
-        return Promise<Podcast> { fulfill, reject in
+    func execute() -> Promise<[Episode]> {
+        return Promise<[Episode]> { fulfill, reject in
             guard let feedUrlString = self.podcast.feedUrl,
                 let feedUrl = URL(string: feedUrlString) else {
                     reject(PodcastFeedError.invalidURL)
@@ -130,8 +130,7 @@ struct PodcastFeedEpisodesRequest {
                     }
                     // TODO: assumption that there will always be episodes
                     let episodes = self.parsePodcastEpisodes(fromRssFeed: feedItems)
-                    self.podcast._episodes.append(objectsIn: episodes)
-                    fulfill(self.podcast)
+                    fulfill(episodes)
                 case .atom(_):
                     reject(PodcastFeedError.notRSS)
                 case .json(_):
