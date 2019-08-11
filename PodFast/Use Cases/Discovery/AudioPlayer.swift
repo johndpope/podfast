@@ -9,7 +9,7 @@
 import AVFoundation
 
 protocol AudioPlayerDelegate {
-    func playBackStarted()
+    func playBackStarted(forURL: URL)
 }
 
 class AudioPlayer: NSObject, AudioPlayerInterface  {
@@ -39,7 +39,7 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
                     if audioPlayer == currentlyPlayingAudioPlayer {
                         audioPlayer.volume = 1.0
                         audioPlayer.play()
-                        print("An Episode will play url: \(urlItem.url)")
+                        delegate?.playBackStarted(forURL: urlItem.url)
                     } else {
                         audioPlayer.preroll(atRate: 1.0) { _ in
                             print("Preroll completed?")
@@ -65,6 +65,7 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
             if audioPlayer.status == .readyToPlay {
                 audioPlayer.volume = 1.0
                 audioPlayer.playImmediately(atRate: 1.0)
+                delegate?.playBackStarted(forURL: url)
             }
         }
     }
@@ -88,6 +89,7 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
     func dequeueItem(url: URL){
         if let audioPlayer = audioPlayers.removeValue(forKey: url){
             audioPlayer.pause()
+            audioPlayer.cancelPendingPrerolls()
             // does it deinit?
         }
     }

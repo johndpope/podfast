@@ -14,8 +14,10 @@ class DiscoveryScreenPresenter {
     private var audioPlayer: AudioPlayerInterface
     weak private var discoveryViewDelegate : DiscoveryViewDelegate?
 
-    private var enqueuedEpisodes = [PodcastCategory: URL]()
+    private var enqueuedEpisodes = [PodcastCategory: Episode]()
     private var categories = [PodcastCategory]()
+
+    private var podcastDetailsRevealTimer: Timer?
 
     init(withInteractor interactor: DiscoveryInteractor = Discovery(),
         withAudioPlayerInterface audioPlayer: AudioPlayerInterface = AudioPlayer()){
@@ -49,27 +51,52 @@ class DiscoveryScreenPresenter {
 
         for category in visibleCategoriesAdded {
             discoveryInteractor.getEpisodeOfPodcast(inCategory: category).then { episode in
-                self.enqueuedEpisodes[category] = URL(string: episode.url!)!
-                self.audioPlayer.enqueueItem(url: URL(string: episode.url!)!)
+                self.enqueuedEpisodes[category] = episode
+                if let episodeURLString = episode.url,
+                    let episodeURL = URL(string: episodeURLString) {
+                    self.audioPlayer.enqueueItem(url: episodeURL)
+                }
             }
         }
 
         for category in visibleCategoriesRemoved {
-            self.audioPlayer.dequeueItem(url: self.enqueuedEpisodes.removeValue(forKey: category)!)
+            if let episodeToRemove = self.enqueuedEpisodes.removeValue(forKey: category),
+            let episodeToRemoveURLString = episodeToRemove.url,
+            let episodeToRemoveURL = URL(string: episodeToRemoveURLString){
+                 self.audioPlayer.dequeueItem(url: episodeToRemoveURL)
+            }
         }
     }
 
     func didSelectCategory(atRow row: Int) {
         let category = categories[row]
 
-        if let enqueuedEpisode = self.enqueuedEpisodes[category]{
-            self.audioPlayer.play(fromURL: enqueuedEpisode)
+        if let enqueuedEpisode = self.enqueuedEpisodes[category],
+        let enqueuedEpisodeURLString = enqueuedEpisode.url,
+        let enqueudEpisodeURL = URL(string: enqueuedEpisodeURLString){
+            self.audioPlayer.play(fromURL: enqueudEpisodeURL)
+        }
+    }
+
+    @objc func revealPodcastInfo(timer: Timer)
+    {
+        if let userInfo = timer.userInfo as? [String: URL],
+            let url = userInfo["url"]
+        {
+            for (_, episode) in enqueuedEpisodes {
+                if episode.url == url.absoluteString,
+                    let podcast = episode.podcast.first {
+                    self.discoveryViewDelegate?.showPodcastInformation(title: podcast.title, episodeTitle: episode.title, linkToPodcast: podcast.feedUrl)
+                }
+            }
         }
     }
 }
 
 extension DiscoveryScreenPresenter: AudioPlayerDelegate {
-    func playBackStarted() {
-        discoveryViewDelegate?.playBackStarted()
+    func playBackStarted(forURL url: URL) {
+        discoveryViewDelegate?.hidePodcastInformation()
+        podcastDetailsRevealTimer?.invalidate()
+        podcastDetailsRevealTimer = Timer.scheduledTimer(timeInterval: 60.0, target: self, selector: #selector(revealPodcastInfo(timer:)), userInfo: ["url": url], repeats: false)
     }
 }

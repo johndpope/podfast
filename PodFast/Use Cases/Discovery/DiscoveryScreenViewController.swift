@@ -9,6 +9,8 @@
 import UIKit
 
 protocol DiscoveryViewDelegate: NSObjectProtocol {
+    func showPodcastInformation(title: String?, episodeTitle: String?, linkToPodcast: String?)
+    func hidePodcastInformation()
     func reloadData()
     func playBackStarted()
 }
@@ -16,6 +18,10 @@ protocol DiscoveryViewDelegate: NSObjectProtocol {
 class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
 
     @IBOutlet weak var podcastCollection: UICollectionView!
+    @IBOutlet weak var podcastInformationView: UIStackView!
+    @IBOutlet weak var podcastTitleLabel: UILabel!
+    @IBOutlet weak var episodeTitleLabel: UILabel!
+    @IBOutlet weak var podcastLinkLabel: UILabel!
 
     private weak var collidedCell: PodcastCollectionViewCell?
     private var visibleCells = [Int]()
@@ -24,10 +30,12 @@ class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        podcastInformationView.isHidden = true
+
         podcastCollection.dataSource = self
         podcastCollection.delegate = self
         podcastCollection.decelerationRate = UIScrollViewDecelerationRateFast
-
 
         presenter.setViewDelegate(discoveryViewDelegate: self)
         presenter.viewDidLoad()
@@ -44,6 +52,7 @@ class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
             return podcastCollection.indexPath(for: cell)?.row
         }
         presenter.categoriesVisibilityChanged(added: Set(visibleCellRows), removed: Set<Int> ())
+        visibleCells = visibleCellRows
     }
 
     func reloadData() {
@@ -56,6 +65,16 @@ class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
         collidedCell?.titleLabel.textColor = .green
     }
 
+    func showPodcastInformation(title: String?, episodeTitle: String?, linkToPodcast: String?) {
+        podcastInformationView.isHidden = false
+        podcastTitleLabel.text = title
+        episodeTitleLabel.text = episodeTitle
+        podcastLinkLabel.text = linkToPodcast
+    }
+
+    func hidePodcastInformation(){
+        podcastInformationView.isHidden = true
+    }
 }
 
 extension DiscoveryScreenViewController: UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate {
@@ -107,7 +126,6 @@ extension DiscoveryScreenViewController: UICollectionViewDataSource, UICollectio
     }
 
     func collisionDetected(forCell cell: PodcastCollectionViewCell){
-        print("Collision of cell \(cell.titleLabel.text)")
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
