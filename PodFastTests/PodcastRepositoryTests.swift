@@ -13,13 +13,13 @@ import Promises
 class PodcastRepositoryTests: XCTestCase {
 
     var podcastRepository = PodcastRepository()
-    var podcastCategoryRepository = PodcastCategoryRepository()
+    var podcastCategoryRepository = PodcastCategoryRepositoryImplementation()
 
     override func setUp() {
         podcastRepository = PodcastRepository( localDataSource: AnyLocalDataSource<Podcast>(base: MockPodcastLocalDataSource()),
                                             remoteDataSource: AnyDataSource<Podcast>(base: MockPodcastRemoteDataSource()),
                                             configDataSource: AnyDataSource<Podcast>(base: MockPodcastConfigDataSource()))
-        podcastCategoryRepository = PodcastCategoryRepository(dataSource: AnyDataSource<PodcastCategory>(base: MockPodcastCategoryDataSource()))
+        podcastCategoryRepository = PodcastCategoryRepositoryImplementation(dataSource: AnyDataSource<PodcastCategory>(base: MockPodcastCategoryDataSource()))
     }
 
     override func tearDown() {

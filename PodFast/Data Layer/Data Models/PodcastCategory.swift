@@ -10,6 +10,7 @@ import RealmSwift
 public class PodcastCategory: Object {
     @objc dynamic var id: Int = 0
     @objc dynamic var name: String?
+    @objc dynamic var plays: Int = 0
 
     public override static func primaryKey() -> String? {
         return "id"

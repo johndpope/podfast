@@ -17,7 +17,7 @@ class DiscoveryScreenPresenter {
     private var enqueuedEpisodes = [PodcastCategory: Episode]()
     private var categories = [PodcastCategory]()
 
-    private var podcastDetailsRevealTimer: Timer?
+    private var podcastHasBeenListenedTimer: Timer?
 
     init(withInteractor interactor: DiscoveryInteractor = Discovery(),
         withAudioPlayerInterface audioPlayer: AudioPlayerInterface = AudioPlayer()){
@@ -78,15 +78,16 @@ class DiscoveryScreenPresenter {
         }
     }
 
-    @objc func revealPodcastInfo(timer: Timer)
+    @objc func podcastHasBeenListenedCallback(timer: Timer)
     {
         if let userInfo = timer.userInfo as? [String: URL],
             let url = userInfo["url"]
         {
-            for (_, episode) in enqueuedEpisodes {
+            for (category, episode) in enqueuedEpisodes {
                 if episode.url == url.absoluteString,
                     let podcast = episode.podcast.first {
                     self.discoveryViewDelegate?.showPodcastInformation(title: podcast.title, episodeTitle: episode.title, linkToPodcast: podcast.feedUrl)
+                    self.discoveryInteractor.advancePlayCount(ofCategory: category)
                 }
             }
         }
@@ -96,7 +97,7 @@ class DiscoveryScreenPresenter {
 extension DiscoveryScreenPresenter: AudioPlayerDelegate {
     func playBackStarted(forURL url: URL) {
         discoveryViewDelegate?.hidePodcastInformation()
-        podcastDetailsRevealTimer?.invalidate()
-        podcastDetailsRevealTimer = Timer.scheduledTimer(timeInterval: 60.0, target: self, selector: #selector(revealPodcastInfo(timer:)), userInfo: ["url": url], repeats: false)
+        podcastHasBeenListenedTimer?.invalidate()
+        podcastHasBeenListenedTimer = Timer.scheduledTimer(timeInterval: 60.0, target: self, selector: #selector(podcastHasBeenListenedCallback(timer:)), userInfo: ["url": url], repeats: false)
     }
 }

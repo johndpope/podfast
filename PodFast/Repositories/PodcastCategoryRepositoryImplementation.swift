@@ -9,7 +9,7 @@
 import Promises
 
 
-class PodcastCategoryRepository: Repository {
+class PodcastCategoryRepositoryImplementation: PodcastCategoryRepository {
 
     private let dataSource: AnyDataSource<PodcastCategory>
 
@@ -24,6 +24,21 @@ class PodcastCategoryRepository: Repository {
     public func update(withPolicy policy: RepositoryUpdatePolicy) -> Promise<Bool> {
         return Promise { true } // Does not do anything at the moment
     }
-    
+
+    func getAll<T>(sortedBy keyPath: KeyPath<PodcastCategory, T>) -> Promise<[PodcastCategory]> where T : Comparable {
+        return Promise<[PodcastCategory]> {fulfill, reject in
+            self.dataSource.fetchAll().then { podcastCategories in
+                fulfill(podcastCategories.sorted(by: keyPath))
+            }
+        }
+    }
+}
+
+extension Sequence {
+    func sorted<T: Comparable>(by keyPath: KeyPath<Element, T>) -> [Element] {
+        return sorted { a, b in
+            return a[keyPath: keyPath] > b[keyPath: keyPath]
+        }
+    }
 }
 

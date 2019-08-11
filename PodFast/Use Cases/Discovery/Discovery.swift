@@ -11,13 +11,14 @@ import Promises
 import RealmSwift
 
 protocol DiscoveryInteractor {
+    func advancePlayCount(ofCategory category: PodcastCategory)
     func getPodcastCategories() -> Promise<[PodcastCategory]>
     func getEpisodeOfPodcast(inCategory: PodcastCategory) -> Promise<Episode>
 }
 
 class Discovery: DiscoveryInteractor {
 
-    let podcastCategoryRepository: AnyRepository<PodcastCategory>
+    let podcastCategoryRepository: PodcastCategoryRepository
     let podcastRepository: AnyRepository<Podcast>
     // TODO: The episode repository should be embedded in podcast repository
     // as a private method and be called when getAll is called
@@ -25,8 +26,7 @@ class Discovery: DiscoveryInteractor {
 
     var podcasts = [Podcast]()
 
-    init(withPodcastCategoryRepository repository: AnyRepository<PodcastCategory>
-        = AnyRepository<PodcastCategory>(base: PodcastCategoryRepository()),
+    init(withPodcastCategoryRepository repository: PodcastCategoryRepository = PodcastCategoryRepositoryImplementation(),
          withPodcastRepository podcastRepository: AnyRepository<Podcast>
         = AnyRepository<Podcast>(base: PodcastRepository()),
          withEpisodeRepository episodeRepository: EpisodeRepositoryInterface = EpisodeRepository()) {
@@ -38,7 +38,7 @@ class Discovery: DiscoveryInteractor {
     }
 
     func getPodcastCategories() -> Promise<[PodcastCategory]> {
-        return self.podcastCategoryRepository.getAll()
+        return self.podcastCategoryRepository.getAll(sortedBy: \.plays)
     }
 
     func getEpisodeOfPodcast(inCategory category: PodcastCategory) -> Promise<Episode> {
@@ -63,4 +63,17 @@ class Discovery: DiscoveryInteractor {
             }
         }
     }
+
+    func advancePlayCount(ofCategory category: PodcastCategory) {
+        do {
+            let realm = DBHelper.shared.getRealm()
+            realm.beginWrite()
+            category.plays = category.plays + 1
+            try realm.commitWrite()
+            print("Advanced play count of category: \(category.name)")
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+
 }
