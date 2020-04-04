@@ -16,7 +16,7 @@ class LaunchScreenViewController: UIViewController, LaunchViewDelegate {
 
     func nextScreen() {
         if let vc = DiscoveryScreenViewController.fromStoryboard(name: "Main", identifier: "discovery"){
-            self.modalPresentationStyle = .fullScreen
+            vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)
         }
     }

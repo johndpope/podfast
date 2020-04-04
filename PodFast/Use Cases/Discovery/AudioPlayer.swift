@@ -90,7 +90,6 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
         if let audioPlayer = audioPlayers.removeValue(forKey: url){
             audioPlayer.pause()
             audioPlayer.cancelPendingPrerolls()
-            // does it deinit?
         }
     }
 }

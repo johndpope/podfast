@@ -39,7 +39,9 @@ class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
 
         presenter.setViewDelegate(discoveryViewDelegate: self)
         presenter.viewDidLoad()
+    }
 
+    override func viewDidLayoutSubviews() {
         let frame = self.podcastCollection.frame
         let lineView = UIView(frame: CGRect(x: frame.width/2,
                                             y: frame.minY, width: 2.0, height: frame.height))
