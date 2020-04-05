@@ -9,7 +9,7 @@
 import Foundation
 
 class DiscoveryScreenPresenter {
-
+    private let podcastDiscoveryTimeInterval: TimeInterval = 30.0
     private let discoveryInteractor: DiscoveryInteractor
     private var audioPlayer: AudioPlayerInterface
     weak private var discoveryViewDelegate : DiscoveryViewDelegate?
@@ -86,7 +86,7 @@ class DiscoveryScreenPresenter {
             for (category, episode) in enqueuedEpisodes {
                 if episode.url == url.absoluteString,
                     let podcast = episode.podcast.first {
-                    self.discoveryViewDelegate?.showPodcastInformation(title: podcast.title, episodeTitle: episode.title, linkToPodcast: podcast.feedUrl)
+                    self.discoveryViewDelegate?.showPodcastInformation(title: podcast.title, episodeTitle: episode.title, linkToPodcast: podcast.itunesUrl ?? podcast.feedUrl)
                     self.discoveryInteractor.advancePlayCount(ofCategory: category)
                 }
             }
@@ -99,6 +99,6 @@ extension DiscoveryScreenPresenter: AudioPlayerDelegate {
         discoveryViewDelegate?.hidePodcastInformation()
         discoveryViewDelegate?.playBackStarted()
         podcastHasBeenListenedTimer?.invalidate()
-        podcastHasBeenListenedTimer = Timer.scheduledTimer(timeInterval: 60.0, target: self, selector: #selector(podcastHasBeenListenedCallback(timer:)), userInfo: ["url": url], repeats: false)
+        podcastHasBeenListenedTimer = Timer.scheduledTimer(timeInterval: podcastDiscoveryTimeInterval, target: self, selector: #selector(podcastHasBeenListenedCallback(timer:)), userInfo: ["url": url], repeats: false)
     }
 }

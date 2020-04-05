@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Foundation
+import TTTAttributedLabel
 
 protocol DiscoveryViewDelegate: NSObjectProtocol {
     func showPodcastInformation(title: String?, episodeTitle: String?, linkToPodcast: String?)
@@ -19,9 +21,9 @@ class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
 
     @IBOutlet weak var podcastCollection: UICollectionView!
     @IBOutlet weak var podcastInformationView: UIStackView!
-    @IBOutlet weak var podcastTitleLabel: UILabel!
+    @IBOutlet weak var podcastTitleLabel: TTTAttributedLabel!
+
     @IBOutlet weak var episodeTitleLabel: UILabel!
-    @IBOutlet weak var podcastLinkLabel: UILabel!
 
     private weak var collidedCell: PodcastCollectionViewCell?
     private var visibleCells = [Int]()
@@ -68,14 +70,31 @@ class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
     }
 
     func showPodcastInformation(title: String?, episodeTitle: String?, linkToPodcast: String?) {
+        guard let title = title, let link = linkToPodcast else {
+            return
+        }
+
         podcastInformationView.isHidden = false
+
+        let linkWithRemovedOrigin = link.replacingOccurrences(of: "?uo=4", with: "")
         podcastTitleLabel.text = title
+        let nstitle = title as NSString
+        podcastTitleLabel.addLink(to: URL(string: linkWithRemovedOrigin), with: nstitle.range(of: title))
+        podcastTitleLabel.delegate = self
+
         episodeTitleLabel.text = episodeTitle
-        podcastLinkLabel.text = linkToPodcast
     }
 
     func hidePodcastInformation(){
         podcastInformationView.isHidden = true
+    }
+}
+
+extension DiscoveryScreenViewController: TTTAttributedLabelDelegate {
+    func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        }
     }
 }
 

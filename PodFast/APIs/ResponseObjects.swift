@@ -81,6 +81,7 @@ class ConfigFileData: Mappable {
 
 class BasePodcastResponse: Mappable {
     var url: String?
+    var itunesUrl: String?
     var title: String?
     var description: String?
     var genres: [String]?
@@ -97,6 +98,7 @@ class BasePodcastResponse: Mappable {
     func toPodcastObject() -> Podcast {
         let dbPodcast = Podcast()
         dbPodcast.feedUrl = url
+        dbPodcast.itunesUrl = itunesUrl
         dbPodcast.title = title
         dbPodcast.podcastDescription = description
         dbPodcast.hasBeenDiscovered = false //TODO: you don't know this :)
@@ -118,7 +120,6 @@ class ConfigPodcast: BasePodcastResponse {
         description <- map["description"]
         genres <- map["genres"]
         genreIds <- map["genreIds"]
-
     }
 }
 
@@ -137,5 +138,6 @@ class AppleTopPodcast: BasePodcastResponse {
         description <- map["description"]
         genres <- map["genres"]
         genreIds <- map["genreIds"]
+        itunesUrl <- map["collectionViewUrl"]
     }
 }
