@@ -52,6 +52,7 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
                 // find the audio player
                 if let urlItem = item.asset as? AVURLAsset,
                 let audioPlayer = enqueuedAudioPlayers[urlItem.url] {
+                    circularSeek(audioPlayer: audioPlayer, toTimeInterval: Date().timeIntervalSince(appLaunchTime!))
                     if audioPlayer == currentlyPlayingAudioPlayer {
                         startPlayback(ofPlayer: audioPlayer)
                     } else {
@@ -66,6 +67,15 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
             case .unknown:
                 playStatic()
             }
+        }
+
+    private func circularSeek(audioPlayer player: AVPlayer, toTimeInterval interval: TimeInterval) {
+        if let duration = player.currentItem?.duration {
+            let durationInSeconds = cmTimeToSeconds(duration) ?? 0
+            let seekTo = interval.truncatingRemainder(dividingBy: durationInSeconds)
+
+            let seekTime = CMTime(seconds: seekTo, preferredTimescale: 1000000)
+            player.seek(to: seekTime)
         }
     }
 
@@ -165,7 +175,10 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
                                      forKeyPath: #keyPath(AVPlayerItem.status),
                                      options: [.old, .new],
                                      context: nil)
+
+
         let audioPlayer = AVPlayer(playerItem: audioPlayerItem)
+
         audioPlayer.automaticallyWaitsToMinimizeStalling = false
         audioPlayer.volume = 0.0
         enqueuedAudioPlayers[url] = audioPlayer

@@ -11,6 +11,8 @@ import RealmSwift
 import AVFoundation
 import Promises
 
+var appLaunchTime: Date?
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
@@ -18,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         print("Realm URL: \(Realm.Configuration.defaultConfiguration.fileURL!)")
+
+        appLaunchTime = Date()
 
         let audioSession = AVAudioSession.sharedInstance()
         do {
