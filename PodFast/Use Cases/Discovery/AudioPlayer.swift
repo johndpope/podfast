@@ -10,13 +10,18 @@ import AVFoundation
 
 protocol AudioPlayerDelegate {
     func playBackStarted(forURL: URL)
+    func updateTimeElapsed(_ timeElapsed: String)
 }
 
 class AudioPlayer: NSObject, AudioPlayerInterface  {
 
     var delegate: AudioPlayerDelegate?
     var enqueuedAudioPlayers = [URL: AVPlayer]()
-    var currentlyPlayingAudioPlayer: AVPlayer?
+    var currentlyPlayingAudioPlayer: AVPlayer? {
+        willSet {
+            removePeriodicTimeObserver()
+        }
+    }
     lazy var staticPlayer: AVAudioPlayer = {
         let staticSound = Bundle.main.path(forResource: "static_1", ofType: "wav")
         do {
@@ -71,7 +76,56 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
 
         if let urlItem = audioPlayer.currentItem?.asset as? AVURLAsset {
             delegate?.playBackStarted(forURL: urlItem.url)
+            addPeriodicTimeObserver()
         }
+    }
+
+    // MARK: Time Observers
+    var timeObserverToken: Any?
+    private func addPeriodicTimeObserver() {
+        // Notify every half second
+        let timeScale = CMTimeScale(NSEC_PER_SEC)
+        let time = CMTime(seconds: 0.5, preferredTimescale: timeScale)
+
+        guard let player = currentlyPlayingAudioPlayer else {
+            return
+        }
+
+        timeObserverToken = player.addPeriodicTimeObserver(forInterval: time, queue: .main) { [weak self] time in
+            let seconds = self?.cmTimeToSeconds(time) ?? TimeInterval(0.0)
+            let timeElapsedString = self?.string(fromInterval: seconds)
+            self?.delegate?.updateTimeElapsed(timeElapsedString ?? "00:00:00")
+        }
+    }
+
+    private func removePeriodicTimeObserver() {
+        guard let player = currentlyPlayingAudioPlayer else {
+            return
+        }
+
+        if let timeObserverToken = timeObserverToken {
+            player.removeTimeObserver(timeObserverToken)
+            self.timeObserverToken = nil
+        }
+    }
+
+    private func cmTimeToSeconds(_ time: CMTime) -> TimeInterval? {
+        let seconds = CMTimeGetSeconds(time)
+        if seconds.isNaN {
+            return nil
+        }
+        return TimeInterval(seconds)
+    }
+
+    func string(fromInterval interval: TimeInterval) -> String {
+
+        let time = NSInteger(interval)
+
+        let seconds = time % 60
+        let minutes = (time / 60) % 60
+        let hours = (time / 3600)
+
+        return String(format: "%0.2d:%0.2d:%0.2d",hours,minutes,seconds)
     }
 
     func play(fromURL url: URL) {

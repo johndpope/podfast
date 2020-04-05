@@ -15,6 +15,7 @@ protocol DiscoveryViewDelegate: NSObjectProtocol {
     func hidePodcastInformation()
     func reloadData()
     func playBackStarted()
+    func setTimeElapsed(_ timeElapsed: String)
 }
 
 class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
@@ -22,6 +23,7 @@ class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
     @IBOutlet weak var podcastCollection: UICollectionView!
     @IBOutlet weak var podcastInformationView: UIStackView!
     @IBOutlet weak var podcastTitleLabel: TTTAttributedLabel!
+    @IBOutlet weak var podcastTimeElapsed: UILabel!
 
     @IBOutlet weak var episodeTitleLabel: UILabel!
 
@@ -87,6 +89,10 @@ class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
 
     func hidePodcastInformation(){
         podcastInformationView.isHidden = true
+    }
+
+    func setTimeElapsed(_ timeElapsed: String) {
+        podcastTimeElapsed.text = timeElapsed
     }
 }
 

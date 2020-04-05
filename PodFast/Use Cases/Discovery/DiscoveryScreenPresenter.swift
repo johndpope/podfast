@@ -102,4 +102,8 @@ extension DiscoveryScreenPresenter: AudioPlayerDelegate {
         podcastHasBeenListenedTimer?.invalidate()
         podcastHasBeenListenedTimer = Timer.scheduledTimer(timeInterval: podcastDiscoveryTimeInterval, target: self, selector: #selector(podcastHasBeenListenedCallback(timer:)), userInfo: ["url": url], repeats: false)
     }
+
+    func updateTimeElapsed(_ timeElapsed: String) {
+        discoveryViewDelegate?.setTimeElapsed(timeElapsed)
+    }
 }
