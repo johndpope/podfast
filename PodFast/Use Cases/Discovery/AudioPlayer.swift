@@ -69,6 +69,29 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
             }
         }
 
+        if keyPath == #keyPath(AVPlayerItem.isPlaybackBufferEmpty),
+            let item = object as? AVPlayerItem {
+
+            if let oldBool = change?[.oldKey] as? Bool,
+                oldBool == false,
+                let newBool = change?[.newKey] as? Bool,
+                newBool == true,
+                let urlItem = item.asset as? AVURLAsset,
+                let audioPlayer = enqueuedAudioPlayers[urlItem.url] {
+                // Resume Playback from stall
+                stopStatic()
+                audioPlayer.play()
+            } else if let newBool = change?[.newKey] as? Bool,
+                newBool == true,
+                let urlItem = item.asset as? AVURLAsset,
+                let audioPlayer = enqueuedAudioPlayers[urlItem.url],
+                audioPlayer == currentlyPlayingAudioPlayer {
+                // Play static when buffers are empty
+                playStatic()
+            }
+        }
+    }
+
     private func circularSeek(audioPlayer player: AVPlayer, toTimeInterval interval: TimeInterval) {
         if let duration = player.currentItem?.duration {
             let durationInSeconds = cmTimeToSeconds(duration) ?? 0
@@ -176,6 +199,10 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
                                      options: [.old, .new],
                                      context: nil)
 
+        audioPlayerItem.addObserver(self,
+                                    forKeyPath: #keyPath(AVPlayerItem.isPlaybackBufferEmpty),
+                                    options: [.old, .new],
+                                    context: nil)
 
         let audioPlayer = AVPlayer(playerItem: audioPlayerItem)
 
