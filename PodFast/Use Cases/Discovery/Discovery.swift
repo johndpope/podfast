@@ -17,7 +17,6 @@ protocol DiscoveryInteractor {
 }
 
 class Discovery: DiscoveryInteractor {
-
     let podcastCategoryRepository: PodcastCategoryRepository
     let podcastRepository: AnyRepository<Podcast>
     // TODO: The episode repository should be embedded in podcast repository
@@ -75,5 +74,4 @@ class Discovery: DiscoveryInteractor {
             print(error.localizedDescription)
         }
     }
-
 }

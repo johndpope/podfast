@@ -15,7 +15,7 @@ protocol AudioPlayerDelegate {
 class AudioPlayer: NSObject, AudioPlayerInterface  {
 
     var delegate: AudioPlayerDelegate?
-    var audioPlayers = [URL: AVPlayer]()
+    var enqueuedAudioPlayers = [URL: AVPlayer]()
     var currentlyPlayingAudioPlayer: AVPlayer?
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -35,7 +35,7 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
             case .readyToPlay:
                 // find the audio player
                 if let urlItem = item.asset as? AVURLAsset,
-                let audioPlayer = audioPlayers[urlItem.url] {
+                let audioPlayer = enqueuedAudioPlayers[urlItem.url] {
                     if audioPlayer == currentlyPlayingAudioPlayer {
                         audioPlayer.volume = 1.0
                         audioPlayer.play()
@@ -56,11 +56,11 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
     }
 
     func play(fromURL url: URL) {
-        for (_, audioPlayer) in audioPlayers {
+        for (_, audioPlayer) in enqueuedAudioPlayers {
             audioPlayer.volume = 0.0
         }
 
-        if let audioPlayer = audioPlayers[url] {
+        if let audioPlayer = enqueuedAudioPlayers[url] {
             currentlyPlayingAudioPlayer = audioPlayer
             if audioPlayer.status == .readyToPlay {
                 audioPlayer.volume = 1.0
@@ -83,11 +83,11 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
         let audioPlayer = AVPlayer(playerItem: audioPlayerItem)
         audioPlayer.automaticallyWaitsToMinimizeStalling = false
         audioPlayer.volume = 0.0
-        audioPlayers[url] = audioPlayer
+        enqueuedAudioPlayers[url] = audioPlayer
     }
 
     func dequeueItem(url: URL){
-        if let audioPlayer = audioPlayers.removeValue(forKey: url){
+        if let audioPlayer = enqueuedAudioPlayers.removeValue(forKey: url){
             audioPlayer.pause()
             audioPlayer.cancelPendingPrerolls()
         }

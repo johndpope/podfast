@@ -71,6 +71,7 @@
                                                 </label>
                                             </subviews>
                                         </view>
+                                        <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="2Yh-aw-Adh" firstAttribute="centerY" secondItem="Ip6-NT-MmH" secondAttribute="centerY" id="anw-CQ-CLX"/>
                                             <constraint firstItem="2Yh-aw-Adh" firstAttribute="leading" secondItem="Ip6-NT-MmH" secondAttribute="leadingMargin" id="qRp-kW-O7M"/>

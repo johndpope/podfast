@@ -97,6 +97,7 @@ class DiscoveryScreenPresenter {
 extension DiscoveryScreenPresenter: AudioPlayerDelegate {
     func playBackStarted(forURL url: URL) {
         discoveryViewDelegate?.hidePodcastInformation()
+        discoveryViewDelegate?.playBackStarted()
         podcastHasBeenListenedTimer?.invalidate()
         podcastHasBeenListenedTimer = Timer.scheduledTimer(timeInterval: 60.0, target: self, selector: #selector(podcastHasBeenListenedCallback(timer:)), userInfo: ["url": url], repeats: false)
     }
