@@ -18,8 +18,7 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
     var enqueuedAudioPlayers = [URL: AVPlayer]()
     var currentlyPlayingAudioPlayer: AVPlayer?
     lazy var staticPlayer: AVAudioPlayer = {
-        let sampleFileNames = ["static_1", "static_2"]
-        let staticSound = Bundle.main.path(forResource: sampleFileNames.randomElement(), ofType: "wav")
+        let staticSound = Bundle.main.path(forResource: "static_1", ofType: "wav")
         do {
             let audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: staticSound!))
             audioPlayer.numberOfLoops = -1
@@ -97,11 +96,11 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
     func playStatic() {
         staticPlayer.volume = 0.0
         staticPlayer.play()
-        staticPlayer.setVolume(0.5, fadeDuration: 0.1)
+        staticPlayer.setVolume(0.3, fadeDuration: 0.2)
     }
 
     func stopStatic() {
-        staticPlayer.setVolume(0.0, fadeDuration: 0.9)
+        staticPlayer.setVolume(0.0, fadeDuration: 1.0)
     }
 
     func stop() {
