@@ -48,24 +48,29 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
                 if let urlItem = item.asset as? AVURLAsset,
                 let audioPlayer = enqueuedAudioPlayers[urlItem.url] {
                     if audioPlayer == currentlyPlayingAudioPlayer {
-                        stopStatic()
-                        audioPlayer.volume = 1.0
-                        audioPlayer.play()
-                        delegate?.playBackStarted(forURL: urlItem.url)
+                        startPlayback(ofPlayer: audioPlayer)
                     } else {
-                        audioPlayer.preroll(atRate: 1.0) { _ in
-                            print("Preroll completed?")
+                        audioPlayer.preroll(atRate: 0.5) { _ in
+                            audioPlayer.play()
                         }
                     }
                 }
             case .failed:
                 // TODO: signal failed in order to enqueue another episode
-                print("FAILED!")
                 playStatic()
             case .unknown:
                 playStatic()
-                print("unknown :(!")
             }
+        }
+    }
+
+    private func startPlayback(ofPlayer audioPlayer: AVPlayer) {
+        stopStatic()
+        audioPlayer.volume = 1.0
+        audioPlayer.playImmediately(atRate: 1.0)
+
+        if let urlItem = audioPlayer.currentItem?.asset as? AVURLAsset {
+            delegate?.playBackStarted(forURL: urlItem.url)
         }
     }
 
@@ -76,18 +81,11 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
 
         if let audioPlayer = enqueuedAudioPlayers[url] {
             currentlyPlayingAudioPlayer = audioPlayer
+            // if the audio player is immediately ready to play
+            // otherwise it will be called when it's ready to play in the observe value callback
             if audioPlayer.status == .readyToPlay {
-                stopStatic()
-                audioPlayer.volume = 1.0
-                audioPlayer.playImmediately(atRate: 1.0)
-                delegate?.playBackStarted(forURL: url)
-            }
-        }
-
-        if currentlyPlayingAudioPlayer == nil {
-            playStatic()
-        } else if let currentlyPlayingAudioPlayer = self.currentlyPlayingAudioPlayer{
-            if currentlyPlayingAudioPlayer.status != .readyToPlay {
+                startPlayback(ofPlayer: audioPlayer)
+            } else {
                 playStatic()
             }
         }
