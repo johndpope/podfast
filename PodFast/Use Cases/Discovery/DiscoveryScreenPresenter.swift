@@ -27,6 +27,7 @@ class DiscoveryScreenPresenter {
     }
 
     func viewDidLoad() {
+        audioPlayer.playStatic()
         discoveryInteractor.getPodcastCategories().then {categories in
             self.categories = categories
             self.discoveryViewDelegate?.reloadData()

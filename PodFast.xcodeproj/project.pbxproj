@@ -48,6 +48,8 @@
 		91B7F14D22ECCF28004CB98F /* PodcastRealmDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B7F14C22ECCF28004CB98F /* PodcastRealmDataSource.swift */; };
 		91B7F15222ECD0F0004CB98F /* PodcastConfigurationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B7F15122ECD0F0004CB98F /* PodcastConfigurationDataSource.swift */; };
 		91C5504322D5498D008FD9AB /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C5504222D5498D008FD9AB /* DBHelper.swift */; };
+		91F129EE243A32F5007FD80F /* static_2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 91F129EC243A32F4007FD80F /* static_2.wav */; };
+		91F129EF243A32F5007FD80F /* static_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 91F129ED243A32F5007FD80F /* static_1.wav */; };
 		91F9003A22DF91B400FA99D2 /* UIAdjustableScrubSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F9003922DF91B400FA99D2 /* UIAdjustableScrubSlider.swift */; };
 		A403A1FE30AF819DD34ED360 /* Pods_PodFastTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8D86976DFC2BD1224FA60BF /* Pods_PodFastTests.framework */; };
 		AC367F35E679B9E8A74B4BB4 /* Pods_PodFast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36604F8F64348AF8F5B002DE /* Pods_PodFast.framework */; };
@@ -112,6 +114,8 @@
 		91B7F14C22ECCF28004CB98F /* PodcastRealmDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastRealmDataSource.swift; sourceTree = "<group>"; };
 		91B7F15122ECD0F0004CB98F /* PodcastConfigurationDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastConfigurationDataSource.swift; sourceTree = "<group>"; };
 		91C5504222D5498D008FD9AB /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
+		91F129EC243A32F4007FD80F /* static_2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = static_2.wav; sourceTree = "<group>"; };
+		91F129ED243A32F5007FD80F /* static_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = static_1.wav; sourceTree = "<group>"; };
 		91F9003922DF91B400FA99D2 /* UIAdjustableScrubSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAdjustableScrubSlider.swift; sourceTree = "<group>"; };
 		A8D86976DFC2BD1224FA60BF /* Pods_PodFastTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PodFastTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6DA6EC92EFDACC5EFAFB171 /* Pods-PodFast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodFast.release.xcconfig"; path = "Target Support Files/Pods-PodFast/Pods-PodFast.release.xcconfig"; sourceTree = "<group>"; };
@@ -223,6 +227,7 @@
 				9186C75822D53534007307C1 /* Main.storyboard */,
 				910454CC22F0D87C00477E09 /* PodcastCollectionViewCell.swift */,
 				910454C522F0AFAD00477E09 /* Extensions.swift */,
+				91F129F0243A32FB007FD80F /* Audio Samples */,
 				9186C75D22D53536007307C1 /* LaunchScreen.storyboard */,
 				9186C75B22D53536007307C1 /* Assets.xcassets */,
 				9186C76022D53536007307C1 /* Info.plist */,
@@ -296,6 +301,15 @@
 				917C8A1122D53E0C00A26154 /* ResponseObjects.swift */,
 			);
 			path = APIs;
+			sourceTree = "<group>";
+		};
+		91F129F0243A32FB007FD80F /* Audio Samples */ = {
+			isa = PBXGroup;
+			children = (
+				91F129ED243A32F5007FD80F /* static_1.wav */,
+				91F129EC243A32F4007FD80F /* static_2.wav */,
+			);
+			path = "Audio Samples";
 			sourceTree = "<group>";
 		};
 		B9952419773CC133ADE439E3 /* Pods */ = {
@@ -400,7 +414,9 @@
 			files = (
 				918752F122ED10FC000A1B94 /* AppleItunesLookupResponse.json in Resources */,
 				918752F222ED10FC000A1B94 /* AppleTopPodcastsResponse.json in Resources */,
+				91F129EF243A32F5007FD80F /* static_1.wav in Resources */,
 				9186C75F22D53536007307C1 /* LaunchScreen.storyboard in Resources */,
+				91F129EE243A32F5007FD80F /* static_2.wav in Resources */,
 				9186C75C22D53536007307C1 /* Assets.xcassets in Resources */,
 				9186C75A22D53534007307C1 /* Main.storyboard in Resources */,
 				915724B122DA5DF70003C6B7 /* data.json in Resources */,

@@ -11,6 +11,8 @@ import Foundation
 protocol AudioPlayerInterface {
     func play(fromURL url: URL)
     func stop()
+    func playStatic()
+    func stopStatic()
     var  delegate: AudioPlayerDelegate? {get set}
     func enqueueItem(url: URL)
     func dequeueItem(url: URL)
