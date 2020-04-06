@@ -106,4 +106,18 @@ extension DiscoveryScreenPresenter: AudioPlayerDelegate {
     func updateTimeElapsed(_ timeElapsed: String) {
         discoveryViewDelegate?.setTimeElapsed(timeElapsed)
     }
+
+    func playerDidFinishPlaying(_ url: URL) {
+        for (category, episode) in enqueuedEpisodes {
+            if episode.url == url.absoluteString{
+                discoveryInteractor.getEpisodeOfPodcast(inCategory: category).then { episode in
+                    self.enqueuedEpisodes[category] = episode
+                    if let episodeURLString = episode.url,
+                        let episodeURL = URL(string: episodeURLString) {
+                        self.audioPlayer.enqueueItem(url: episodeURL, replacingURL: url)
+                    }
+                }
+            }
+        }
+    }
 }

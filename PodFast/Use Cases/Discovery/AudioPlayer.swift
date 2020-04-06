@@ -11,6 +11,7 @@ import AVFoundation
 protocol AudioPlayerDelegate {
     func playBackStarted(forURL: URL)
     func updateTimeElapsed(_ timeElapsed: String)
+    func playerDidFinishPlaying(_ url: URL)
 }
 
 class AudioPlayer: NSObject, AudioPlayerInterface  {
@@ -70,16 +71,18 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
         }
 
         if keyPath == #keyPath(AVPlayerItem.isPlaybackBufferEmpty),
-            let item = object as? AVPlayerItem {
-
+            let item = object as? AVPlayerItem,
+                currentlyPlayingAudioPlayer != nil {
             if let wasBufferEmpty = change?[.oldKey] as? Bool,
-                wasBufferEmpty == false,
+                wasBufferEmpty == true,
                 let isBufferEmpty = change?[.newKey] as? Bool,
-                isBufferEmpty == true,
+                isBufferEmpty == false,
                 let urlItem = item.asset as? AVURLAsset,
-                let audioPlayer = enqueuedAudioPlayers[urlItem.url] {
+                let audioPlayer = enqueuedAudioPlayers[urlItem.url]{
                 // Resume Playback from stall
-                stopStatic()
+                if audioPlayer == currentlyPlayingAudioPlayer {
+                    stopStatic()
+                }
                 audioPlayer.play()
             } else if let newBool = change?[.newKey] as? Bool,
                 newBool == true,
@@ -97,6 +100,7 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
             let durationInSeconds = cmTimeToSeconds(duration) ?? 0
             let seekTo = interval.truncatingRemainder(dividingBy: durationInSeconds)
 
+            print(durationInSeconds)
             let seekTime = CMTime(seconds: seekTo, preferredTimescale: 1000000)
             player.seek(to: seekTime)
         }
@@ -192,7 +196,15 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
 
     }
 
-    func enqueueItem(url: URL) {
+    @objc func playerDidFinishPlaying(note: NSNotification) {
+        for (url, player) in enqueuedAudioPlayers {
+            if !player.isPlaying {
+                delegate?.playerDidFinishPlaying(url)
+            }
+        }
+    }
+
+    func enqueueItem(url: URL, replacingURL oldURL: URL? = nil) {
         let audioPlayerItem = AVPlayerItem(url: url)
 
         audioPlayerItem.addObserver(self,
@@ -205,10 +217,23 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
                                     options: [.old, .new],
                                     context: nil)
 
+        NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying(note:)),
+        name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: audioPlayerItem)
+
+
         let audioPlayer = AVPlayer(playerItem: audioPlayerItem)
 
         audioPlayer.automaticallyWaitsToMinimizeStalling = false
         audioPlayer.volume = 0.0
+
+        if let oldURL = oldURL {
+            if let oldAudioPlayer = enqueuedAudioPlayers.removeValue(forKey: oldURL),
+                currentlyPlayingAudioPlayer == oldAudioPlayer {
+                playStatic()
+                currentlyPlayingAudioPlayer = audioPlayer
+            }
+        }
+
         enqueuedAudioPlayers[url] = audioPlayer
     }
 
@@ -217,5 +242,11 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
             audioPlayer.pause()
             audioPlayer.cancelPendingPrerolls()
         }
+    }
+}
+
+extension AVPlayer {
+    var isPlaying: Bool {
+        return rate != 0 && error == nil
     }
 }

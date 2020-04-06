@@ -14,6 +14,13 @@ protocol AudioPlayerInterface {
     func playStatic()
     func stopStatic()
     var  delegate: AudioPlayerDelegate? {get set}
-    func enqueueItem(url: URL)
+    func enqueueItem(url: URL, replacingURL oldURL: URL?)
     func dequeueItem(url: URL)
+}
+
+extension AudioPlayerInterface
+{
+    func enqueueItem(url: URL, replacingURL oldURL: URL? = nil) {
+        return enqueueItem(url: url, replacingURL: oldURL)
+    }
 }
