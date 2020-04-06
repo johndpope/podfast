@@ -72,10 +72,10 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
         if keyPath == #keyPath(AVPlayerItem.isPlaybackBufferEmpty),
             let item = object as? AVPlayerItem {
 
-            if let oldBool = change?[.oldKey] as? Bool,
-                oldBool == false,
-                let newBool = change?[.newKey] as? Bool,
-                newBool == true,
+            if let wasBufferEmpty = change?[.oldKey] as? Bool,
+                wasBufferEmpty == false,
+                let isBufferEmpty = change?[.newKey] as? Bool,
+                isBufferEmpty == true,
                 let urlItem = item.asset as? AVURLAsset,
                 let audioPlayer = enqueuedAudioPlayers[urlItem.url] {
                 // Resume Playback from stall
@@ -86,7 +86,7 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
                 let urlItem = item.asset as? AVURLAsset,
                 let audioPlayer = enqueuedAudioPlayers[urlItem.url],
                 audioPlayer == currentlyPlayingAudioPlayer {
-                // Play static when buffers are empty
+                // Play static when currently playing buffers are empty
                 playStatic()
             }
         }
@@ -194,6 +194,7 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
 
     func enqueueItem(url: URL) {
         let audioPlayerItem = AVPlayerItem(url: url)
+
         audioPlayerItem.addObserver(self,
                                      forKeyPath: #keyPath(AVPlayerItem.status),
                                      options: [.old, .new],
