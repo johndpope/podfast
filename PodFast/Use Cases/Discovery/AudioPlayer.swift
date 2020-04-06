@@ -243,6 +243,19 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
             audioPlayer.cancelPendingPrerolls()
         }
     }
+
+    func stopPreroll() {
+        for player in enqueuedAudioPlayers.values where player != currentlyPlayingAudioPlayer {
+            player.cancelPendingPrerolls()
+            player.pause()
+        }
+    }
+
+    func resumePreroll() {
+        for player in enqueuedAudioPlayers.values where player != currentlyPlayingAudioPlayer {
+            player.play()
+        }
+    }
 }
 
 extension AVPlayer {

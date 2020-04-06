@@ -16,6 +16,8 @@ protocol AudioPlayerInterface {
     var  delegate: AudioPlayerDelegate? {get set}
     func enqueueItem(url: URL, replacingURL oldURL: URL?)
     func dequeueItem(url: URL)
+    func stopPreroll()
+    func resumePreroll()
 }
 
 extension AudioPlayerInterface

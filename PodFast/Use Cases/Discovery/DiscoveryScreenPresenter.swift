@@ -24,6 +24,18 @@ class DiscoveryScreenPresenter {
         discoveryInteractor = interactor
         self.audioPlayer = audioPlayer
         self.audioPlayer.delegate = self
+
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveAppWillResignActive), name: .appWillResignActive, object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveAppWillBecomeActive), name: .appDidBecomeActive, object: nil)
+    }
+
+    @objc private func didReceiveAppWillResignActive() {
+        audioPlayer.stopPreroll()
+    }
+
+    @objc private func didReceiveAppWillBecomeActive() {
+        audioPlayer.resumePreroll()
     }
 
     func viewDidLoad() {

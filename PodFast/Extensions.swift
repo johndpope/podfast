@@ -23,3 +23,8 @@ extension UIViewController {
         }
     }
 }
+
+extension Notification.Name {
+    static let appWillResignActive = Notification.Name("appWillResignActive")
+    static let appDidBecomeActive = Notification.Name("completedLengthyDownload")
+}
