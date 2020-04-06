@@ -73,17 +73,17 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
         if keyPath == #keyPath(AVPlayerItem.isPlaybackBufferEmpty),
             let item = object as? AVPlayerItem,
                 currentlyPlayingAudioPlayer != nil {
-            if let wasBufferEmpty = change?[.oldKey] as? Bool,
-                wasBufferEmpty == true,
-                let isBufferEmpty = change?[.newKey] as? Bool,
+            if let isBufferEmpty = change?[.newKey] as? Bool,
                 isBufferEmpty == false,
                 let urlItem = item.asset as? AVURLAsset,
                 let audioPlayer = enqueuedAudioPlayers[urlItem.url]{
                 // Resume Playback from stall
-                if audioPlayer == currentlyPlayingAudioPlayer {
-                    stopStatic()
+                if item.isPlaybackLikelyToKeepUp {
+                    if audioPlayer == currentlyPlayingAudioPlayer {
+                        stopStatic()
+                    }
+                    audioPlayer.play()
                 }
-                audioPlayer.play()
             } else if let newBool = change?[.newKey] as? Bool,
                 newBool == true,
                 let urlItem = item.asset as? AVURLAsset,
