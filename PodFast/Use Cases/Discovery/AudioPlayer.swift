@@ -7,6 +7,7 @@
 //
 
 import AVFoundation
+import MediaPlayer
 
 protocol AudioPlayerDelegate {
     func playBackStarted(forURL: URL)
@@ -34,6 +35,45 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
             return AVAudioPlayer()
         }
     }()
+
+    override init() {
+        super.init()
+        setupRemoteTransportControls()
+    }
+
+    func setupRemoteTransportControls() {
+
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = [MPMediaItemPropertyTitle: "Podfast"]
+
+        // Get the shared MPRemoteCommandCenter
+        let commandCenter = MPRemoteCommandCenter.shared()
+
+        // Add handler for Play Command
+        commandCenter.playCommand.addTarget { [unowned self] event in
+            guard let player = self.currentlyPlayingAudioPlayer else {
+                return .commandFailed
+            }
+
+            if player.rate == 0.0 {
+                player.play()
+                return .success
+            }
+            return .commandFailed
+        }
+
+        // Add handler for Pause Command
+        commandCenter.pauseCommand.addTarget { [unowned self] event in
+            guard let player = self.currentlyPlayingAudioPlayer else {
+                return .commandFailed
+            }
+
+            if player.rate == 1.0 {
+                player.pause()
+                return .success
+            }
+            return .commandFailed
+        }
+    }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == #keyPath(AVPlayerItem.status),
@@ -190,6 +230,16 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
 
     func stopStatic() {
         staticPlayer.setVolume(0.0, fadeDuration: 1.0)
+    }
+
+    func resume() {
+        guard let player = self.currentlyPlayingAudioPlayer else {
+            return
+        }
+
+        if player.rate == 0.0 {
+            player.play()
+        }
     }
 
     func stop() {

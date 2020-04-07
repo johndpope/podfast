@@ -36,6 +36,7 @@ class DiscoveryScreenPresenter {
 
     @objc private func didReceiveAppWillBecomeActive() {
         audioPlayer.resumePreroll()
+        audioPlayer.resume()
     }
 
     func viewDidLoad() {

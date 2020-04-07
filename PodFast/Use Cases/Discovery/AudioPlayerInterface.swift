@@ -18,6 +18,7 @@ protocol AudioPlayerInterface {
     func dequeueItem(url: URL)
     func stopPreroll()
     func resumePreroll()
+    func resume()
 }
 
 extension AudioPlayerInterface
