@@ -36,7 +36,6 @@
 		917C8A1222D53E0C00A26154 /* ResponseObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917C8A1122D53E0C00A26154 /* ResponseObjects.swift */; };
 		917C8A1522D53E1600A26154 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917C8A1422D53E1600A26154 /* Requests.swift */; };
 		9186C75522D53534007307C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9186C75422D53534007307C1 /* AppDelegate.swift */; };
-		9186C75722D53534007307C1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9186C75622D53534007307C1 /* ViewController.swift */; };
 		9186C75A22D53534007307C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9186C75822D53534007307C1 /* Main.storyboard */; };
 		9186C75C22D53536007307C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9186C75B22D53536007307C1 /* Assets.xcassets */; };
 		9186C75F22D53536007307C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9186C75D22D53536007307C1 /* LaunchScreen.storyboard */; };
@@ -44,11 +43,11 @@
 		918752EE22ED02CD000A1B94 /* PodcastCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918752ED22ED02CD000A1B94 /* PodcastCategory.swift */; };
 		918752F122ED10FC000A1B94 /* AppleItunesLookupResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 918752EF22ED10FB000A1B94 /* AppleItunesLookupResponse.json */; };
 		918752F222ED10FC000A1B94 /* AppleTopPodcastsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 918752F022ED10FC000A1B94 /* AppleTopPodcastsResponse.json */; };
+		91AFB4CE243C8FBB000D722A /* gif1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 91AFB4CD243C8FBB000D722A /* gif1.gif */; };
 		91B7F14B22ECCEC2004CB98F /* PodcastRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B7F14A22ECCEC2004CB98F /* PodcastRemoteDataSource.swift */; };
 		91B7F14D22ECCF28004CB98F /* PodcastRealmDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B7F14C22ECCF28004CB98F /* PodcastRealmDataSource.swift */; };
 		91B7F15222ECD0F0004CB98F /* PodcastConfigurationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B7F15122ECD0F0004CB98F /* PodcastConfigurationDataSource.swift */; };
 		91C5504322D5498D008FD9AB /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C5504222D5498D008FD9AB /* DBHelper.swift */; };
-		91F129EE243A32F5007FD80F /* static_2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 91F129EC243A32F4007FD80F /* static_2.wav */; };
 		91F129EF243A32F5007FD80F /* static_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 91F129ED243A32F5007FD80F /* static_1.wav */; };
 		91F9003A22DF91B400FA99D2 /* UIAdjustableScrubSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F9003922DF91B400FA99D2 /* UIAdjustableScrubSlider.swift */; };
 		A403A1FE30AF819DD34ED360 /* Pods_PodFastTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8D86976DFC2BD1224FA60BF /* Pods_PodFastTests.framework */; };
@@ -99,7 +98,6 @@
 		917C8A1422D53E1600A26154 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
 		9186C75122D53534007307C1 /* PodFast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodFast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9186C75422D53534007307C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9186C75622D53534007307C1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9186C75922D53534007307C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9186C75B22D53536007307C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9186C75E22D53536007307C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -110,11 +108,11 @@
 		918752ED22ED02CD000A1B94 /* PodcastCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastCategory.swift; sourceTree = "<group>"; };
 		918752EF22ED10FB000A1B94 /* AppleItunesLookupResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AppleItunesLookupResponse.json; sourceTree = "<group>"; };
 		918752F022ED10FC000A1B94 /* AppleTopPodcastsResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AppleTopPodcastsResponse.json; sourceTree = "<group>"; };
+		91AFB4CD243C8FBB000D722A /* gif1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = gif1.gif; sourceTree = "<group>"; };
 		91B7F14A22ECCEC2004CB98F /* PodcastRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastRemoteDataSource.swift; sourceTree = "<group>"; };
 		91B7F14C22ECCF28004CB98F /* PodcastRealmDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastRealmDataSource.swift; sourceTree = "<group>"; };
 		91B7F15122ECD0F0004CB98F /* PodcastConfigurationDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastConfigurationDataSource.swift; sourceTree = "<group>"; };
 		91C5504222D5498D008FD9AB /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
-		91F129EC243A32F4007FD80F /* static_2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = static_2.wav; sourceTree = "<group>"; };
 		91F129ED243A32F5007FD80F /* static_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = static_1.wav; sourceTree = "<group>"; };
 		91F9003922DF91B400FA99D2 /* UIAdjustableScrubSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAdjustableScrubSlider.swift; sourceTree = "<group>"; };
 		A8D86976DFC2BD1224FA60BF /* Pods_PodFastTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PodFastTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -216,18 +214,18 @@
 			isa = PBXGroup;
 			children = (
 				9186C75422D53534007307C1 /* AppDelegate.swift */,
-				9186C75622D53534007307C1 /* ViewController.swift */,
 				915724B022DA5DF70003C6B7 /* data.json */,
 				91B7F15022ECD024004CB98F /* APIs */,
 				915724AF22DA525D0003C6B7 /* Data Layer */,
 				910454BE22F0A95D00477E09 /* Use Cases */,
+				918752F322ED1100000A1B94 /* Mock Responses */,
+				91F129F0243A32FB007FD80F /* Audio Samples */,
 				91C5504222D5498D008FD9AB /* DBHelper.swift */,
 				91F9003922DF91B400FA99D2 /* UIAdjustableScrubSlider.swift */,
-				918752F322ED1100000A1B94 /* Mock Responses */,
 				9186C75822D53534007307C1 /* Main.storyboard */,
 				910454CC22F0D87C00477E09 /* PodcastCollectionViewCell.swift */,
+				91AFB4CD243C8FBB000D722A /* gif1.gif */,
 				910454C522F0AFAD00477E09 /* Extensions.swift */,
-				91F129F0243A32FB007FD80F /* Audio Samples */,
 				9186C75D22D53536007307C1 /* LaunchScreen.storyboard */,
 				9186C75B22D53536007307C1 /* Assets.xcassets */,
 				9186C76022D53536007307C1 /* Info.plist */,
@@ -307,7 +305,6 @@
 			isa = PBXGroup;
 			children = (
 				91F129ED243A32F5007FD80F /* static_1.wav */,
-				91F129EC243A32F4007FD80F /* static_2.wav */,
 			);
 			path = "Audio Samples";
 			sourceTree = "<group>";
@@ -415,8 +412,8 @@
 				918752F122ED10FC000A1B94 /* AppleItunesLookupResponse.json in Resources */,
 				918752F222ED10FC000A1B94 /* AppleTopPodcastsResponse.json in Resources */,
 				91F129EF243A32F5007FD80F /* static_1.wav in Resources */,
+				91AFB4CE243C8FBB000D722A /* gif1.gif in Resources */,
 				9186C75F22D53536007307C1 /* LaunchScreen.storyboard in Resources */,
-				91F129EE243A32F5007FD80F /* static_2.wav in Resources */,
 				9186C75C22D53536007307C1 /* Assets.xcassets in Resources */,
 				9186C75A22D53534007307C1 /* Main.storyboard in Resources */,
 				915724B122DA5DF70003C6B7 /* data.json in Resources */,
@@ -516,7 +513,6 @@
 				915724AA22DA4D320003C6B7 /* Episode.swift in Sources */,
 				918752EE22ED02CD000A1B94 /* PodcastCategory.swift in Sources */,
 				910454CB22F0C14600477E09 /* DiscoveryScreenViewController.swift in Sources */,
-				9186C75722D53534007307C1 /* ViewController.swift in Sources */,
 				910454CF22F1002700477E09 /* EpisodeRepository.swift in Sources */,
 				91C5504322D5498D008FD9AB /* DBHelper.swift in Sources */,
 				910454C022F0AB1100477E09 /* LaunchScreenViewController.swift in Sources */,
