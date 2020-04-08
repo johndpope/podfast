@@ -47,11 +47,7 @@ class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
     }
 
     override func viewDidLayoutSubviews() {
-        let frame = self.podcastCollection.frame
-        let lineView = UIView(frame: CGRect(x: frame.width/2,
-                                            y: frame.minY, width: 2.0, height: frame.height))
-        lineView.backgroundColor = .red
-        self.view.addSubview(lineView)
+        
     }
 
     override func viewDidAppear(_ animated: Bool) {

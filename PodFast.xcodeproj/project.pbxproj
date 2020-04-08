@@ -50,6 +50,10 @@
 		91F129EF243A32F5007FD80F /* static_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 91F129ED243A32F5007FD80F /* static_1.wav */; };
 		91F9003A22DF91B400FA99D2 /* UIAdjustableScrubSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F9003922DF91B400FA99D2 /* UIAdjustableScrubSlider.swift */; };
 		91FF66B7243E320800BB9881 /* HiddenCategoriesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FF66B6243E320800BB9881 /* HiddenCategoriesDataSource.swift */; };
+		91FF66BC243E584000BB9881 /* TTCommons-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91FF66B8243E583F00BB9881 /* TTCommons-Medium.ttf */; };
+		91FF66BD243E584000BB9881 /* TTCommons-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91FF66B9243E583F00BB9881 /* TTCommons-Thin.ttf */; };
+		91FF66BE243E584000BB9881 /* TTCommons-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 91FF66BA243E584000BB9881 /* TTCommons-Bold.otf */; };
+		91FF66BF243E584000BB9881 /* TTCommons-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91FF66BB243E584000BB9881 /* TTCommons-Regular.ttf */; };
 		A403A1FE30AF819DD34ED360 /* Pods_PodFastTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8D86976DFC2BD1224FA60BF /* Pods_PodFastTests.framework */; };
 		AC367F35E679B9E8A74B4BB4 /* Pods_PodFast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36604F8F64348AF8F5B002DE /* Pods_PodFast.framework */; };
 /* End PBXBuildFile section */
@@ -115,6 +119,10 @@
 		91F129ED243A32F5007FD80F /* static_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = static_1.wav; sourceTree = "<group>"; };
 		91F9003922DF91B400FA99D2 /* UIAdjustableScrubSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAdjustableScrubSlider.swift; sourceTree = "<group>"; };
 		91FF66B6243E320800BB9881 /* HiddenCategoriesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenCategoriesDataSource.swift; sourceTree = "<group>"; };
+		91FF66B8243E583F00BB9881 /* TTCommons-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TTCommons-Medium.ttf"; sourceTree = "<group>"; };
+		91FF66B9243E583F00BB9881 /* TTCommons-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TTCommons-Thin.ttf"; sourceTree = "<group>"; };
+		91FF66BA243E584000BB9881 /* TTCommons-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TTCommons-Bold.otf"; sourceTree = "<group>"; };
+		91FF66BB243E584000BB9881 /* TTCommons-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TTCommons-Regular.ttf"; sourceTree = "<group>"; };
 		A8D86976DFC2BD1224FA60BF /* Pods_PodFastTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PodFastTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6DA6EC92EFDACC5EFAFB171 /* Pods-PodFast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodFast.release.xcconfig"; path = "Target Support Files/Pods-PodFast/Pods-PodFast.release.xcconfig"; sourceTree = "<group>"; };
 		FA760B81FA684F9178BF5BFD /* Pods-PodFastTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodFastTests.debug.xcconfig"; path = "Target Support Files/Pods-PodFastTests/Pods-PodFastTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -224,6 +232,7 @@
 				91F9003922DF91B400FA99D2 /* UIAdjustableScrubSlider.swift */,
 				9186C75822D53534007307C1 /* Main.storyboard */,
 				910454CC22F0D87C00477E09 /* PodcastCollectionViewCell.swift */,
+				91FF66C0243E584500BB9881 /* Fonts */,
 				910454C522F0AFAD00477E09 /* Extensions.swift */,
 				9186C75D22D53536007307C1 /* LaunchScreen.storyboard */,
 				9186C75B22D53536007307C1 /* Assets.xcassets */,
@@ -307,6 +316,17 @@
 				91F129ED243A32F5007FD80F /* static_1.wav */,
 			);
 			path = "Audio Samples";
+			sourceTree = "<group>";
+		};
+		91FF66C0243E584500BB9881 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				91FF66B8243E583F00BB9881 /* TTCommons-Medium.ttf */,
+				91FF66BB243E584000BB9881 /* TTCommons-Regular.ttf */,
+				91FF66B9243E583F00BB9881 /* TTCommons-Thin.ttf */,
+				91FF66BA243E584000BB9881 /* TTCommons-Bold.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		B9952419773CC133ADE439E3 /* Pods */ = {
@@ -410,11 +430,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				918752F122ED10FC000A1B94 /* AppleItunesLookupResponse.json in Resources */,
+				91FF66BE243E584000BB9881 /* TTCommons-Bold.otf in Resources */,
 				918752F222ED10FC000A1B94 /* AppleTopPodcastsResponse.json in Resources */,
+				91FF66BC243E584000BB9881 /* TTCommons-Medium.ttf in Resources */,
 				91F129EF243A32F5007FD80F /* static_1.wav in Resources */,
 				9186C75F22D53536007307C1 /* LaunchScreen.storyboard in Resources */,
 				9186C75C22D53536007307C1 /* Assets.xcassets in Resources */,
+				91FF66BD243E584000BB9881 /* TTCommons-Thin.ttf in Resources */,
 				9186C75A22D53534007307C1 /* Main.storyboard in Resources */,
+				91FF66BF243E584000BB9881 /* TTCommons-Regular.ttf in Resources */,
 				915724B122DA5DF70003C6B7 /* data.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

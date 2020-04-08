@@ -45,6 +45,13 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>TTCommons-Medium</string>
+		<string>TTCommons-Regular</string>
+		<string>TTCommons-Thin</string>
+		<string>TTCommons-Bold</string>
+	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
