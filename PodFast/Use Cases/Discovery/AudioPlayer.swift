@@ -123,6 +123,10 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
                         stopStatic()
                     }
                     audioPlayer.play()
+                } else {
+                    if audioPlayer == currentlyPlayingAudioPlayer {
+                        playStatic()
+                    }
                 }
             } else if let newBool = change?[.newKey] as? Bool,
                 newBool == true,
@@ -131,6 +135,22 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
                 audioPlayer == currentlyPlayingAudioPlayer {
                 // Play static when currently playing buffers are empty
                 playStatic()
+            }
+        }
+
+        if keyPath == #keyPath(AVPlayerItem.isPlaybackLikelyToKeepUp),
+                   let item = object as? AVPlayerItem,
+                       currentlyPlayingAudioPlayer != nil {
+            if let isPlaybackLikelyToKeepUp = change?[.newKey] as? Bool,
+                isPlaybackLikelyToKeepUp == true,
+                let wasPlaybackLikelyToKeepUp = change?[.oldKey] as? Bool,
+                wasPlaybackLikelyToKeepUp == false,
+                let urlItem = item.asset as? AVURLAsset,
+                let audioPlayer = enqueuedAudioPlayers[urlItem.url] {
+                if audioPlayer == currentlyPlayingAudioPlayer {
+                    stopStatic()
+                }
+                audioPlayer.play()
             }
         }
     }
@@ -153,6 +173,7 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
 
         if let urlItem = audioPlayer.currentItem?.asset as? AVURLAsset {
             delegate?.playBackStarted(forURL: urlItem.url)
+            removePeriodicTimeObserver()
             addPeriodicTimeObserver()
         }
     }
@@ -160,9 +181,8 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
     // MARK: Time Observers
     var timeObserverToken: Any?
     private func addPeriodicTimeObserver() {
-        // Notify every half second
         let timeScale = CMTimeScale(NSEC_PER_SEC)
-        let time = CMTime(seconds: 0.5, preferredTimescale: timeScale)
+        let time = CMTime(seconds: 1.0, preferredTimescale: timeScale)
 
         guard let player = currentlyPlayingAudioPlayer else {
             return
@@ -267,6 +287,11 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
                                     options: [.old, .new],
                                     context: nil)
 
+        audioPlayerItem.addObserver(self,
+                                    forKeyPath: #keyPath(AVPlayerItem.isPlaybackLikelyToKeepUp),
+                                    options: [.old, .new],
+                                    context: nil)
+
         NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying(note:)),
         name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: audioPlayerItem)
 
@@ -289,8 +314,15 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
 
     func dequeueItem(url: URL){
         if let audioPlayer = enqueuedAudioPlayers.removeValue(forKey: url){
+            audioPlayer.currentItem?.removeObserver(self,
+                                                    forKeyPath: #keyPath(AVPlayerItem.status))
+            audioPlayer.currentItem?.removeObserver(self,
+                                                    forKeyPath: #keyPath(AVPlayerItem.isPlaybackBufferEmpty))
+            audioPlayer.currentItem?.removeObserver(self,
+                                                    forKeyPath: #keyPath(AVPlayerItem.isPlaybackLikelyToKeepUp))
             audioPlayer.pause()
             audioPlayer.cancelPendingPrerolls()
+
         }
     }
 
