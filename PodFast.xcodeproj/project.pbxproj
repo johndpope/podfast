@@ -43,7 +43,6 @@
 		918752EE22ED02CD000A1B94 /* PodcastCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918752ED22ED02CD000A1B94 /* PodcastCategory.swift */; };
 		918752F122ED10FC000A1B94 /* AppleItunesLookupResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 918752EF22ED10FB000A1B94 /* AppleItunesLookupResponse.json */; };
 		918752F222ED10FC000A1B94 /* AppleTopPodcastsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 918752F022ED10FC000A1B94 /* AppleTopPodcastsResponse.json */; };
-		91AFB4CE243C8FBB000D722A /* gif1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 91AFB4CD243C8FBB000D722A /* gif1.gif */; };
 		91B7F14B22ECCEC2004CB98F /* PodcastRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B7F14A22ECCEC2004CB98F /* PodcastRemoteDataSource.swift */; };
 		91B7F14D22ECCF28004CB98F /* PodcastRealmDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B7F14C22ECCF28004CB98F /* PodcastRealmDataSource.swift */; };
 		91B7F15222ECD0F0004CB98F /* PodcastConfigurationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B7F15122ECD0F0004CB98F /* PodcastConfigurationDataSource.swift */; };
@@ -108,7 +107,6 @@
 		918752ED22ED02CD000A1B94 /* PodcastCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastCategory.swift; sourceTree = "<group>"; };
 		918752EF22ED10FB000A1B94 /* AppleItunesLookupResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AppleItunesLookupResponse.json; sourceTree = "<group>"; };
 		918752F022ED10FC000A1B94 /* AppleTopPodcastsResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AppleTopPodcastsResponse.json; sourceTree = "<group>"; };
-		91AFB4CD243C8FBB000D722A /* gif1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = gif1.gif; sourceTree = "<group>"; };
 		91B7F14A22ECCEC2004CB98F /* PodcastRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastRemoteDataSource.swift; sourceTree = "<group>"; };
 		91B7F14C22ECCF28004CB98F /* PodcastRealmDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastRealmDataSource.swift; sourceTree = "<group>"; };
 		91B7F15122ECD0F0004CB98F /* PodcastConfigurationDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastConfigurationDataSource.swift; sourceTree = "<group>"; };
@@ -224,7 +222,6 @@
 				91F9003922DF91B400FA99D2 /* UIAdjustableScrubSlider.swift */,
 				9186C75822D53534007307C1 /* Main.storyboard */,
 				910454CC22F0D87C00477E09 /* PodcastCollectionViewCell.swift */,
-				91AFB4CD243C8FBB000D722A /* gif1.gif */,
 				910454C522F0AFAD00477E09 /* Extensions.swift */,
 				9186C75D22D53536007307C1 /* LaunchScreen.storyboard */,
 				9186C75B22D53536007307C1 /* Assets.xcassets */,
@@ -412,7 +409,6 @@
 				918752F122ED10FC000A1B94 /* AppleItunesLookupResponse.json in Resources */,
 				918752F222ED10FC000A1B94 /* AppleTopPodcastsResponse.json in Resources */,
 				91F129EF243A32F5007FD80F /* static_1.wav in Resources */,
-				91AFB4CE243C8FBB000D722A /* gif1.gif in Resources */,
 				9186C75F22D53536007307C1 /* LaunchScreen.storyboard in Resources */,
 				9186C75C22D53536007307C1 /* Assets.xcassets in Resources */,
 				9186C75A22D53534007307C1 /* Main.storyboard in Resources */,
