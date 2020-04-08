@@ -79,27 +79,23 @@ class LaunchScreenViewController: UIViewController, LaunchViewDelegate {
 }
 
 extension LaunchScreenViewController: UIViewControllerTransitioningDelegate {
-
-    // B1 - 2
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return FadeAnimator(fadingViews: [self.logoImageView, self.textLabel])
     }
 
-    // B1 - 3
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return nil
     }
 }
 
 final class FadeAnimator: NSObject, UIViewControllerAnimatedTransitioning {
-
-    static let duration: TimeInterval = 1.0
+    static let duration: TimeInterval = 0.8
     let fadingViews: [UIView]
 
     init(fadingViews: [UIView]) {
         self.fadingViews = fadingViews
     }
-    // B2 - 12
+
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return Self.duration
     }
@@ -113,7 +109,6 @@ final class FadeAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         let container = transitionContext.containerView
         container.addSubview(toView!)
 
-        // Replace your animations here
         toView?.frame = transitionContext.finalFrame(for: toViewController)
         toView?.alpha = 0
 
