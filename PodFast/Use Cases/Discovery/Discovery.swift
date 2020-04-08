@@ -14,6 +14,7 @@ protocol DiscoveryInteractor {
     func advancePlayCount(ofCategory category: PodcastCategory)
     func getPodcastCategories() -> Promise<[PodcastCategory]>
     func getEpisodeOfPodcast(inCategory: PodcastCategory) -> Promise<Episode>
+    func markAsPlayed(episode: Episode)
 }
 
 class Discovery: DiscoveryInteractor {
@@ -69,7 +70,17 @@ class Discovery: DiscoveryInteractor {
             realm.beginWrite()
             category.plays = category.plays + 1
             try realm.commitWrite()
-            print("Advanced play count of category: \(category.name)")
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+
+    func markAsPlayed(episode: Episode) {
+        do {
+            let realm = DBHelper.shared.getRealm()
+            realm.beginWrite()
+            episode.hasBeenPlayed = true
+            try realm.commitWrite()
         } catch let error {
             print(error.localizedDescription)
         }

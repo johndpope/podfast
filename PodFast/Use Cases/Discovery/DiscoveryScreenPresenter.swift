@@ -100,8 +100,9 @@ class DiscoveryScreenPresenter {
             for (category, episode) in enqueuedEpisodes {
                 if episode.url == url.absoluteString,
                     let podcast = episode.podcast.first {
-                    self.discoveryViewDelegate?.showPodcastInformation(title: podcast.title, episodeTitle: episode.title, linkToPodcast: podcast.itunesUrl ?? podcast.feedUrl)
+                    self.discoveryViewDelegate?.displayDetails(forPodcast: podcast, episode)
                     self.discoveryInteractor.advancePlayCount(ofCategory: category)
+                    self.discoveryInteractor.markAsPlayed(episode: episode)
                 }
             }
         }
