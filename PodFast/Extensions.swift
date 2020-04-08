@@ -28,3 +28,39 @@ extension Notification.Name {
     static let appWillResignActive = Notification.Name("appWillResignActive")
     static let appDidBecomeActive = Notification.Name("completedLengthyDownload")
 }
+
+extension String {
+    var sentences: [String] {
+        var sentences = [String]()
+        var sentenceNumber = 0
+        var currentSentence: String? = ""
+
+        var period = 0
+
+        for (index, char) in self.enumerated() {
+            currentSentence! += "\(char)"
+            if (char == ".") {
+                period = index
+
+                if (period == self.count-1) {
+                    sentences.append(currentSentence!)
+                }
+            } else if ((char == " " && period == index-1 && index != 1) || period == (self.count-1)) {
+
+                sentences.append(currentSentence!)
+                currentSentence = ""
+                sentenceNumber = sentenceNumber + 1
+            }
+        }
+
+        return sentences
+    }
+
+    func limitTo(numberOfSentences n: Int) -> String {
+        return self.sentences.prefix(n).reduce("", +)
+    }
+
+    func stripHtml() -> String {
+        return self.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
+    }
+}

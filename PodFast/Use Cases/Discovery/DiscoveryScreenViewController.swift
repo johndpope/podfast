@@ -11,7 +11,7 @@ import Foundation
 import TTTAttributedLabel
 
 protocol DiscoveryViewDelegate: NSObjectProtocol {
-    func showPodcastInformation(title: String?, episodeTitle: String?, linkToPodcast: String?)
+    func displayDetails(forPodcast podcast: Podcast, _ episode: Episode)
     func hidePodcastInformation()
     func reloadData()
     func playBackStarted()
@@ -23,6 +23,7 @@ class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
     @IBOutlet weak var podcastCollection: UICollectionView!
     @IBOutlet weak var podcastInformationView: UIStackView!
     @IBOutlet weak var podcastTitleLabel: TTTAttributedLabel!
+    @IBOutlet weak var episodeDescriptionLabel: UILabel!
     @IBOutlet weak var podcastTimeElapsed: UILabel!
 
     @IBOutlet weak var episodeTitleLabel: UILabel!
@@ -71,20 +72,23 @@ class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
         collidedCell?.titleLabel.textColor = .green
     }
 
-    func showPodcastInformation(title: String?, episodeTitle: String?, linkToPodcast: String?) {
-        guard let title = title, let link = linkToPodcast else {
-            return
-        }
+    func displayDetails(forPodcast podcast: Podcast, _ episode: Episode) {
 
         podcastInformationView.isHidden = false
 
-        let linkWithRemovedOrigin = link.replacingOccurrences(of: "?uo=4", with: "")
-        podcastTitleLabel.text = title
-        let nstitle = title as NSString
-        podcastTitleLabel.addLink(to: URL(string: linkWithRemovedOrigin), with: nstitle.range(of: title))
-        podcastTitleLabel.delegate = self
+        podcastTitleLabel.text = podcast.title
+        episodeTitleLabel.text = episode.title
+        episodeDescriptionLabel.text = episode.episodeDescription?.stripHtml().replacingOccurrences(of: "\n", with: "").limitTo(numberOfSentences: 2)
 
-        episodeTitleLabel.text = episodeTitle
+        if let itunesUrl = podcast.itunesUrl {
+            guard let title = podcast.title else {
+                return
+            }
+            let linkWithRemovedOrigin = itunesUrl.replacingOccurrences(of: "?uo=4", with: "")
+            let nstitle = title as NSString
+            podcastTitleLabel.addLink(to: URL(string: linkWithRemovedOrigin), with: nstitle.range(of: title))
+            podcastTitleLabel.delegate = self
+        }
     }
 
     func hidePodcastInformation(){
