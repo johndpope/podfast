@@ -55,6 +55,7 @@ class ApplePodcastLookUpResponse: Mappable {
 class ConfigFileData: Mappable {
     var updated: Date?
     var podcasts: [ConfigPodcast]?
+    var hiddenCategories: [String]?
 
     let stringToConfigDateFormat = TransformOf<Date, String>(fromJSON: { (value: String?) -> Date? in
         guard let updated = value else { return nil }
@@ -76,6 +77,7 @@ class ConfigFileData: Mappable {
     func mapping(map: Map) {
         updated <- (map["updated"], stringToConfigDateFormat)
         podcasts <- map["podcasts"]
+        hiddenCategories <- map["hiddenCategories"]
     }
 }
 
@@ -120,6 +122,7 @@ class ConfigPodcast: BasePodcastResponse {
         description <- map["description"]
         genres <- map["genres"]
         genreIds <- map["genreIds"]
+        itunesUrl <- map["itunesUrl"]
     }
 }
 

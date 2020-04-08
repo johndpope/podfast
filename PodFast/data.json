@@ -10,8 +10,8 @@
             "subscribers": 486,
             "subscribers_last_week": 486,
             "title": "WTF with Marc Maron Podcast",
-            "url": "http://wtfpod.libsyn.com/rss",
-            "website": "http://wtfpod.com",
+            "url": "https://wtfpod.com",
+            "itunesUrl" : "https://podcasts.apple.com/us/podcast/wtf-with-marc-maron-podcast/id329875043",
             "genreIds": ["1303", "26", "1301", "1309", "1405"],
             "genres": ["Comedy", "Podcasts", "Arts", "TV & Film", "Performing Arts"]
         },
@@ -77,5 +77,8 @@
             "genreIds":["1324", "26", "1487"],
             "genres":["Society & Culture", "Podcasts", "History"]
         }
+    ],
+    "hiddenCategories" : [
+        "podcasts"
     ]
 }

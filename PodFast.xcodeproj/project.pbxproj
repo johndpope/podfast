@@ -49,6 +49,7 @@
 		91C5504322D5498D008FD9AB /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C5504222D5498D008FD9AB /* DBHelper.swift */; };
 		91F129EF243A32F5007FD80F /* static_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 91F129ED243A32F5007FD80F /* static_1.wav */; };
 		91F9003A22DF91B400FA99D2 /* UIAdjustableScrubSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F9003922DF91B400FA99D2 /* UIAdjustableScrubSlider.swift */; };
+		91FF66B7243E320800BB9881 /* HiddenCategoriesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FF66B6243E320800BB9881 /* HiddenCategoriesDataSource.swift */; };
 		A403A1FE30AF819DD34ED360 /* Pods_PodFastTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8D86976DFC2BD1224FA60BF /* Pods_PodFastTests.framework */; };
 		AC367F35E679B9E8A74B4BB4 /* Pods_PodFast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36604F8F64348AF8F5B002DE /* Pods_PodFast.framework */; };
 /* End PBXBuildFile section */
@@ -113,6 +114,7 @@
 		91C5504222D5498D008FD9AB /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
 		91F129ED243A32F5007FD80F /* static_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = static_1.wav; sourceTree = "<group>"; };
 		91F9003922DF91B400FA99D2 /* UIAdjustableScrubSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAdjustableScrubSlider.swift; sourceTree = "<group>"; };
+		91FF66B6243E320800BB9881 /* HiddenCategoriesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenCategoriesDataSource.swift; sourceTree = "<group>"; };
 		A8D86976DFC2BD1224FA60BF /* Pods_PodFastTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PodFastTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6DA6EC92EFDACC5EFAFB171 /* Pods-PodFast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodFast.release.xcconfig"; path = "Target Support Files/Pods-PodFast/Pods-PodFast.release.xcconfig"; sourceTree = "<group>"; };
 		FA760B81FA684F9178BF5BFD /* Pods-PodFastTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodFastTests.debug.xcconfig"; path = "Target Support Files/Pods-PodFastTests/Pods-PodFastTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 				91B7F14A22ECCEC2004CB98F /* PodcastRemoteDataSource.swift */,
 				910454D022F102A900477E09 /* EpisodeRealmDataSource.swift */,
 				910454D422F102DE00477E09 /* EpisodeRemoteDatasource.swift */,
+				91FF66B6243E320800BB9881 /* HiddenCategoriesDataSource.swift */,
 			);
 			path = "Data Sources";
 			sourceTree = "<group>";
@@ -511,6 +514,7 @@
 				910454CB22F0C14600477E09 /* DiscoveryScreenViewController.swift in Sources */,
 				910454CF22F1002700477E09 /* EpisodeRepository.swift in Sources */,
 				91C5504322D5498D008FD9AB /* DBHelper.swift in Sources */,
+				91FF66B7243E320800BB9881 /* HiddenCategoriesDataSource.swift in Sources */,
 				910454C022F0AB1100477E09 /* LaunchScreenViewController.swift in Sources */,
 				910454C222F0AB3100477E09 /* Launch.swift in Sources */,
 				9186C75522D53534007307C1 /* AppDelegate.swift in Sources */,

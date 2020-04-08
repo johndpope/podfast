@@ -159,7 +159,6 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
             let durationInSeconds = cmTimeToSeconds(duration) ?? 0
             let seekTo = interval.truncatingRemainder(dividingBy: durationInSeconds)
 
-            print(durationInSeconds)
             let seekTime = CMTime(seconds: seekTo, preferredTimescale: 1000000)
             player.seek(to: seekTime)
         }
