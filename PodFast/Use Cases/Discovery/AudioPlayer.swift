@@ -42,7 +42,6 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
     }
 
     func setupRemoteTransportControls() {
-
         MPNowPlayingInfoCenter.default().nowPlayingInfo = [MPMediaItemPropertyTitle: "Podfast"]
 
         // Get the shared MPRemoteCommandCenter
@@ -171,9 +170,9 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
         audioPlayer.volume = 1.0
         audioPlayer.playImmediately(atRate: 1.0)
 
-        if let urlItem = audioPlayer.currentItem?.asset as? AVURLAsset {
+        if let urlItem = audioPlayer.currentItem?.asset as? AVURLAsset,
+            audioPlayer.isPlaying {
             delegate?.playBackStarted(forURL: urlItem.url)
-            removePeriodicTimeObserver()
             addPeriodicTimeObserver()
         }
     }
@@ -234,7 +233,7 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
             currentlyPlayingAudioPlayer = audioPlayer
             // if the audio player is immediately ready to play
             // otherwise it will be called when it's ready to play in the observe value callback
-            if audioPlayer.status == .readyToPlay {
+            if audioPlayer.status == .readyToPlay, let item = audioPlayer.currentItem, item.status == .readyToPlay {
                 startPlayback(ofPlayer: audioPlayer)
             } else {
                 playStatic()
@@ -322,7 +321,6 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
                                                     forKeyPath: #keyPath(AVPlayerItem.isPlaybackLikelyToKeepUp))
             audioPlayer.pause()
             audioPlayer.cancelPendingPrerolls()
-
         }
     }
 
