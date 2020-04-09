@@ -92,18 +92,22 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
                 // find the audio player
                 if let urlItem = item.asset as? AVURLAsset,
                 let audioPlayer = enqueuedAudioPlayers[urlItem.url] {
-                    circularSeek(audioPlayer: audioPlayer, toTimeInterval: Date().timeIntervalSince(appLaunchTime!))
-                    if audioPlayer == currentlyPlayingAudioPlayer {
-                        startPlayback(ofPlayer: audioPlayer)
-                    } else {
-                        audioPlayer.preroll(atRate: 0.5) { _ in
-                            audioPlayer.play()
+                    circularSeek(audioPlayer: audioPlayer, toTimeInterval: Date().timeIntervalSince(appLaunchTime!), then: { _ in
+                        if audioPlayer == self.currentlyPlayingAudioPlayer {
+                            self.startPlayback(ofPlayer: audioPlayer)
+                        } else {
+                            audioPlayer.preroll(atRate: 0.5) { _ in
+                                audioPlayer.play()
+                            }
                         }
-                    }
+                    })
                 }
             case .failed:
                 // TODO: signal failed in order to enqueue another episode
-                playStatic()
+                // find the audio player
+                if let urlItem = item.asset as? AVURLAsset {
+                    delegate?.playerDidFinishPlaying(urlItem.url)
+                }
             case .unknown:
                 playStatic()
             }
@@ -111,66 +115,97 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
 
         if keyPath == #keyPath(AVPlayerItem.isPlaybackBufferEmpty),
             let item = object as? AVPlayerItem,
-                currentlyPlayingAudioPlayer != nil {
-            if let isBufferEmpty = change?[.newKey] as? Bool,
-                isBufferEmpty == false,
-                let urlItem = item.asset as? AVURLAsset,
-                let audioPlayer = enqueuedAudioPlayers[urlItem.url]{
-                // Resume Playback from stall
-                if item.isPlaybackLikelyToKeepUp {
-                    if audioPlayer == currentlyPlayingAudioPlayer {
-                        stopStatic()
-                    }
-                    audioPlayer.play()
-                } else {
-                    if audioPlayer == currentlyPlayingAudioPlayer {
-                        playStatic()
-                    }
-                }
-            } else if let newBool = change?[.newKey] as? Bool,
-                newBool == true,
-                let urlItem = item.asset as? AVURLAsset,
-                let audioPlayer = enqueuedAudioPlayers[urlItem.url],
-                audioPlayer == currentlyPlayingAudioPlayer {
-                // Play static when currently playing buffers are empty
-                playStatic()
-            }
+            currentlyPlayingAudioPlayer != nil,
+            let isBufferEmpty = change?[.newKey] as? Bool,
+            let wasBufferEmpty = change?[.oldKey] as? Bool,
+            isBufferEmpty != wasBufferEmpty,
+            let urlItem = item.asset as? AVURLAsset,
+            let audioPlayer = enqueuedAudioPlayers[urlItem.url] {
+            isBufferEmptyDidChange(forAudioPlayer: audioPlayer)
+        }
+
+        if keyPath == #keyPath(AVPlayerItem.isPlaybackBufferFull),
+            let item = object as? AVPlayerItem,
+            currentlyPlayingAudioPlayer != nil,
+            let isPlaybackBufferFull = change?[.newKey] as? Bool,
+            let wasPlaybackBufferFull = change?[.oldKey] as? Bool,
+            isPlaybackBufferFull != wasPlaybackBufferFull,
+            let urlItem = item.asset as? AVURLAsset,
+            let audioPlayer = enqueuedAudioPlayers[urlItem.url] {
+            isBufferFullDidChange(forAudioPlayer: audioPlayer)
         }
 
         if keyPath == #keyPath(AVPlayerItem.isPlaybackLikelyToKeepUp),
-                   let item = object as? AVPlayerItem,
-                       currentlyPlayingAudioPlayer != nil {
-            if let isPlaybackLikelyToKeepUp = change?[.newKey] as? Bool,
-                isPlaybackLikelyToKeepUp == true,
-                let wasPlaybackLikelyToKeepUp = change?[.oldKey] as? Bool,
-                wasPlaybackLikelyToKeepUp == false,
-                let urlItem = item.asset as? AVURLAsset,
-                let audioPlayer = enqueuedAudioPlayers[urlItem.url] {
-                if audioPlayer == currentlyPlayingAudioPlayer {
-                    stopStatic()
+            let item = object as? AVPlayerItem,
+            currentlyPlayingAudioPlayer != nil,
+            let isPlaybackLikelyToKeepUp = change?[.newKey] as? Bool,
+            let wasPlaybackLikelyToKeepUp = change?[.oldKey] as? Bool,
+            isPlaybackLikelyToKeepUp != wasPlaybackLikelyToKeepUp,
+            let urlItem = item.asset as? AVURLAsset,
+            let audioPlayer = enqueuedAudioPlayers[urlItem.url] {
+            isPlaybackLikelyToKeepUpDidChange(forAudioPlayer: audioPlayer)
+        }
+    }
+
+    private func isBufferEmptyDidChange(forAudioPlayer player: AVPlayer) {
+        if let item = player.currentItem,
+            isCurrentlyPlayingAudioPlayer(player: player) {
+            if item.isPlaybackBufferEmpty {
+                
+                print("PlaybackBuffer is Empty for currentlyPlayingAudioPlayer/Will Pause Background Players")
+                playStatic()
+
+                let enqueuedBackgroundPlayers = enqueuedAudioPlayers.filter{ !isCurrentlyPlayingAudioPlayer(player: $0.value) }
+                enqueuedBackgroundPlayers.forEach {
+                    $0.value.pause()
                 }
-                audioPlayer.play()
             }
         }
     }
 
-    private func circularSeek(audioPlayer player: AVPlayer, toTimeInterval interval: TimeInterval) {
+    private func isBufferFullDidChange(forAudioPlayer player: AVPlayer) {
+        if let item = player.currentItem,
+            isCurrentlyPlayingAudioPlayer(player: player),
+            item.isPlaybackBufferFull {
+                print("Playback is LikelyToKeepUp for currentlyPlayingAudioPlayer/Will Resume All Players")
+                stopStatic()
+                enqueuedAudioPlayers.forEach {
+                    $0.value.play()
+                }
+        }
+    }
+
+    private func isPlaybackLikelyToKeepUpDidChange(forAudioPlayer player: AVPlayer) {
+        if let item = player.currentItem,
+            isCurrentlyPlayingAudioPlayer(player: player),
+            item.isPlaybackLikelyToKeepUp {
+                print("Playback is LikelyToKeepUp for currentlyPlayingAudioPlayer/Will Resume All Players")
+                stopStatic()
+                enqueuedAudioPlayers.forEach {
+                    $0.value.play()
+                }
+        }
+    }
+
+    private func circularSeek(audioPlayer player: AVPlayer, toTimeInterval interval: TimeInterval, then: @escaping (Bool) -> Void) {
         if let duration = player.currentItem?.duration {
             let durationInSeconds = cmTimeToSeconds(duration) ?? 0
             let seekTo = interval.truncatingRemainder(dividingBy: durationInSeconds)
 
             let seekTime = CMTime(seconds: seekTo, preferredTimescale: 1000000)
-            player.seek(to: seekTime)
+            player.seek(to: seekTime) { succeeded in
+                then(succeeded)
+            }
         }
     }
 
     private func startPlayback(ofPlayer audioPlayer: AVPlayer) {
-        stopStatic()
         audioPlayer.volume = 1.0
         audioPlayer.playImmediately(atRate: 1.0)
 
         if let urlItem = audioPlayer.currentItem?.asset as? AVURLAsset,
             audioPlayer.isPlaying {
+            stopStatic()
             delegate?.playBackStarted(forURL: urlItem.url)
             addPeriodicTimeObserver()
         }
@@ -286,6 +321,11 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
                                     context: nil)
 
         audioPlayerItem.addObserver(self,
+        forKeyPath: #keyPath(AVPlayerItem.isPlaybackBufferFull),
+        options: [.old, .new],
+        context: nil)
+
+        audioPlayerItem.addObserver(self,
                                     forKeyPath: #keyPath(AVPlayerItem.isPlaybackLikelyToKeepUp),
                                     options: [.old, .new],
                                     context: nil)
@@ -318,6 +358,8 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
                                                     forKeyPath: #keyPath(AVPlayerItem.isPlaybackBufferEmpty))
             audioPlayer.currentItem?.removeObserver(self,
                                                     forKeyPath: #keyPath(AVPlayerItem.isPlaybackLikelyToKeepUp))
+            audioPlayer.currentItem?.removeObserver(self,
+                                                    forKeyPath: #keyPath(AVPlayerItem.isPlaybackBufferFull))
             audioPlayer.pause()
             audioPlayer.cancelPendingPrerolls()
         }
@@ -335,9 +377,20 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
             player.play()
         }
     }
+
+    func isCurrentlyPlayingAudioPlayer(player: AVPlayer) -> Bool {
+        guard let currentItem = currentlyPlayingAudioPlayer?.currentItem,
+            let currentAsset = currentItem.asset as? AVURLAsset,
+            let playerItem = player.currentItem,
+            let playerAsset = playerItem.asset as? AVURLAsset else {
+            return false
+        }
+
+        return player.volume > 0.0 && currentAsset.url.absoluteString == playerAsset.url.absoluteString
+    }
 }
 
-extension AVPlayer {
+fileprivate extension AVPlayer {
     var isPlaying: Bool {
         return rate != 0 && error == nil
     }
