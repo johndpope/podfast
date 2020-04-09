@@ -54,6 +54,7 @@
 		91FF66BD243E584000BB9881 /* TTCommons-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91FF66B9243E583F00BB9881 /* TTCommons-Thin.ttf */; };
 		91FF66BE243E584000BB9881 /* TTCommons-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 91FF66BA243E584000BB9881 /* TTCommons-Bold.otf */; };
 		91FF66BF243E584000BB9881 /* TTCommons-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91FF66BB243E584000BB9881 /* TTCommons-Regular.ttf */; };
+		91FF66C2243E8D5E00BB9881 /* Stylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FF66C1243E8D5E00BB9881 /* Stylist.swift */; };
 		A403A1FE30AF819DD34ED360 /* Pods_PodFastTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8D86976DFC2BD1224FA60BF /* Pods_PodFastTests.framework */; };
 		AC367F35E679B9E8A74B4BB4 /* Pods_PodFast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36604F8F64348AF8F5B002DE /* Pods_PodFast.framework */; };
 /* End PBXBuildFile section */
@@ -123,6 +124,7 @@
 		91FF66B9243E583F00BB9881 /* TTCommons-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TTCommons-Thin.ttf"; sourceTree = "<group>"; };
 		91FF66BA243E584000BB9881 /* TTCommons-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TTCommons-Bold.otf"; sourceTree = "<group>"; };
 		91FF66BB243E584000BB9881 /* TTCommons-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TTCommons-Regular.ttf"; sourceTree = "<group>"; };
+		91FF66C1243E8D5E00BB9881 /* Stylist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stylist.swift; sourceTree = "<group>"; };
 		A8D86976DFC2BD1224FA60BF /* Pods_PodFastTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PodFastTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6DA6EC92EFDACC5EFAFB171 /* Pods-PodFast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodFast.release.xcconfig"; path = "Target Support Files/Pods-PodFast/Pods-PodFast.release.xcconfig"; sourceTree = "<group>"; };
 		FA760B81FA684F9178BF5BFD /* Pods-PodFastTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodFastTests.debug.xcconfig"; path = "Target Support Files/Pods-PodFastTests/Pods-PodFastTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 				910454CC22F0D87C00477E09 /* PodcastCollectionViewCell.swift */,
 				91FF66C0243E584500BB9881 /* Fonts */,
 				910454C522F0AFAD00477E09 /* Extensions.swift */,
+				91FF66C1243E8D5E00BB9881 /* Stylist.swift */,
 				9186C75D22D53536007307C1 /* LaunchScreen.storyboard */,
 				9186C75B22D53536007307C1 /* Assets.xcassets */,
 				9186C76022D53536007307C1 /* Info.plist */,
@@ -525,6 +528,7 @@
 				917C8A1222D53E0C00A26154 /* ResponseObjects.swift in Sources */,
 				915724AC22DA4D3A0003C6B7 /* Podcast.swift in Sources */,
 				910454C422F0AB7E00477E09 /* LaunchScreenPresenter.swift in Sources */,
+				91FF66C2243E8D5E00BB9881 /* Stylist.swift in Sources */,
 				91B7F14B22ECCEC2004CB98F /* PodcastRemoteDataSource.swift in Sources */,
 				91F9003A22DF91B400FA99D2 /* UIAdjustableScrubSlider.swift in Sources */,
 				916DD7E422EA0FC100AE9E25 /* Repository.swift in Sources */,

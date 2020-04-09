@@ -44,10 +44,19 @@ class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
 
         presenter.setViewDelegate(discoveryViewDelegate: self)
         presenter.viewDidLoad()
+
+        setupView()
     }
 
+    fileprivate var viewHadLayedoutSubviews = false
+
     override func viewDidLayoutSubviews() {
-        
+        if !viewHadLayedoutSubviews {
+            let width = self.view.bounds.width
+            podcastCollection.contentInset = UIEdgeInsets(top: 0, left: width/2, bottom: 0, right: width/2)
+            podcastCollection.setContentOffset(CGPoint(x: -(width/2), y: 0), animated: false)
+        }
+        viewHadLayedoutSubviews = true
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -58,8 +67,23 @@ class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
         visibleCells = visibleCellRows
     }
 
+    private func setupView() {
+        podcastTitleLabel.linkAttributes = [
+            NSAttributedString.Key.font.rawValue: Stylist.font(weight: .bold, size: 20) ?? UIFont.systemFont(ofSize: 20),
+            NSAttributedString.Key.foregroundColor.rawValue: Colors.orange.cgColor,
+            NSAttributedString.Key.underlineStyle.rawValue: true,
+        ]
+
+        podcastTitleLabel.activeLinkAttributes = [
+            NSAttributedString.Key.font.rawValue: Stylist.font(weight: .bold, size: 20) ?? UIFont.systemFont(ofSize: 20),
+            NSAttributedString.Key.foregroundColor.rawValue: Colors.orange.cgColor,
+            NSAttributedString.Key.underlineStyle.rawValue: true,
+        ]
+    }
+
     func reloadData() {
         podcastCollection.reloadData()
+        viewHadLayedoutSubviews = false
     }
 
     // TODO Not working at the moment
@@ -69,8 +93,8 @@ class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
     }
 
     func displayDetails(forPodcast podcast: Podcast, _ episode: Episode) {
-
         podcastInformationView.isHidden = false
+        podcastInformationView.alpha = 0
 
         podcastTitleLabel.text = podcast.title
         episodeTitleLabel.text = episode.title
@@ -85,10 +109,18 @@ class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
             podcastTitleLabel.addLink(to: URL(string: linkWithRemovedOrigin), with: nstitle.range(of: title))
             podcastTitleLabel.delegate = self
         }
+
+        UIView.animate(withDuration: 0.3, animations: {
+            self.podcastInformationView.alpha = 1
+        })
     }
 
     func hidePodcastInformation(){
-        podcastInformationView.isHidden = true
+        UIView.animate(withDuration: 0.3, animations: {
+            self.podcastInformationView.alpha = 0
+        }, completion: { _ in
+            self.podcastInformationView.isHidden = true
+        })
     }
 
     func setTimeElapsed(_ timeElapsed: String) {
@@ -115,6 +147,13 @@ extension DiscoveryScreenViewController: UICollectionViewDataSource, UICollectio
             for: indexPath
         ) as! PodcastCollectionViewCell
 
+        cell.layer.cornerRadius = 5.0
+        cell.addBottomBorderWithColor(color: .white, width: 2.0)
+        cell.addRightBorderWithColor(color: .white, width: 2.0)
+        cell.addTopBorderWithColor(color: .white, width: 6.0)
+        cell.addLeftBorderWithColor(color: .white, width: 6.0)
+
+
         cell.titleLabel.text = presenter.getCategoryName(forRow: indexPath.row) ?? " "
         return cell
     }
@@ -138,7 +177,7 @@ extension DiscoveryScreenViewController: UICollectionViewDataSource, UICollectio
         for cell in cellsInView {
             // detect collision
             let cellFrame = podcastCollection.convert(cell.frame, to: self.view)
-            cell.titleLabel.textColor = .black
+            cell.titleLabel.textColor = .white
             if cellFrame.contains(center) {
                 cell.titleLabel.isHighlighted = true
                 if(collidedCell != cell){

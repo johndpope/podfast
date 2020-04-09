@@ -70,40 +70,42 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hRZ-Dh-SSk">
-                                <rect key="frame" x="8" y="269.5" width="359" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="0.0" y="298.5" width="375" height="70"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="adw-Ad-exN"/>
+                                    <constraint firstAttribute="height" constant="70" id="adw-Ad-exN"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="NTS-b2-sYU">
-                                    <size key="itemSize" width="177" height="96"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="12" minimumInteritemSpacing="0.0" id="NTS-b2-sYU">
+                                    <size key="itemSize" width="150" height="70"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="center" reuseIdentifier="podcast" id="Ip6-NT-MmH" customClass="PodcastCollectionViewCell" customModule="PodFast" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="174" height="128"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="150" height="70"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="174" height="128"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="2Yh-aw-Adh">
-                                                    <rect key="frame" x="8" y="45" width="158" height="38.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                                    <nil key="textColor"/>
-                                                    <color key="highlightedColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label Two Lines" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="2Yh-aw-Adh">
+                                                    <rect key="frame" x="14" y="14" width="126" height="46"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" name="TTCommons-Bold" family="TT Commons" pointSize="24"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="highlightedColor" red="0.8395072818" green="0.67828553920000001" blue="0.28890019659999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </label>
                                             </subviews>
                                         </view>
-                                        <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.14028018710000001" green="0.51468932629999997" blue="0.1093888953" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="2Yh-aw-Adh" firstAttribute="centerY" secondItem="Ip6-NT-MmH" secondAttribute="centerY" id="anw-CQ-CLX"/>
-                                            <constraint firstItem="2Yh-aw-Adh" firstAttribute="leading" secondItem="Ip6-NT-MmH" secondAttribute="leadingMargin" id="qRp-kW-O7M"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="2Yh-aw-Adh" secondAttribute="trailing" id="xDa-te-tcW"/>
+                                            <constraint firstAttribute="bottom" secondItem="2Yh-aw-Adh" secondAttribute="bottom" constant="10" id="2mZ-Xu-01b"/>
+                                            <constraint firstAttribute="trailing" secondItem="2Yh-aw-Adh" secondAttribute="trailing" constant="10" id="ZlL-BJ-Hzv"/>
+                                            <constraint firstItem="2Yh-aw-Adh" firstAttribute="top" secondItem="Ip6-NT-MmH" secondAttribute="top" constant="14" id="d5D-n2-Mdo"/>
+                                            <constraint firstItem="2Yh-aw-Adh" firstAttribute="leading" secondItem="Ip6-NT-MmH" secondAttribute="leading" constant="14" id="svZ-Zd-Phu"/>
                                         </constraints>
-                                        <size key="customSize" width="174" height="128"/>
+                                        <size key="customSize" width="150" height="70"/>
                                         <connections>
                                             <outlet property="titleLabel" destination="2Yh-aw-Adh" id="QbK-nU-2wg"/>
                                         </connections>
@@ -111,7 +113,7 @@
                                 </cells>
                             </collectionView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wwA-eD-oFH">
-                                <rect key="frame" x="8" y="421.5" width="359" height="188"/>
+                                <rect key="frame" x="8" y="474" width="359" height="158.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Marc Maron WTF" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cqn-5G-GU7" customClass="TTTAttributedLabel">
                                         <rect key="frame" x="227" y="0.0" width="132" height="21"/>
@@ -126,22 +128,22 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="450 good stuff This text can take up to two lines but what if it takes more what happens?" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fh0-J9-x0h">
-                                        <rect key="frame" x="10.5" y="29" width="348.5" height="41"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="8.5" y="29" width="350.5" height="41"/>
+                                        <fontDescription key="fontDescription" name="TTCommons-Bold" family="TT Commons" pointSize="17"/>
+                                        <color key="textColor" red="0.84313725490196079" green="0.67843137254901964" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R2Z-23-Vmk">
-                                        <rect key="frame" x="2" y="78" width="357" height="81.5"/>
+                                        <rect key="frame" x="0.0" y="78" width="359" height="50.5"/>
                                         <string key="text">This is the description of this episode and it can take up to 4 lines believe it or not ok so let's try to do a 4th line and see how that goes in that device</string>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="TTCommons-Bold" family="TT Commons" pointSize="14"/>
+                                        <color key="textColor" red="0.8395072818" green="0.67828553920000001" blue="0.28890019659999999" alpha="0.89190960570469802" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lPo-ni-joR">
-                                        <rect key="frame" x="287.5" y="167.5" width="71.5" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="285.5" y="136.5" width="73.5" height="22"/>
+                                        <fontDescription key="fontDescription" name="TTCommons-Bold" family="TT Commons" pointSize="18"/>
+                                        <color key="textColor" red="0.8395072818" green="0.67828553920000001" blue="0.28890019659999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -158,12 +160,12 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Lyw-8I-qcy" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="wwA-eD-oFH" secondAttribute="bottom" constant="8" id="Gq5-fp-2p6"/>
-                            <constraint firstItem="wwA-eD-oFH" firstAttribute="top" secondItem="hRZ-Dh-SSk" secondAttribute="bottom" constant="24" id="JTf-Ux-QkP"/>
-                            <constraint firstItem="Lyw-8I-qcy" firstAttribute="trailing" secondItem="hRZ-Dh-SSk" secondAttribute="trailing" constant="8" id="Nt5-qw-NVx"/>
-                            <constraint firstItem="hRZ-Dh-SSk" firstAttribute="leading" secondItem="Lyw-8I-qcy" secondAttribute="leading" constant="8" id="OWm-W2-7C1"/>
+                            <constraint firstItem="Lyw-8I-qcy" firstAttribute="trailing" secondItem="hRZ-Dh-SSk" secondAttribute="trailing" id="Nt5-qw-NVx"/>
+                            <constraint firstItem="hRZ-Dh-SSk" firstAttribute="leading" secondItem="Lyw-8I-qcy" secondAttribute="leading" id="OWm-W2-7C1"/>
                             <constraint firstItem="hRZ-Dh-SSk" firstAttribute="centerY" secondItem="KEt-VD-v15" secondAttribute="centerY" id="P1x-7W-nLz"/>
                             <constraint firstItem="Vw0-lO-aqQ" firstAttribute="centerY" secondItem="KEt-VD-v15" secondAttribute="centerY" id="S3n-bv-QtT"/>
                             <constraint firstItem="Vw0-lO-aqQ" firstAttribute="centerX" secondItem="KEt-VD-v15" secondAttribute="centerX" id="ZuP-Vo-qv4"/>
+                            <constraint firstItem="wwA-eD-oFH" firstAttribute="top" secondItem="Vw0-lO-aqQ" secondAttribute="bottom" constant="8" id="dLD-LV-m6O"/>
                             <constraint firstItem="wwA-eD-oFH" firstAttribute="leading" secondItem="KEt-VD-v15" secondAttribute="leading" constant="8" id="fk4-Hc-fYJ"/>
                             <constraint firstItem="wwA-eD-oFH" firstAttribute="trailing" secondItem="Lyw-8I-qcy" secondAttribute="trailing" constant="-8" id="g0r-Z4-e3E"/>
                         </constraints>
