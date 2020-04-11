@@ -10,6 +10,7 @@ import UIKit
 import RealmSwift
 import AVFoundation
 import Promises
+import Firebase
 
 var appLaunchTime: Date?
 
@@ -30,6 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch {
             print("Setting category to AVAudioSessionCategoryPlayback failed.")
         }
+
+        FirebaseApp.configure()
 
         return true
     }
