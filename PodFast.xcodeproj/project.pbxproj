@@ -29,7 +29,6 @@
 		915724AA22DA4D320003C6B7 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915724A922DA4D320003C6B7 /* Episode.swift */; };
 		915724AC22DA4D3A0003C6B7 /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915724AB22DA4D3A0003C6B7 /* Podcast.swift */; };
 		915724AE22DA4D4D0003C6B7 /* Discovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915724AD22DA4D4D0003C6B7 /* Discovery.swift */; };
-		915724B122DA5DF70003C6B7 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 915724B022DA5DF70003C6B7 /* data.json */; };
 		916DD7E222E8EA5400AE9E25 /* DataSetUpdated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916DD7E122E8EA5400AE9E25 /* DataSetUpdated.swift */; };
 		916DD7E422EA0FC100AE9E25 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916DD7E322EA0FC100AE9E25 /* Repository.swift */; };
 		916DD7E622EA10B400AE9E25 /* PodcastRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916DD7E522EA10B400AE9E25 /* PodcastRepository.swift */; };
@@ -55,6 +54,9 @@
 		91FF66BE243E584000BB9881 /* TTCommons-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 91FF66BA243E584000BB9881 /* TTCommons-Bold.otf */; };
 		91FF66BF243E584000BB9881 /* TTCommons-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91FF66BB243E584000BB9881 /* TTCommons-Regular.ttf */; };
 		91FF66C2243E8D5E00BB9881 /* Stylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FF66C1243E8D5E00BB9881 /* Stylist.swift */; };
+		91FF66C724422AAF00BB9881 /* RemoteConfigSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FF66C624422AAF00BB9881 /* RemoteConfigSetup.swift */; };
+		91FF66CA2442428600BB9881 /* podcasts.json in Resources */ = {isa = PBXBuildFile; fileRef = 91FF66C92442428600BB9881 /* podcasts.json */; };
+		91FF66CC24424AE700BB9881 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 91FF66CB24424AE700BB9881 /* GoogleService-Info.plist */; };
 		A403A1FE30AF819DD34ED360 /* Pods_PodFastTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8D86976DFC2BD1224FA60BF /* Pods_PodFastTests.framework */; };
 		AC367F35E679B9E8A74B4BB4 /* Pods_PodFast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36604F8F64348AF8F5B002DE /* Pods_PodFast.framework */; };
 /* End PBXBuildFile section */
@@ -95,7 +97,6 @@
 		915724A922DA4D320003C6B7 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 		915724AB22DA4D3A0003C6B7 /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
 		915724AD22DA4D4D0003C6B7 /* Discovery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discovery.swift; sourceTree = "<group>"; };
-		915724B022DA5DF70003C6B7 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
 		916DD7E122E8EA5400AE9E25 /* DataSetUpdated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSetUpdated.swift; sourceTree = "<group>"; };
 		916DD7E322EA0FC100AE9E25 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		916DD7E522EA10B400AE9E25 /* PodcastRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastRepository.swift; sourceTree = "<group>"; };
@@ -125,6 +126,9 @@
 		91FF66BA243E584000BB9881 /* TTCommons-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TTCommons-Bold.otf"; sourceTree = "<group>"; };
 		91FF66BB243E584000BB9881 /* TTCommons-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TTCommons-Regular.ttf"; sourceTree = "<group>"; };
 		91FF66C1243E8D5E00BB9881 /* Stylist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stylist.swift; sourceTree = "<group>"; };
+		91FF66C624422AAF00BB9881 /* RemoteConfigSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigSetup.swift; sourceTree = "<group>"; };
+		91FF66C92442428600BB9881 /* podcasts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = podcasts.json; sourceTree = "<group>"; };
+		91FF66CB24424AE700BB9881 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A8D86976DFC2BD1224FA60BF /* Pods_PodFastTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PodFastTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6DA6EC92EFDACC5EFAFB171 /* Pods-PodFast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodFast.release.xcconfig"; path = "Target Support Files/Pods-PodFast/Pods-PodFast.release.xcconfig"; sourceTree = "<group>"; };
 		FA760B81FA684F9178BF5BFD /* Pods-PodFastTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodFastTests.debug.xcconfig"; path = "Target Support Files/Pods-PodFastTests/Pods-PodFastTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -224,13 +228,13 @@
 			isa = PBXGroup;
 			children = (
 				9186C75422D53534007307C1 /* AppDelegate.swift */,
-				915724B022DA5DF70003C6B7 /* data.json */,
+				91FF66C92442428600BB9881 /* podcasts.json */,
 				91B7F15022ECD024004CB98F /* APIs */,
 				915724AF22DA525D0003C6B7 /* Data Layer */,
 				910454BE22F0A95D00477E09 /* Use Cases */,
 				918752F322ED1100000A1B94 /* Mock Responses */,
 				91F129F0243A32FB007FD80F /* Audio Samples */,
-				91C5504222D5498D008FD9AB /* DBHelper.swift */,
+				91FF66C824422AB500BB9881 /* RemoteConfigSetup */,
 				91F9003922DF91B400FA99D2 /* UIAdjustableScrubSlider.swift */,
 				9186C75822D53534007307C1 /* Main.storyboard */,
 				910454CC22F0D87C00477E09 /* PodcastCollectionViewCell.swift */,
@@ -238,6 +242,7 @@
 				910454C522F0AFAD00477E09 /* Extensions.swift */,
 				91FF66C1243E8D5E00BB9881 /* Stylist.swift */,
 				9186C75D22D53536007307C1 /* LaunchScreen.storyboard */,
+				91FF66CB24424AE700BB9881 /* GoogleService-Info.plist */,
 				9186C75B22D53536007307C1 /* Assets.xcassets */,
 				9186C76022D53536007307C1 /* Info.plist */,
 			);
@@ -332,6 +337,15 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		91FF66C824422AB500BB9881 /* RemoteConfigSetup */ = {
+			isa = PBXGroup;
+			children = (
+				91C5504222D5498D008FD9AB /* DBHelper.swift */,
+				91FF66C624422AAF00BB9881 /* RemoteConfigSetup.swift */,
+			);
+			path = RemoteConfigSetup;
+			sourceTree = "<group>";
+		};
 		B9952419773CC133ADE439E3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,6 +369,7 @@
 				9186C74E22D53534007307C1 /* Frameworks */,
 				9186C74F22D53534007307C1 /* Resources */,
 				419560F560DF77F54EF0074F /* [CP] Embed Pods Frameworks */,
+				91FF66C52442265100BB9881 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -432,6 +447,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91FF66CC24424AE700BB9881 /* GoogleService-Info.plist in Resources */,
 				918752F122ED10FC000A1B94 /* AppleItunesLookupResponse.json in Resources */,
 				91FF66BE243E584000BB9881 /* TTCommons-Bold.otf in Resources */,
 				918752F222ED10FC000A1B94 /* AppleTopPodcastsResponse.json in Resources */,
@@ -440,9 +456,9 @@
 				9186C75F22D53536007307C1 /* LaunchScreen.storyboard in Resources */,
 				9186C75C22D53536007307C1 /* Assets.xcassets in Resources */,
 				91FF66BD243E584000BB9881 /* TTCommons-Thin.ttf in Resources */,
+				91FF66CA2442428600BB9881 /* podcasts.json in Resources */,
 				9186C75A22D53534007307C1 /* Main.storyboard in Resources */,
 				91FF66BF243E584000BB9881 /* TTCommons-Regular.ttf in Resources */,
-				915724B122DA5DF70003C6B7 /* data.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,6 +511,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		91FF66C52442265100BB9881 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
 		ACC98E14E97E24E68D3BAD3E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -535,6 +569,7 @@
 				915724AE22DA4D4D0003C6B7 /* Discovery.swift in Sources */,
 				910454C922F0C12800477E09 /* DiscoveryScreenPresenter.swift in Sources */,
 				916DD7E222E8EA5400AE9E25 /* DataSetUpdated.swift in Sources */,
+				91FF66C724422AAF00BB9881 /* RemoteConfigSetup.swift in Sources */,
 				910454D722F1106100477E09 /* AudioPlayerInterface.swift in Sources */,
 				910454D922F1108700477E09 /* AudioPlayer.swift in Sources */,
 				915724AA22DA4D320003C6B7 /* Episode.swift in Sources */,
