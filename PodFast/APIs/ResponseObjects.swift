@@ -52,35 +52,6 @@ class ApplePodcastLookUpResponse: Mappable {
     }
 }
 
-class ConfigFileData: Mappable {
-    var updated: Date?
-    var podcasts: [ConfigPodcast]?
-    var hiddenCategories: [String]?
-
-    let stringToConfigDateFormat = TransformOf<Date, String>(fromJSON: { (value: String?) -> Date? in
-        guard let updated = value else { return nil }
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "ddMMyyyy"
-        let formattedDate = dateFormatter.date(from: updated)
-
-        return formattedDate
-    }, toJSON: { (value: Date?) -> String? in
-        // This is broken, not needed for now
-        return nil
-    })
-    
-    required init?(map: Map){
-
-    }
-
-    func mapping(map: Map) {
-        updated <- (map["updated"], stringToConfigDateFormat)
-        podcasts <- map["podcasts"]
-        hiddenCategories <- map["hiddenCategories"]
-    }
-}
-
 class BasePodcastResponse: Mappable {
     var url: String?
     var itunesUrl: String?
@@ -115,14 +86,37 @@ class BasePodcastResponse: Mappable {
     }
 }
 
-class ConfigPodcast: BasePodcastResponse {
-    override func mapping(map: Map) {
-        url <- map["url"]
-        title <- map["title"]
-        description <- map["description"]
-        genres <- map["genres"]
-        genreIds <- map["genreIds"]
-        itunesUrl <- map["itunesUrl"]
+import Lobster
+
+struct PodcastsConfig: Codable {
+    var podcasts: [RemoteConfigPodcast]
+    var lastUpdated: String
+    var hiddenCategories: [String]
+}
+
+struct RemoteConfigPodcast: Codable, ConfigSerializable {
+    var feedUrl: String?
+    var itunesUrl: String?
+    var title: String?
+    var description: String?
+    var genres: [String]?
+    var genreIds: [String]?
+
+    func toPodcastObject() -> Podcast {
+        let dbPodcast = Podcast()
+        dbPodcast.feedUrl = feedUrl
+        dbPodcast.itunesUrl = itunesUrl
+        dbPodcast.title = title
+        dbPodcast.podcastDescription = description
+        dbPodcast.hasBeenDiscovered = false //TODO: you don't know this :)
+
+        if let genres = genres, let genreIds = genreIds {
+            for (genreId, genre) in zip(genreIds, genres) {
+                dbPodcast.categories.append(PodcastCategory(value: [Int(genreId) ?? 0, genre]))
+            }
+        }
+
+        return dbPodcast
     }
 }
 

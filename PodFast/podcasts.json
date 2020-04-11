@@ -1,0 +1,28 @@
+{
+  "lastUpdated": "1586634082",
+  "hiddenCategories": [
+    "podcasts"
+  ],
+  "podcasts": [
+    {
+      "description": "Comedian Marc Maron is tackling the most complex philosophical question of our\nday - WTF? He'll get to the bottom of it with help from comedian friends,\ncelebrity guests and the voices in his own head.",
+      "title": "WTF with Marc Maron Podcast",
+      "feedUrl": "https://wtfpod.com",
+      "itunesUrl": "https://podcasts.apple.com/us/podcast/wtf-with-marc-maron-podcast/id329875043",
+      "genreIds": [
+        "1303",
+        "26",
+        "1301",
+        "1309",
+        "1405"
+      ],
+      "genres": [
+        "Comedy",
+        "Podcasts",
+        "Arts",
+        "TV & Film",
+        "Performing Arts"
+      ]
+    }
+  ]
+}

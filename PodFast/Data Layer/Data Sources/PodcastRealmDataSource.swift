@@ -38,14 +38,14 @@ public struct PodcastRealmDataSource: LocalDataSource {
 
     public func update<D>(fromSource dataSource: D) -> Promise<Bool> where D : DataSource, D.DataType == Podcast {
         return Promise<Bool> { fulfill, reject in
-            self.isUpToDate(with: AnyDataSource<Podcast>(base: dataSource)).then { dbIsUpToDateWithDataSource in
+            self.isUpToDate(with: AnyDataSource<Podcast>(base: dataSource)).then { (dbIsUpToDateWithDataSource, dataSourceUpdatedDate) in
                 if !dbIsUpToDateWithDataSource {
                     dataSource.fetchAll().then { podcasts in
                         do {
                             self.realm.beginWrite()
                             self.realm.add(podcasts, update: Realm.UpdatePolicy.modified)
                             try self.realm.commitWrite()
-                            try self.update(lastUpdatedDatasource: dataSource, to: Date())
+                            try self.update(lastUpdatedDatasource: dataSource, to: dataSourceUpdatedDate)
                             fulfill(true)
                         } catch let error as NSError {
                             reject(error)
@@ -78,11 +78,11 @@ public struct PodcastRealmDataSource: LocalDataSource {
         try realm.commitWrite()
     }
 
-    private func isUpToDate(with dataSource: AnyDataSource<Podcast>) -> Promise<Bool> {
-        return Promise<Bool> { fulfill, reject in
+    private func isUpToDate(with dataSource: AnyDataSource<Podcast>) -> Promise<(Bool, Date)> {
+        return Promise<(Bool, Date)> { fulfill, reject in
             let savedDataSourceUpdatedDate = self.get(lastUpdatedDatasourceDate: dataSource)
             dataSource.lastUpdated().then { dataSourceUpdatedDate in
-                fulfill(savedDataSourceUpdatedDate >= dataSourceUpdatedDate)
+                fulfill((savedDataSourceUpdatedDate >= dataSourceUpdatedDate, dataSourceUpdatedDate))
             }
         }
     }

@@ -8,27 +8,22 @@
 
 import Foundation
 import Promises
+import Lobster
 
 public struct HiddenCategoriesDataSource: DataSource {
 
     public var description = "config"
 
     public func fetchAll() -> Promise<[String]> {
-        if let configData = try! ConfigurationDataRequest().execute() {
-            return Promise<[String]>(
-                configData.hiddenCategories ?? [String]()
-            )
-        } else {
-            // TODO Handle Error Type Here
-            return Promise<[String]>([String]())
+        return Promise {
+            return Lobster.shared[.hiddenCategories]
         }
     }
 
     public func lastUpdated() -> Promise<Date> {
-        if let configData = try! ConfigurationDataRequest().execute() {
-            return Promise<Date>(configData.updated ?? Date(timeIntervalSince1970: 0))
-        } else {
-            return Promise<Date>(APIRequestError.noValueInResponse)
+        return Promise<Date> { fulfil, reject in
+            let timeSince1970 = Double(Lobster.shared[config:.podcastsLastUpdated]) ?? 0
+            fulfil(Date(timeIntervalSince1970: timeSince1970))
         }
     }
 }

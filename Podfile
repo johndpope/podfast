@@ -14,8 +14,11 @@ target 'PodFast' do
   pod 'FeedKit', '~> 8.0'
   pod 'PromisesSwift'
   pod 'TTTAttributedLabel'
+  pod 'Firebase/Core', '~> 6.22.0'
   pod 'Firebase/Analytics'
   pod 'Firebase/Crashlytics'
+  pod 'Firebase/RemoteConfig'
+  pod 'Lobster', '~> 2.1'
 
   target 'PodFastTests' do
     inherit! :search_paths
