@@ -151,9 +151,9 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
         if let item = player.currentItem,
             isCurrentlyPlayingAudioPlayer(player: player) {
             if item.isPlaybackBufferEmpty {
-                
-                print("PlaybackBuffer is Empty for currentlyPlayingAudioPlayer/Will Pause Background Players")
-                playStatic()
+                if !item.isPlaybackLikelyToKeepUp {
+                    playStatic()
+                }
 
                 let enqueuedBackgroundPlayers = enqueuedAudioPlayers.filter{ !isCurrentlyPlayingAudioPlayer(player: $0.value) }
                 enqueuedBackgroundPlayers.forEach {
@@ -167,7 +167,6 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
         if let item = player.currentItem,
             isCurrentlyPlayingAudioPlayer(player: player),
             item.isPlaybackBufferFull {
-                print("Playback is LikelyToKeepUp for currentlyPlayingAudioPlayer/Will Resume All Players")
                 stopStatic()
                 enqueuedAudioPlayers.forEach {
                     $0.value.play()
@@ -179,7 +178,6 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
         if let item = player.currentItem,
             isCurrentlyPlayingAudioPlayer(player: player),
             item.isPlaybackLikelyToKeepUp {
-                print("Playback is LikelyToKeepUp for currentlyPlayingAudioPlayer/Will Resume All Players")
                 stopStatic()
                 enqueuedAudioPlayers.forEach {
                     $0.value.play()
@@ -278,7 +276,7 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
     func playStatic() {
         staticPlayer.volume = 0.0
         staticPlayer.play()
-        staticPlayer.setVolume(0.3, fadeDuration: 0.2)
+        staticPlayer.setVolume(0.2, fadeDuration: 0.2)
     }
 
     func stopStatic() {
@@ -321,9 +319,9 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
                                     context: nil)
 
         audioPlayerItem.addObserver(self,
-        forKeyPath: #keyPath(AVPlayerItem.isPlaybackBufferFull),
-        options: [.old, .new],
-        context: nil)
+                                    forKeyPath: #keyPath(AVPlayerItem.isPlaybackBufferFull),
+                                    options: [.old, .new],
+                                    context: nil)
 
         audioPlayerItem.addObserver(self,
                                     forKeyPath: #keyPath(AVPlayerItem.isPlaybackLikelyToKeepUp),
