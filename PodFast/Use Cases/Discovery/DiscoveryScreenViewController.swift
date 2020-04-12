@@ -9,6 +9,7 @@
 import UIKit
 import Foundation
 import TTTAttributedLabel
+import SideMenu
 
 protocol DiscoveryViewDelegate: NSObjectProtocol {
     func displayDetails(forPodcast podcast: Podcast, _ episode: Episode)
@@ -82,6 +83,8 @@ class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
             NSAttributedString.Key.foregroundColor.rawValue: Colors.orange.cgColor,
             NSAttributedString.Key.underlineStyle.rawValue: true,
         ]
+
+        initializeSideMenu()
     }
 
     func reloadData() {
@@ -129,6 +132,27 @@ class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
     func setTimeElapsed(_ timeElapsed: String) {
         podcastTimeElapsed.text = timeElapsed
     }
+
+    func initializeSideMenu()
+    {
+        let menuLeftNavigationController = storyboard!.instantiateViewController(withIdentifier: "LeftMenuViewController") as! SideMenuNavigationController
+        SideMenuManager.default.leftMenuNavigationController = menuLeftNavigationController
+        menuLeftNavigationController.statusBarEndAlpha = 0
+        menuLeftNavigationController.alwaysAnimate = true
+        menuLeftNavigationController.presentationStyle = SideMenuPresentationStyle.menuSlideIn;
+        menuLeftNavigationController.presentationStyle.presentingEndAlpha = 0.8
+        menuLeftNavigationController.presentationStyle.onTopShadowOpacity = 0.5
+        menuLeftNavigationController.presentationStyle.onTopShadowRadius = 5
+        menuLeftNavigationController.presentationStyle.onTopShadowColor = .black
+        menuLeftNavigationController.pushStyle = .popWhenPossible;
+        menuLeftNavigationController.menuWidth = view.frame.width * 0.75;
+        SideMenuManager.default.rightMenuNavigationController = nil
+    }
+
+    @IBAction func menuButtonTapped(_ sender: Any) {
+        present(SideMenuManager.default.leftMenuNavigationController!, animated: true, completion: nil)
+    }
+
 }
 
 extension DiscoveryScreenViewController: TTTAttributedLabelDelegate {

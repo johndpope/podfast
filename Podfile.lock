@@ -113,6 +113,7 @@ PODS:
   - Realm/Headers (4.4.0)
   - RealmSwift (4.4.0):
     - Realm (= 4.4.0)
+  - SideMenu (6.4.8)
   - TTTAttributedLabel (2.0.0)
 
 DEPENDENCIES:
@@ -125,6 +126,7 @@ DEPENDENCIES:
   - Lobster (~> 2.1)
   - PromisesSwift
   - RealmSwift
+  - SideMenu
   - TTTAttributedLabel
 
 SPEC REPOS:
@@ -147,6 +149,7 @@ SPEC REPOS:
     - Lobster
     - nanopb
     - Protobuf
+    - SideMenu
   trunk:
     - Alamofire
     - AlamofireObjectMapper
@@ -185,8 +188,9 @@ SPEC CHECKSUMS:
   Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
   Realm: e125f464884cda953ebefe70c671b75b03b81b9b
   RealmSwift: 33656a42bd300959a081fc13347376bc478071af
+  SideMenu: 4a891be552d30bb6fa87ad404d62e485f8450c34
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
-PODFILE CHECKSUM: dc3d5dd778f14ad5d597a1b71f8c441ba7354907
+PODFILE CHECKSUM: 78a30ad164afc974683ce898bd93e4a74d55ed0a
 
 COCOAPODS: 1.9.1

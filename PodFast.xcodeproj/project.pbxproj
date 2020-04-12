@@ -57,6 +57,7 @@
 		91FF66C724422AAF00BB9881 /* RemoteConfigSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FF66C624422AAF00BB9881 /* RemoteConfigSetup.swift */; };
 		91FF66CA2442428600BB9881 /* podcasts.json in Resources */ = {isa = PBXBuildFile; fileRef = 91FF66C92442428600BB9881 /* podcasts.json */; };
 		91FF66CC24424AE700BB9881 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 91FF66CB24424AE700BB9881 /* GoogleService-Info.plist */; };
+		91FF66CF244355C500BB9881 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FF66CE244355C500BB9881 /* MenuViewController.swift */; };
 		A403A1FE30AF819DD34ED360 /* Pods_PodFastTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8D86976DFC2BD1224FA60BF /* Pods_PodFastTests.framework */; };
 		AC367F35E679B9E8A74B4BB4 /* Pods_PodFast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36604F8F64348AF8F5B002DE /* Pods_PodFast.framework */; };
 /* End PBXBuildFile section */
@@ -102,7 +103,7 @@
 		916DD7E522EA10B400AE9E25 /* PodcastRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastRepository.swift; sourceTree = "<group>"; };
 		917C8A1122D53E0C00A26154 /* ResponseObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseObjects.swift; sourceTree = "<group>"; };
 		917C8A1422D53E1600A26154 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
-		9186C75122D53534007307C1 /* PodFast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodFast.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9186C75122D53534007307C1 /* Podfast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Podfast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9186C75422D53534007307C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9186C75922D53534007307C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9186C75B22D53536007307C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -129,6 +130,7 @@
 		91FF66C624422AAF00BB9881 /* RemoteConfigSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigSetup.swift; sourceTree = "<group>"; };
 		91FF66C92442428600BB9881 /* podcasts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = podcasts.json; sourceTree = "<group>"; };
 		91FF66CB24424AE700BB9881 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		91FF66CE244355C500BB9881 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		A8D86976DFC2BD1224FA60BF /* Pods_PodFastTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PodFastTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6DA6EC92EFDACC5EFAFB171 /* Pods-PodFast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodFast.release.xcconfig"; path = "Target Support Files/Pods-PodFast/Pods-PodFast.release.xcconfig"; sourceTree = "<group>"; };
 		FA760B81FA684F9178BF5BFD /* Pods-PodFastTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodFastTests.debug.xcconfig"; path = "Target Support Files/Pods-PodFastTests/Pods-PodFastTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 		910454BE22F0A95D00477E09 /* Use Cases */ = {
 			isa = PBXGroup;
 			children = (
+				91FF66CD244355A100BB9881 /* Menu */,
 				910454DA22F115CF00477E09 /* Discovery */,
 				910454C722F0BB5600477E09 /* Launch */,
 			);
@@ -218,7 +221,7 @@
 		9186C75222D53534007307C1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9186C75122D53534007307C1 /* PodFast.app */,
+				9186C75122D53534007307C1 /* Podfast.app */,
 				9186C76522D53536007307C1 /* PodFastTests.xctest */,
 			);
 			name = Products;
@@ -346,6 +349,14 @@
 			path = RemoteConfigSetup;
 			sourceTree = "<group>";
 		};
+		91FF66CD244355A100BB9881 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				91FF66CE244355C500BB9881 /* MenuViewController.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
 		B9952419773CC133ADE439E3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -377,7 +388,7 @@
 			);
 			name = PodFast;
 			productName = PodFast;
-			productReference = 9186C75122D53534007307C1 /* PodFast.app */;
+			productReference = 9186C75122D53534007307C1 /* Podfast.app */;
 			productType = "com.apple.product-type.application";
 		};
 		9186C76422D53536007307C1 /* PodFastTests */ = {
@@ -569,6 +580,7 @@
 				915724AE22DA4D4D0003C6B7 /* Discovery.swift in Sources */,
 				910454C922F0C12800477E09 /* DiscoveryScreenPresenter.swift in Sources */,
 				916DD7E222E8EA5400AE9E25 /* DataSetUpdated.swift in Sources */,
+				91FF66CF244355C500BB9881 /* MenuViewController.swift in Sources */,
 				91FF66C724422AAF00BB9881 /* RemoteConfigSetup.swift in Sources */,
 				910454D722F1106100477E09 /* AudioPlayerInterface.swift in Sources */,
 				910454D922F1108700477E09 /* AudioPlayer.swift in Sources */,
@@ -767,7 +779,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = me.orestisPapadopoulos.PodFast;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Podfast;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -786,7 +798,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = me.orestisPapadopoulos.PodFast;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Podfast;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

@@ -19,6 +19,7 @@ target 'PodFast' do
   pod 'Firebase/Crashlytics'
   pod 'Firebase/RemoteConfig'
   pod 'Lobster', '~> 2.1'
+  pod 'SideMenu'
 
   target 'PodFastTests' do
     inherit! :search_paths
