@@ -56,6 +56,8 @@
 		91FF66C2243E8D5E00BB9881 /* Stylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FF66C1243E8D5E00BB9881 /* Stylist.swift */; };
 		91FF66C724422AAF00BB9881 /* RemoteConfigSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FF66C624422AAF00BB9881 /* RemoteConfigSetup.swift */; };
 		91FF66CF244355C500BB9881 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FF66CE244355C500BB9881 /* MenuViewController.swift */; };
+		91FF66D22443866800BB9881 /* podcasts.json in Resources */ = {isa = PBXBuildFile; fileRef = 91FF66D02443866800BB9881 /* podcasts.json */; };
+		91FF66D32443866800BB9881 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 91FF66D12443866800BB9881 /* GoogleService-Info.plist */; };
 		A403A1FE30AF819DD34ED360 /* Pods_PodFastTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8D86976DFC2BD1224FA60BF /* Pods_PodFastTests.framework */; };
 		AC367F35E679B9E8A74B4BB4 /* Pods_PodFast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36604F8F64348AF8F5B002DE /* Pods_PodFast.framework */; };
 /* End PBXBuildFile section */
@@ -127,6 +129,8 @@
 		91FF66C1243E8D5E00BB9881 /* Stylist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stylist.swift; sourceTree = "<group>"; };
 		91FF66C624422AAF00BB9881 /* RemoteConfigSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigSetup.swift; sourceTree = "<group>"; };
 		91FF66CE244355C500BB9881 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		91FF66D02443866800BB9881 /* podcasts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = podcasts.json; sourceTree = "<group>"; };
+		91FF66D12443866800BB9881 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A8D86976DFC2BD1224FA60BF /* Pods_PodFastTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PodFastTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6DA6EC92EFDACC5EFAFB171 /* Pods-PodFast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodFast.release.xcconfig"; path = "Target Support Files/Pods-PodFast/Pods-PodFast.release.xcconfig"; sourceTree = "<group>"; };
 		FA760B81FA684F9178BF5BFD /* Pods-PodFastTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodFastTests.debug.xcconfig"; path = "Target Support Files/Pods-PodFastTests/Pods-PodFastTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -184,6 +188,7 @@
 		910454DA22F115CF00477E09 /* Discovery */ = {
 			isa = PBXGroup;
 			children = (
+				910454CC22F0D87C00477E09 /* PodcastCollectionViewCell.swift */,
 				915724AD22DA4D4D0003C6B7 /* Discovery.swift */,
 				910454D822F1108700477E09 /* AudioPlayer.swift */,
 				910454D622F1106100477E09 /* AudioPlayerInterface.swift */,
@@ -230,16 +235,15 @@
 				91B7F15022ECD024004CB98F /* APIs */,
 				915724AF22DA525D0003C6B7 /* Data Layer */,
 				910454BE22F0A95D00477E09 /* Use Cases */,
-				918752F322ED1100000A1B94 /* Mock Responses */,
 				91F129F0243A32FB007FD80F /* Audio Samples */,
-				91FF66C824422AB500BB9881 /* RemoteConfigSetup */,
+				91FF66C824422AB500BB9881 /* Util */,
 				91F9003922DF91B400FA99D2 /* UIAdjustableScrubSlider.swift */,
 				9186C75822D53534007307C1 /* Main.storyboard */,
-				910454CC22F0D87C00477E09 /* PodcastCollectionViewCell.swift */,
-				91FF66C0243E584500BB9881 /* Fonts */,
-				910454C522F0AFAD00477E09 /* Extensions.swift */,
-				91FF66C1243E8D5E00BB9881 /* Stylist.swift */,
 				9186C75D22D53536007307C1 /* LaunchScreen.storyboard */,
+				91FF66D12443866800BB9881 /* GoogleService-Info.plist */,
+				91FF66D02443866800BB9881 /* podcasts.json */,
+				918752F322ED1100000A1B94 /* Mock Responses */,
+				91FF66C0243E584500BB9881 /* Fonts */,
 				9186C75B22D53536007307C1 /* Assets.xcassets */,
 				9186C76022D53536007307C1 /* Info.plist */,
 			);
@@ -334,13 +338,15 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		91FF66C824422AB500BB9881 /* RemoteConfigSetup */ = {
+		91FF66C824422AB500BB9881 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				91FF66C1243E8D5E00BB9881 /* Stylist.swift */,
+				910454C522F0AFAD00477E09 /* Extensions.swift */,
 				91C5504222D5498D008FD9AB /* DBHelper.swift */,
 				91FF66C624422AAF00BB9881 /* RemoteConfigSetup.swift */,
 			);
-			path = RemoteConfigSetup;
+			path = Util;
 			sourceTree = "<group>";
 		};
 		91FF66CD244355A100BB9881 /* Menu */ = {
@@ -457,11 +463,13 @@
 				918752F222ED10FC000A1B94 /* AppleTopPodcastsResponse.json in Resources */,
 				91FF66BC243E584000BB9881 /* TTCommons-Medium.ttf in Resources */,
 				91F129EF243A32F5007FD80F /* static_1.wav in Resources */,
+				91FF66D32443866800BB9881 /* GoogleService-Info.plist in Resources */,
 				9186C75F22D53536007307C1 /* LaunchScreen.storyboard in Resources */,
 				9186C75C22D53536007307C1 /* Assets.xcassets in Resources */,
 				91FF66BD243E584000BB9881 /* TTCommons-Thin.ttf in Resources */,
 				9186C75A22D53534007307C1 /* Main.storyboard in Resources */,
 				91FF66BF243E584000BB9881 /* TTCommons-Regular.ttf in Resources */,
+				91FF66D22443866800BB9881 /* podcasts.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
