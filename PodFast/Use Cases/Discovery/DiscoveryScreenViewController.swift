@@ -30,6 +30,7 @@ class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
 
     private weak var collidedCell: PodcastCollectionViewCell?
     private var visibleCells = [Int]()
+    private let cellWidth: CGFloat = 150.0
 
     private let presenter = DiscoveryScreenPresenter()
 
@@ -52,14 +53,16 @@ class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
 
     override func viewDidLayoutSubviews() {
         if !viewHadLayedoutSubviews {
-            let width = self.view.bounds.width
-            podcastCollection.contentInset = UIEdgeInsets(top: 0, left: width/2, bottom: 0, right: width/2)
-            podcastCollection.setContentOffset(CGPoint(x: -(width/2), y: 0), animated: false)
+            let screenWidth = self.view.bounds.width
+            let xOffset: CGFloat = -((screenWidth/2) - (cellWidth + 4.0))
+            podcastCollection.contentInset = UIEdgeInsets(top: 0, left: screenWidth/2, bottom: 0, right: screenWidth/2)
+            podcastCollection.setContentOffset(CGPoint(x: xOffset, y: 0), animated: false)
         }
         viewHadLayedoutSubviews = true
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        presenter.viewDidAppear()
         let visibleCellRows = podcastCollection.visibleCells.compactMap { cell in
             return podcastCollection.indexPath(for: cell)?.row
         }
