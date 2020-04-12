@@ -15,6 +15,7 @@ protocol DiscoveryInteractor {
     func getPodcastCategories() -> Promise<[PodcastCategory]>
     func getEpisodeOfPodcast(inCategory: PodcastCategory) -> Promise<Episode>
     func markAsPlayed(episode: Episode)
+    func removePodcast(podcast: Podcast)
 }
 
 class Discovery: DiscoveryInteractor {
@@ -47,12 +48,26 @@ class Discovery: DiscoveryInteractor {
         if let randomPodcast = podcastsInCategory.randomElement() {
             return Promise<Episode> { fulfill, reject in
                 randomPodcast.episodes.then { episodes in
+                    if episodes.count == 0 {
+                        reject(DiscoveryError.NoEpisodesInPodcast(podcast: randomPodcast))
+                    }
                     let unplayedEpisodes = episodes.filter { $0.hasBeenPlayed == false }
-                    fulfill(unplayedEpisodes.randomElement() ?? Episode())
+                    if unplayedEpisodes.count > 0 {
+                        let randomEpisode = unplayedEpisodes.randomElement()!
+                        if let episodeURLString = randomEpisode.url,
+                            let _ = URL(string: episodeURLString) {
+                            fulfill(randomEpisode)
+                        } else {
+                            reject(DiscoveryError.InvalidEpisodeURL)
+                        }
+
+                    } else {
+                        reject(DiscoveryError.NoUnplayedEpisode)
+                    }
                 }
             }
         }
-        return Promise<Episode>(Episode())
+        return Promise<Episode>{fulfill, reject in reject(DiscoveryError.NoPodcastsInCategory)}
     }
 
     private func getPodcasts() -> Promise<[Podcast]> {
@@ -69,6 +84,19 @@ class Discovery: DiscoveryInteractor {
             let realm = DBHelper.shared.getRealm()
             realm.beginWrite()
             category.plays = category.plays + 1
+            try realm.commitWrite()
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+
+    func removePodcast(podcast: Podcast) {
+        do {
+            let realm = DBHelper.shared.getRealm()
+            realm.beginWrite()
+            if let podcast = realm.object(ofType: Podcast.self, forPrimaryKey: podcast.title) {
+                realm.delete(podcast)
+            }
             try realm.commitWrite()
         } catch let error {
             print(error.localizedDescription)

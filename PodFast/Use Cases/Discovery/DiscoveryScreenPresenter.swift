@@ -8,6 +8,13 @@
 
 import Foundation
 
+enum DiscoveryError: Error {
+    case NoUnplayedEpisode
+    case NoPodcastsInCategory
+    case NoEpisodesInPodcast(podcast: Podcast)
+    case InvalidEpisodeURL
+}
+
 class DiscoveryScreenPresenter {
     private let podcastDiscoveryTimeInterval: TimeInterval = 30.0
     private let discoveryInteractor: DiscoveryInteractor
@@ -40,11 +47,14 @@ class DiscoveryScreenPresenter {
     }
 
     func viewDidLoad() {
-        audioPlayer.playStatic()
         discoveryInteractor.getPodcastCategories().then {categories in
             self.categories = categories
             self.discoveryViewDelegate?.reloadData()
         }
+    }
+
+    func viewDidAppear() {
+        audioPlayer.playStatic()
     }
 
     func getCategoriesCount() -> Int {
@@ -64,11 +74,29 @@ class DiscoveryScreenPresenter {
         let visibleCategoriesRemoved = removed.map { categories[$0] }
 
         for category in visibleCategoriesAdded {
+            // TODO: this logic should be simplified in the presenter
             discoveryInteractor.getEpisodeOfPodcast(inCategory: category).then { episode in
-                self.enqueuedEpisodes[category] = episode
                 if let episodeURLString = episode.url,
                     let episodeURL = URL(string: episodeURLString) {
+                    self.enqueuedEpisodes[category] = episode
                     self.audioPlayer.enqueueItem(url: episodeURL)
+                }
+            }.catch { error in
+                if let discoveryError = error as? DiscoveryError {
+                    switch discoveryError {
+                    case .InvalidEpisodeURL, .NoUnplayedEpisode:
+                        // try another podcast -- if this fails again, it can't be caught
+                        self.enqueuePodcast(ofCategory: category)
+                    case .NoPodcastsInCategory:
+                        if let index = self.categories.index(of: category) {
+                            self.categories.remove(at: index)
+                            self.discoveryViewDelegate?.reloadData()
+                        }
+                    case .NoEpisodesInPodcast(let podcast):
+                        self.discoveryInteractor.removePodcast(podcast: podcast)
+                        // try another podcast
+                        self.enqueuePodcast(ofCategory: category)
+                    }
                 }
             }
         }
@@ -78,6 +106,17 @@ class DiscoveryScreenPresenter {
             let episodeToRemoveURLString = episodeToRemove.url,
             let episodeToRemoveURL = URL(string: episodeToRemoveURLString){
                  self.audioPlayer.dequeueItem(url: episodeToRemoveURL)
+            }
+        }
+    }
+
+    // Similar to categoriesVisibilityChanged but without catch
+    private func enqueuePodcast(ofCategory category: PodcastCategory) {
+        self.discoveryInteractor.getEpisodeOfPodcast(inCategory: category).then { episode in
+            if let episodeURLString = episode.url,
+                let episodeURL = URL(string: episodeURLString) {
+                self.enqueuedEpisodes[category] = episode
+                self.audioPlayer.enqueueItem(url: episodeURL)
             }
         }
     }

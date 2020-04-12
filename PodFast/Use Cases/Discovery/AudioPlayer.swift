@@ -92,12 +92,14 @@ class AudioPlayer: NSObject, AudioPlayerInterface  {
                 // find the audio player
                 if let urlItem = item.asset as? AVURLAsset,
                 let audioPlayer = enqueuedAudioPlayers[urlItem.url] {
-                    circularSeek(audioPlayer: audioPlayer, toTimeInterval: Date().timeIntervalSince(appLaunchTime!), then: { _ in
-                        if audioPlayer == self.currentlyPlayingAudioPlayer {
-                            self.startPlayback(ofPlayer: audioPlayer)
-                        } else {
-                            audioPlayer.preroll(atRate: 0.5) { _ in
-                                audioPlayer.play()
+                    circularSeek(audioPlayer: audioPlayer, toTimeInterval: Date().timeIntervalSince(appLaunchTime!), then: { succeded in
+                        if succeded {
+                            if audioPlayer == self.currentlyPlayingAudioPlayer {
+                                self.startPlayback(ofPlayer: audioPlayer)
+                            } else {
+                                audioPlayer.preroll(atRate: 1.0) { _ in
+                                    audioPlayer.play()
+                                }
                             }
                         }
                     })
