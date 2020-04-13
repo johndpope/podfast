@@ -57,7 +57,7 @@
 		91FF66C724422AAF00BB9881 /* RemoteConfigSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FF66C624422AAF00BB9881 /* RemoteConfigSetup.swift */; };
 		91FF66CF244355C500BB9881 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FF66CE244355C500BB9881 /* MenuViewController.swift */; };
 		91FF66D22443866800BB9881 /* podcasts.json in Resources */ = {isa = PBXBuildFile; fileRef = 91FF66D02443866800BB9881 /* podcasts.json */; };
-		91FF66D32443866800BB9881 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 91FF66D12443866800BB9881 /* GoogleService-Info.plist */; };
+		91FF66D5244388A600BB9881 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 91FF66D4244388A600BB9881 /* GoogleService-Info.plist */; };
 		A403A1FE30AF819DD34ED360 /* Pods_PodFastTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8D86976DFC2BD1224FA60BF /* Pods_PodFastTests.framework */; };
 		AC367F35E679B9E8A74B4BB4 /* Pods_PodFast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36604F8F64348AF8F5B002DE /* Pods_PodFast.framework */; };
 /* End PBXBuildFile section */
@@ -130,7 +130,7 @@
 		91FF66C624422AAF00BB9881 /* RemoteConfigSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigSetup.swift; sourceTree = "<group>"; };
 		91FF66CE244355C500BB9881 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		91FF66D02443866800BB9881 /* podcasts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = podcasts.json; sourceTree = "<group>"; };
-		91FF66D12443866800BB9881 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		91FF66D4244388A600BB9881 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A8D86976DFC2BD1224FA60BF /* Pods_PodFastTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PodFastTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6DA6EC92EFDACC5EFAFB171 /* Pods-PodFast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodFast.release.xcconfig"; path = "Target Support Files/Pods-PodFast/Pods-PodFast.release.xcconfig"; sourceTree = "<group>"; };
 		FA760B81FA684F9178BF5BFD /* Pods-PodFastTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PodFastTests.debug.xcconfig"; path = "Target Support Files/Pods-PodFastTests/Pods-PodFastTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -240,7 +240,7 @@
 				91F9003922DF91B400FA99D2 /* UIAdjustableScrubSlider.swift */,
 				9186C75822D53534007307C1 /* Main.storyboard */,
 				9186C75D22D53536007307C1 /* LaunchScreen.storyboard */,
-				91FF66D12443866800BB9881 /* GoogleService-Info.plist */,
+				91FF66D4244388A600BB9881 /* GoogleService-Info.plist */,
 				91FF66D02443866800BB9881 /* podcasts.json */,
 				918752F322ED1100000A1B94 /* Mock Responses */,
 				91FF66C0243E584500BB9881 /* Fonts */,
@@ -463,7 +463,7 @@
 				918752F222ED10FC000A1B94 /* AppleTopPodcastsResponse.json in Resources */,
 				91FF66BC243E584000BB9881 /* TTCommons-Medium.ttf in Resources */,
 				91F129EF243A32F5007FD80F /* static_1.wav in Resources */,
-				91FF66D32443866800BB9881 /* GoogleService-Info.plist in Resources */,
+				91FF66D5244388A600BB9881 /* GoogleService-Info.plist in Resources */,
 				9186C75F22D53536007307C1 /* LaunchScreen.storyboard in Resources */,
 				9186C75C22D53536007307C1 /* Assets.xcassets in Resources */,
 				91FF66BD243E584000BB9881 /* TTCommons-Thin.ttf in Resources */,
@@ -772,13 +772,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4WBR9B6AZ7;
+				CURRENT_PROJECT_VERSION = 2004120;
+				DEVELOPMENT_TEAM = XHY6676M54;
 				INFOPLIST_FILE = PodFast/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = me.orestisPapadopoulos.PodFast;
+				PRODUCT_BUNDLE_IDENTIFIER = com.orestisPapadopoulos.PodFast;
 				PRODUCT_NAME = Podfast;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -791,13 +792,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4WBR9B6AZ7;
+				CURRENT_PROJECT_VERSION = 2004120;
+				DEVELOPMENT_TEAM = XHY6676M54;
 				INFOPLIST_FILE = PodFast/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = me.orestisPapadopoulos.PodFast;
+				PRODUCT_BUNDLE_IDENTIFIER = com.orestisPapadopoulos.PodFast;
 				PRODUCT_NAME = Podfast;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
