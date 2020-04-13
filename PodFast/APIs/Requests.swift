@@ -142,15 +142,3 @@ struct PodcastFeedEpisodesRequest {
         }
     }
 }
-
-struct ConfigurationDataRequest {
-    let path = Bundle.main.path(forResource: "data", ofType: "json")!
-
-    func execute() throws -> ConfigFileData? {
-        let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-        if let jsonData = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String:Any] {
-            return ConfigFileData(JSON: jsonData) ?? nil
-        }
-        return nil
-    }
-}

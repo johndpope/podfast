@@ -26,6 +26,14 @@ protocol Repository {
     
 }
 
+protocol PodcastCategoryRepository {
+
+    func getAll() -> Promise<[PodcastCategory]>
+    func getAll<T: Comparable>(sortedBy: KeyPath<PodcastCategory, T>) -> Promise<[PodcastCategory]>
+    func update(withPolicy policy: RepositoryUpdatePolicy) -> Promise<Bool>
+    
+}
+
 // Type Erased Struct to Represent Any Data Source
 struct AnyRepository<U>: Repository {
 

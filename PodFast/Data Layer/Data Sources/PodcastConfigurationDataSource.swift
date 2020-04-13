@@ -8,6 +8,7 @@
 
 import Foundation
 import Promises
+import Lobster
 
 public struct PodcastConfigurationDataSource: DataSource {
 
@@ -16,20 +17,15 @@ public struct PodcastConfigurationDataSource: DataSource {
     public var description = "config"
 
     public func fetchAll() -> Promise<[Podcast]> {
-        if let configData = try! ConfigurationDataRequest().execute(),
-           let podcasts = configData.podcasts {
-            return Promise<[Podcast]>(podcasts.map{$0.toPodcastObject()})
-        } else {
-            // TODO Handle Error Type Here
-            return Promise<[Podcast]>(APIRequestError.noValueInResponse)
+        return Promise<[Podcast]> {fulfil, reject in
+            fulfil(Lobster.shared[.podcasts].map{$0.toPodcastObject()})
         }
     }
-
+    
     public func lastUpdated() -> Promise<Date> {
-        if let configData = try! ConfigurationDataRequest().execute() {
-            return Promise<Date>(configData.updated ?? Date(timeIntervalSince1970: 0))
-        } else {
-            return Promise<Date>(APIRequestError.noValueInResponse)
+        return Promise<Date> { fulfil, reject in
+            let timeSince1970 = Double(Lobster.shared[config:.podcastsLastUpdated]) ?? 0
+            fulfil(Date(timeIntervalSince1970: timeSince1970))
         }
     }
 }

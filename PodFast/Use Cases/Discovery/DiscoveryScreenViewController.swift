@@ -7,47 +7,89 @@
 //
 
 import UIKit
+import Foundation
+import TTTAttributedLabel
+import SideMenu
 
 protocol DiscoveryViewDelegate: NSObjectProtocol {
+    func displayDetails(forPodcast podcast: Podcast, _ episode: Episode)
+    func hidePodcastInformation()
     func reloadData()
     func playBackStarted()
+    func setTimeElapsed(_ timeElapsed: String)
 }
 
 class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
 
     @IBOutlet weak var podcastCollection: UICollectionView!
+    @IBOutlet weak var podcastInformationView: UIStackView!
+    @IBOutlet weak var podcastTitleLabel: TTTAttributedLabel!
+    @IBOutlet weak var episodeDescriptionLabel: UILabel!
+    @IBOutlet weak var podcastTimeElapsed: UILabel!
+
+    @IBOutlet weak var episodeTitleLabel: UILabel!
 
     private weak var collidedCell: PodcastCollectionViewCell?
     private var visibleCells = [Int]()
+    private let cellWidth: CGFloat = 150.0
 
     private let presenter = DiscoveryScreenPresenter()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        podcastInformationView.isHidden = true
+
         podcastCollection.dataSource = self
         podcastCollection.delegate = self
         podcastCollection.decelerationRate = UIScrollViewDecelerationRateFast
 
-
         presenter.setViewDelegate(discoveryViewDelegate: self)
         presenter.viewDidLoad()
 
-        let frame = self.podcastCollection.frame
-        let lineView = UIView(frame: CGRect(x: frame.width/2,
-                                            y: frame.minY, width: 2.0, height: frame.height))
-        lineView.backgroundColor = .red
-        self.view.addSubview(lineView)
+        setupView()
+    }
+
+    fileprivate var viewHadLayedoutSubviews = false
+
+    override func viewDidLayoutSubviews() {
+        if !viewHadLayedoutSubviews {
+            let screenWidth = self.view.bounds.width
+            let xOffset: CGFloat = -((screenWidth/2) - (cellWidth + 4.0))
+            podcastCollection.contentInset = UIEdgeInsets(top: 0, left: screenWidth/2, bottom: 0, right: screenWidth/2)
+            podcastCollection.setContentOffset(CGPoint(x: xOffset, y: 0), animated: false)
+        }
+        viewHadLayedoutSubviews = true
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        presenter.viewDidAppear()
         let visibleCellRows = podcastCollection.visibleCells.compactMap { cell in
             return podcastCollection.indexPath(for: cell)?.row
         }
         presenter.categoriesVisibilityChanged(added: Set(visibleCellRows), removed: Set<Int> ())
+        visibleCells = visibleCellRows
+    }
+
+    private func setupView() {
+        podcastTitleLabel.linkAttributes = [
+            NSAttributedString.Key.font.rawValue: Stylist.font(weight: .bold, size: 20) ?? UIFont.systemFont(ofSize: 20),
+            NSAttributedString.Key.foregroundColor.rawValue: Colors.orange.cgColor,
+            NSAttributedString.Key.underlineStyle.rawValue: true,
+        ]
+
+        podcastTitleLabel.activeLinkAttributes = [
+            NSAttributedString.Key.font.rawValue: Stylist.font(weight: .bold, size: 20) ?? UIFont.systemFont(ofSize: 20),
+            NSAttributedString.Key.foregroundColor.rawValue: Colors.orange.cgColor,
+            NSAttributedString.Key.underlineStyle.rawValue: true,
+        ]
+
+        initializeSideMenu()
     }
 
     func reloadData() {
         podcastCollection.reloadData()
+        viewHadLayedoutSubviews = false
     }
 
     // TODO Not working at the moment
@@ -56,6 +98,69 @@ class DiscoveryScreenViewController: UIViewController, DiscoveryViewDelegate {
         collidedCell?.titleLabel.textColor = .green
     }
 
+    func displayDetails(forPodcast podcast: Podcast, _ episode: Episode) {
+        podcastInformationView.isHidden = false
+        podcastInformationView.alpha = 0
+
+        podcastTitleLabel.text = podcast.title
+        episodeTitleLabel.text = episode.title
+        episodeDescriptionLabel.text = episode.episodeDescription?.stripHtml().replacingOccurrences(of: "\n", with: "").limitTo(numberOfSentences: 2)
+
+        if let itunesUrl = podcast.itunesUrl {
+            guard let title = podcast.title else {
+                return
+            }
+            let linkWithRemovedOrigin = itunesUrl.replacingOccurrences(of: "?uo=4", with: "")
+            let nstitle = title as NSString
+            podcastTitleLabel.addLink(to: URL(string: linkWithRemovedOrigin), with: nstitle.range(of: title))
+            podcastTitleLabel.delegate = self
+        }
+
+        UIView.animate(withDuration: 0.3, animations: {
+            self.podcastInformationView.alpha = 1
+        })
+    }
+
+    func hidePodcastInformation(){
+        UIView.animate(withDuration: 0.3, animations: {
+            self.podcastInformationView.alpha = 0
+        }, completion: { _ in
+            self.podcastInformationView.isHidden = true
+        })
+    }
+
+    func setTimeElapsed(_ timeElapsed: String) {
+        podcastTimeElapsed.text = timeElapsed
+    }
+
+    func initializeSideMenu()
+    {
+        let menuLeftNavigationController = storyboard!.instantiateViewController(withIdentifier: "LeftMenuViewController") as! SideMenuNavigationController
+        SideMenuManager.default.leftMenuNavigationController = menuLeftNavigationController
+        menuLeftNavigationController.statusBarEndAlpha = 0
+        menuLeftNavigationController.alwaysAnimate = true
+        menuLeftNavigationController.presentationStyle = SideMenuPresentationStyle.menuSlideIn;
+        menuLeftNavigationController.presentationStyle.presentingEndAlpha = 0.8
+        menuLeftNavigationController.presentationStyle.onTopShadowOpacity = 0.5
+        menuLeftNavigationController.presentationStyle.onTopShadowRadius = 5
+        menuLeftNavigationController.presentationStyle.onTopShadowColor = .black
+        menuLeftNavigationController.pushStyle = .popWhenPossible;
+        menuLeftNavigationController.menuWidth = view.frame.width * 0.75;
+        SideMenuManager.default.rightMenuNavigationController = nil
+    }
+
+    @IBAction func menuButtonTapped(_ sender: Any) {
+        present(SideMenuManager.default.leftMenuNavigationController!, animated: true, completion: nil)
+    }
+
+}
+
+extension DiscoveryScreenViewController: TTTAttributedLabelDelegate {
+    func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        }
+    }
 }
 
 extension DiscoveryScreenViewController: UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate {
@@ -68,6 +173,13 @@ extension DiscoveryScreenViewController: UICollectionViewDataSource, UICollectio
             withReuseIdentifier: "podcast",
             for: indexPath
         ) as! PodcastCollectionViewCell
+
+        cell.layer.cornerRadius = 5.0
+        cell.addBottomBorderWithColor(color: .white, width: 2.0)
+        cell.addRightBorderWithColor(color: .white, width: 2.0)
+        cell.addTopBorderWithColor(color: .white, width: 6.0)
+        cell.addLeftBorderWithColor(color: .white, width: 6.0)
+
 
         cell.titleLabel.text = presenter.getCategoryName(forRow: indexPath.row) ?? " "
         return cell
@@ -92,7 +204,7 @@ extension DiscoveryScreenViewController: UICollectionViewDataSource, UICollectio
         for cell in cellsInView {
             // detect collision
             let cellFrame = podcastCollection.convert(cell.frame, to: self.view)
-            cell.titleLabel.textColor = .black
+            cell.titleLabel.textColor = .white
             if cellFrame.contains(center) {
                 cell.titleLabel.isHighlighted = true
                 if(collidedCell != cell){
@@ -107,7 +219,6 @@ extension DiscoveryScreenViewController: UICollectionViewDataSource, UICollectio
     }
 
     func collisionDetected(forCell cell: PodcastCollectionViewCell){
-        print("Collision of cell \(cell.titleLabel.text)")
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {

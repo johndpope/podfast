@@ -11,10 +11,10 @@ import RealmSwift
 import AlamofireObjectMapper
 import ObjectMapper
 import Promises
-import enum Result.NoError
 
 public class Podcast: Object {
     @objc dynamic var feedUrl: String?
+    @objc dynamic var itunesUrl: String?
     @objc dynamic var title: String?
     @objc dynamic var podcastDescription: String?
     @objc dynamic var hasBeenDiscovered: Bool = false
